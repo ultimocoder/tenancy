@@ -10,7 +10,7 @@
 
     <div class="section pb-3">
         <div class="container">
-            <form action="{{route('login')}}" method="post">
+            <form action="{{route('telantlogin')}}" method="post">
                 @csrf
             <div class="row">
                 <div class="col-sm-10 mx-auto">

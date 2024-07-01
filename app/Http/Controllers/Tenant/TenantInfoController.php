@@ -18,11 +18,10 @@ use Carbon\Carbon;
 class TenantInfoController extends Controller
 {
     public function tenantInfo(){                 
-                $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
-                $user = User::where('id',$tenant_info->user_id)->first();
-                $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
-                return view('tenant.tenant-information', compact('tenant_info','user','popups'));
-      
+        $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
+        $user = User::where('id',$tenant_info->user_id)->first();
+        $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
+        return view('tenant.tenant-information', compact('tenant_info','user','popups'));      
     }
     public function tenantEdit($id){
         $tenant = User::where('users.id', $id)
@@ -76,12 +75,10 @@ class TenantInfoController extends Controller
                 $unit->save();
                 $tenant->property_unit = '';
                 $tenant->property_unit_id = null;
-
             }
         }
 
         if($files = $request->file('file')) {
-
             if($tenant->image){
                 unlink(public_path('tenants/'.$tenant->image));
             }   

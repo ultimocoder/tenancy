@@ -1,7 +1,7 @@
 <div class="leftbar">
     <a href="{{route('tenant-dashboard')}}" class="logo text-black text-center">
         <img src="{{ asset('images/tenant_logo.svg')}}" alt="">
-        Teanat
+        
     </a>
     <div class="accordion" id="leftMenu">
         <div class="accordion-item">

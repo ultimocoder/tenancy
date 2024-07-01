@@ -5,15 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Additional Information</title>
-  @include('landlord_layouts.header')
+  @include('tenant_layouts.header')
 </head>
 
 <body>
   <div class="admin-container">
-    @include('landlord_layouts.navbar')
+    @include('tenant_layouts.navbar')
     <div class="rightside">
       <div class="top">
-        @include('landlord_layouts.topbar')
+        @include('tenant_layouts.topbar')
         <div class="page">
           <div class="page-title">
             <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <span id="activepage"></span></div>
@@ -80,10 +80,10 @@
           @endif
         </div>
       </div>
-      @include('landlord_layouts.footer')
+      @include('tenant_layouts.footer')
     </div>
   </div>
-  @include('landlord_layouts.script')
+  @include('tenant_layouts.script')
 </body>
 
 </html>

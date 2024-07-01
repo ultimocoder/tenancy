@@ -56,7 +56,7 @@
               <label for="">Email</label>
               <div class="dataValue">
                 <span>{{Auth::user()->email}}</span>
-                <a href="#" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <!-- <a href="#" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a> -->
               </div>
             </div>
 

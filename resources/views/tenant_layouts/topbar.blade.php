@@ -45,7 +45,11 @@
         <div class="profile-menu">
             <div class="dropdown">
                 <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('landlord/images/user-profile-pic.png')}}" alt="">
+                @if(Auth::user()->image)
+                <img src="{{ asset('tenants/profile/'.Auth::user()->image)}}" id="previewImage" alt="Preview Image">
+                @else
+                <img src="{{ asset('tenants/profile/user-profile-pic.png')}}" id="previewImage" alt="Preview Image">
+                @endif
                     Welcome <b class="ms-1 uc">{{ucfirst(auth::user()->username)}}</b>
                 </button>
                 
@@ -56,7 +60,7 @@
                     </li>
                     <li><a class="dropdown-item small" href="{{route('tenant.profile')}}">Profile</a></li>
                     <li><a class="dropdown-item small" href="#">Payment Account</a></li>
-                    <li><a class="dropdown-item small" href="{{route('landlord.account.security')}}">Account and Security</a></li>
+                    <li><a class="dropdown-item small" href="{{route('tenant.account.security')}}">Account and Security</a></li>
                     <li><a class="dropdown-item small" href="{{route('landlord.account.billing')}}">Billing</a></li>
                     <li><a class="dropdown-item small" href="{{route('tenantlogout')}}"> 
                             Logout</a></li>

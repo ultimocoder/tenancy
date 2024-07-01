@@ -12,7 +12,8 @@ use Auth;
 class TenantLoginController extends Controller
 {
 
-    public function tenantloginpost(request $request){        
+    public function tenantloginpost(request $request){  
+          
         $credentials = $request->validate([
             'email' => ['required'],
             'password' => ['required'],
@@ -35,15 +36,13 @@ class TenantLoginController extends Controller
 
     public function tenantdashboard()
     {
-        //dd(auth::user()->unique_id);die;
         if(Auth::check()){
             return view('admin/tenant_dashboard');
         }
        return redirect("tenant/login")->withSuccess('Opps! You do not have access');
     }
 
-    public function tenantlogout(){
-   
+    public function tenantlogout(){   
         Auth::logout();
         return redirect('tenant/login');
     }  

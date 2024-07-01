@@ -142,7 +142,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <a href="{{route('landlord.profile')}}" class="btn btn-danger btn-sm">Cancel</a>
+                                        <a href="{{route('tenant.profile')}}" class="btn btn-danger btn-sm">Cancel</a>
                                     </div>
 
                                 </div>
