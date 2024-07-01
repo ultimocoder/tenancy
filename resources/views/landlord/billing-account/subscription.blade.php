@@ -18,7 +18,7 @@
           <div class="page-title">
           <div class="withButton">
                   <div>
-                      <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <a href="#">Account</a> / <span id="activepage"></span></div>
+                      <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <a href="#">Account</a> / <a href="#">Billing</a> / <span id="activepage"></span></div>
                       <h1><span id="title"></span></h1>
                   </div>
                   <a href="{{route('landlord.account.billing')}}" class="btn btn-xs btn-7"><i class="fa-solid fa-arrow-left-long"></i> Back</a>

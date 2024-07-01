@@ -66,7 +66,7 @@ class SubscriptionController extends Controller
             'email' => 'required|email|unique:users',
             'phone' => 'required',
             'address' => 'required',
-            'zip_code' => 'required',
+            'zip_code' => 'required|min:5',
             // 'card_number' => 'required',
             // 'exp_month' => 'required',
             // 'exp_year' => 'required',

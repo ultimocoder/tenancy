@@ -93,7 +93,7 @@
                                                 <div class="data-row"><label for="">Lease Start Date</label>
                                                     <input type="text" name="lease_start_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly class=" form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->lease_start_date){{ date('m/d/Y', strtotime($tenant->lease_start_date))}}@endif">
                                                 </div>
-                                                <div class="data-row"><label for="">Lease End</label>
+                                                <div class="data-row"><label for="">Lease End Date</label>
                                                     <input type="text" name="lease_end_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly  class="form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->lease_end_date){{date('m/d/Y', strtotime($tenant->lease_end_date))}}@endif">
                                                 </div>
                                                 <div class="data-row"><label for="">Rent Amount</label>

@@ -55,7 +55,7 @@
                                                 <tr>
                                                     <td> <a href="/landlord/upload-documents/{{$doc->document}}" download>{{$doc->document}}</a></td>
                                                     <td> {{$doc->desc}}</td>
-                                                    <td> {{$doc->date}}</td>
+                                                    <td> {{date("m/d/Y", strtotime($doc->date))}}</td>
                                                     <td> {{$doc->size}}</td>
                                                     <td> @if($doc->share == '1') {{'Yes'}} @else {{"No"}} @endif</td>
                                                 </tr>

@@ -67,7 +67,7 @@
                                                 <td><input type="checkbox" class="sub_chk" data-id="{{$doc->id}}" data-status="{{$doc->share}}"></td>
                                                 <td>{{$doc->document}}</td>
                                                 <td> {{$doc->desc}}</td>
-                                                <td> {{$doc->date}}</td>
+                                                <td> {{date("m/d/Y", strtotime($doc->date))}}</td>
                                                 <td> {{$doc->size}}</td>
                                                 
                                                 <td>

@@ -127,7 +127,7 @@
                         <div class="data-row"><label for="">Lease Start Date</label>
                           <div class="value">@if($tenant_info->lease_start_date){{ date('m/d/Y', strtotime($tenant_info->lease_start_date))}} @endif</div>
                         </div>
-                        <div class="data-row"><label for="">Lease End</label>
+                        <div class="data-row"><label for="">Lease End Date</label>
                           <div class="value">@if($tenant_info->lease_end_date){{date('m/d/Y', strtotime($tenant_info->lease_end_date))}} @endif</div>
                         </div>
                         <div class="data-row"><label for="">Rent Amount</label>

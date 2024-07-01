@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-sm-3 required">
                                         <label for="">Zipcode</label>
-                                        <input type="text" class="form-control @error('zip_code') is-invalid @enderror" id="zip_code" value="{{old('zip_code')}}" name="zip_code" placeholder="Enter Zip Code">
+                                        <input type="text" class="form-control @error('zip_code') is-invalid @enderror" id="zip_code" maxlength="5" value="{{old('zip_code')}}" name="zip_code" placeholder="Enter Zip Code">
                                             @error('zip_code')
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
