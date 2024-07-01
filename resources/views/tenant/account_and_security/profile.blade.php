@@ -31,11 +31,11 @@
                                 <div class="page-card">
                                     @if(Auth::user()->image)
                                     <div class="profile-pic">
-                                        <img src="{{ asset('landlord/profile/'.Auth::user()->image)}}" alt="">
+                                        <img src="{{ asset('tenants/profile/'.Auth::user()->image)}}" alt="">
                                     </div>
                                     @else
                                     <div class="profile-pic">
-                                        <img src="{{ asset('landlord/images/user-profile-pic.png')}}" alt="">
+                                        <img src="{{ asset('tenants/profile/user-profile-pic.png')}}" alt="">
                                     </div>
                                     @endif
 

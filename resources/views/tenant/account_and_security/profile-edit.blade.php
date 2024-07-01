@@ -42,7 +42,7 @@
                                         <div class="dataValue">
                                             <span>{{Auth::user()->username}}</span>
                                             <!-- <a href="account-change-user-name.php" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a> -->
-                                            <a href="{{route('landlord.account.username.change')}}" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                            <a href="{{route('tenant.account.username.change')}}" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                         </div>
                                     </div>
 
@@ -51,7 +51,7 @@
                                         <div class="dataValue">
                                             <span>*****************</span>
                                             <!-- <a href="account-change-password.php" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a> -->
-                                            <a href="{{route('landlord.account.password.change')}}" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                            <a href="{{route('tenant.account.password.change')}}" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                                         </div>
                                     </div>
 

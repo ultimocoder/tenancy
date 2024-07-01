@@ -5,22 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Change Password</title>
-    @include('landlord_layouts.header')
+    @include('tenant_layouts.header')
 </head>
 
 <body>
     <div class="admin-container">
-    @include('landlord_layouts.navbar')
+    @include('tenant_layouts.navbar')
         <div class="rightside">
             <div class="top">
-            @include('landlord_layouts.topbar')
+            @include('tenant_layouts.topbar')
                 <div class="page">
                     <div class="page-title">
                         <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <a href="#">Account</a> / <span id="activepage"></span></div>
                         <h1><span id="title"></span></h1>
                     </div>
 
-                    <form action="{{route('landlord.password.save')}}" method="post" class="page-card mx-auto" style="width:500px;">
+                    <form action="{{route('tenant.password.save')}}" method="post" class="page-card mx-auto" style="width:500px;">
                         @csrf
                         <div class="form-group-1">
                             <label for="">New Password</label>
@@ -56,10 +56,10 @@
 
                 </div>
             </div>
-            @include('landlord_layouts.footer')
+            @include('tenant_layouts.footer')
         </div>
     </div>
-    @include('landlord_layouts.script')
+    @include('tenant_layouts.script')
 </body>
 
 </html>

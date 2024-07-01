@@ -14,8 +14,8 @@ class TenantLoginController extends Controller
 
     public function tenantloginpost(request $request){        
         $credentials = $request->validate([
-            'username' => ['required'],
-             'password' => ['required'],
+            'email' => ['required'],
+            'password' => ['required'],
         ]);
         // dd($credentials);
         if (Auth::attempt($credentials)) {
@@ -24,12 +24,11 @@ class TenantLoginController extends Controller
                 $user_id = Auth::user()->id;
                 $user = User::where('id', $user_id)->first();         
                 Session::put('userdetsils', $user);
-                $userdetsils_data = Session::get('userdetsils');
                 return redirect()->intended('tenant-dashboard')->withSuccess('Youh have Successfully loggedin');
             }
         }
             return back()->withErrors([
-                'username' => ' invalid username',
+                'email' => ' invalid email',
                 'password' => ' invalid password',
         ]);
     }

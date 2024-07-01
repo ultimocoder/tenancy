@@ -1,4 +1,4 @@
-@extends('front_layouts.master')
+@extends('tenant_front_layouts.master')
 
     @section('title' , 'Tenant')
 
@@ -6,7 +6,7 @@
 
 <body class="underpage bg-main">
 
-@include('front_layouts.navbar')
+@include('tenant_front_layouts.navbar')
 
     <div class="section pb-3">
         <div class="container">
@@ -21,18 +21,18 @@
                         <div class="col-sm-6">
                             <div class="new-form">
                                 <a href="{{url('/')}}" class="logo text-black mb-3">
-                                    <img src="{{asset('images/logo-icon.svg')}}" alt="">
-                                    Tenant Login 
+                                    <img src="{{asset('images/tenant_logo.svg')}}" alt="">
+                                    Login 
                                 </a>
                                 <h2 class="heading-1 mb-2">Welcome Back!</h2>
                                 <h3 class="heading-2 mb-4">Sign in to continue with Tenant  </h3>
                                 <div class="box">
                                     <div>
-                                        <label for="User name">User name</label>
+                                        <label for="Email Id">Email Id</label>
                                         <div class="icon-control">
                                             <i class="fa-regular fa-circle-user"></i>
-                                            <input type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Enter username" value="{{ old('email') }}" required autocomplete="username" autofocus>
-                                            @error('username')
+                                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Enter Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                            @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -70,6 +70,6 @@
         </div>
     </div>
 
-@include('front_layouts.footer')
+@include('tenant_front_layouts.footer')
 
 @endsection

@@ -5,15 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Account and Security</title>
-  @include('landlord_layouts.header')
+  @include('tenant_layouts.header')
 </head>
 
 <body>
   <div class="admin-container">
-    @include('landlord_layouts.navbar')
+    @include('tenant_layouts.navbar')
     <div class="rightside">
       <div class="top">
-        @include('landlord_layouts.topbar')
+        @include('tenant_layouts.topbar')
         <div class="page">
           <div class="page-title">
             <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <a href="#">Account</a> / <span id="activepage"></span></div>
@@ -40,7 +40,7 @@
               <label for="">User name</label>
               <div class="dataValue">
                 <span>{{Auth::user()->username}}</span>
-                <a href="{{route('landlord.account.username.change')}}" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <a href="{{route('tenant.account.username.change')}}" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
               </div>
             </div>
 
@@ -48,7 +48,7 @@
               <label for="">Password</label>
               <div class="dataValue">
                 <span>*****************</span>
-                <a href="{{route('landlord.account.password.change')}}" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <a href="{{route('tenant.account.password.change')}}" class="btn btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
               </div>
             </div>
 
@@ -64,10 +64,10 @@
 
         </div>
       </div>
-      @include('landlord_layouts.footer')
+      @include('tenant_layouts.footer')
     </div>
   </div>
-  @include('landlord_layouts.script')
+  @include('tenant_layouts.script')
 </body>
 
 </html>
