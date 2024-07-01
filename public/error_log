@@ -1,0 +1,29 @@
+[02-May-2024 08:02:43 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\SubscriptionController::generateAccountId() in /home/adminlalit/public_html/tenancy/app/Http/Controllers/SubscriptionController.php on line 37
+[14-May-2024 05:04:19 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Landlord\AccountController::paymentEdit() in /home/adminlalit/public_html/tenancy/app/Http/Controllers/Landlord/AccountController.php on line 175
+[14-May-2024 05:04:33 UTC] PHP Fatal error:  Cannot redeclare App\Http\Controllers\Landlord\AccountController::paymentEdit() in /home/adminlalit/public_html/tenancy/app/Http/Controllers/Landlord/AccountController.php on line 175
+[24-Jun-2024 07:40:50 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:352
+Stack trace:
+#0 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#1 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(744): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(719): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(650): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#4 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(556): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#5 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(473): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(ParseError))
+#6 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(509): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(ParseError))
+#7 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(148): Illuminate\Foundation\Http\Kernel->renderException(Object(Illuminate\Http\Request), Object(ParseError))
+#8 /home/adminlalit/public_html/tenancy/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#9 {main}
+  thrown in /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 352
+[24-Jun-2024 07:40:54 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:352
+Stack trace:
+#0 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(18): Illuminate\Support\Facades\Facade::__callStatic('replaceNamespac...', Array)
+#1 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(744): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(719): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(650): Illuminate\Foundation\Exceptions\Handler->renderHttpException(Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#4 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(556): Illuminate\Foundation\Exceptions\Handler->prepareResponse(Object(Illuminate\Http\Request), Object(Symfony\Component\HttpKernel\Exception\HttpException))
+#5 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(473): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse(Object(Illuminate\Http\Request), Object(ParseError))
+#6 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(509): Illuminate\Foundation\Exceptions\Handler->render(Object(Illuminate\Http\Request), Object(ParseError))
+#7 /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(148): Illuminate\Foundation\Http\Kernel->renderException(Object(Illuminate\Http\Request), Object(ParseError))
+#8 /home/adminlalit/public_html/tenancy/public/index.php(52): Illuminate\Foundation\Http\Kernel->handle(Object(Illuminate\Http\Request))
+#9 {main}
+  thrown in /home/adminlalit/public_html/tenancy/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 352
