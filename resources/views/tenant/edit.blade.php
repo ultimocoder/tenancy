@@ -36,7 +36,7 @@
                                         <div class="d-flex align-items-center column-gap-3">
                                             <!-- <div class="form-check form-switch fs-13 mb-0"> -->
                                                 <!-- <input class="form-check-input" type="checkbox" name="status" role="switch" id="flexSwitchCheckChecked" @if($tenant->status == true) checked @endif> -->
-                                                <label class="form-check-label fs-14" for="flexSwitchCheckChecked">Status: @if($tenant->status == true) Active @else Inactive @endif</label>
+                                                <!-- <label class="form-check-label fs-14" for="flexSwitchCheckChecked">Status: @if($tenant->status == true) Active @else Inactive @endif</label> -->
                                             <!-- </div> -->
                                             {{--<a href="{{route('landlord.tenant-information')}}" class="btn-xs btn-4"><i class="fa-solid fa-floppy-disk"></i>Save</a>--}}
                                         </div>
@@ -49,25 +49,32 @@
                                                     <span class="fw-bold">{{$tenant->unique_id}}</span>
                                                 </div>
                                                 <div class="data-row"><label for="">First name</label>
-                                                    <input type="text" name="first_name" class="form-control form-control-sm" value="{{$tenant->first_name}}">
+                                                <span class="fw-bold">{{$tenant->first_name}}</span>
+                                                  
                                                 </div>
                                                 <div class="data-row"><label for="">Last name</label>
-                                                    <input type="text" name="last_name" class="form-control form-control-sm" value="{{$tenant->last_name}}">
+                                                <span class="fw-bold">{{$tenant->last_name}}</span>
+                                                    <!-- <input type="text" name="last_name" class="form-control form-control-sm" value="{{$tenant->last_name}}"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Address</label>
-                                                    <input type="text" name="address" class="form-control form-control-sm" value="{{$tenant->address}}">
+                                                <span class="fw-bold">{{$tenant->address}}</span>
+                                                    <!-- <input type="text" name="address" class="form-control form-control-sm" value="{{$tenant->address}}"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Unit Number</label>
-                                                    <input type="text" readonly name="unit_number" class="form-control form-control-sm" value="{{$tenant->property_unit}}">
+                                                <span class="fw-bold">{{$tenant->property_unit}}</span>
+                                                    <!-- <input type="text" readonly name="unit_number" class="form-control form-control-sm" value="{{$tenant->property_unit}}"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">City</label>
-                                                    <input type="text" name="city" class="form-control form-control-sm" value="{{$tenant->city}}">
+                                                <span class="fw-bold">{{$tenant->city}}</span>
+                                                    <!-- <input type="text" name="city" class="form-control form-control-sm" value="{{$tenant->city}}"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">State</label>
-                                                    <input type="text" name="state" class="form-control form-control-sm" value="{{$tenant->state}}">
+                                                <span class="fw-bold">{{$tenant->state}}</span>
+                                                    <!-- <input type="text" name="state" class="form-control form-control-sm" value="{{$tenant->state}}"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Zip</label>
-                                                    <input type="text" name="zipcode" class="form-control form-control-sm" value="{{$tenant->zipcode}}">
+                                                <span class="fw-bold">{{$tenant->zipcode}}</span>
+                                                    <!-- <input type="text" name="zipcode" class="form-control form-control-sm" value="{{$tenant->zipcode}}"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Phone</label>
                                                     <input type="text" name="phone" id="phoneInput" maxlength="10" min="10" class="form-control form-control-sm @error('phone') is-invalid @enderror" value="{{$tenant->phone}}">
@@ -88,39 +95,46 @@
                                                 </div>
                                                 <div class="data-row"><label for="">Created Date</label>
                                                     <!-- <input type="text" name="since" readonly class="form-control form-control-sm" value="{{date('d/m/Y',strtotime($tenant->created_at))}}"> -->
-                                                <span class=""fw-bold>{{date('m/d/Y',strtotime($tenant->created_at))}}</span>
+                                                <span class="fw-bold">{{date('m/d/Y',strtotime($tenant->created_at))}}</span>
                                                 </div>
                                                <div class="data-row"><label for="">Lease Start Date</label>
-                                                    <input type="text" name="lease_start_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly class=" form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->lease_start_date){{ date('m/d/Y', strtotime($tenant->lease_start_date))}}@endif">
+                                               <span class="fw-bold">{{date('m/d/Y',strtotime($tenant->lease_start_date))}}</span>
+                                                    <!-- <input type="text" name="lease_start_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly class=" form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->lease_start_date){{ date('m/d/Y', strtotime($tenant->lease_start_date))}}@endif"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Lease End</label>
-                                                    <input type="text" name="lease_end_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly  class="form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->lease_end_date){{date('m/d/Y', strtotime($tenant->lease_end_date))}}@endif">
+                                                <span class="fw-bold">{{date('m/d/Y',strtotime($tenant->lease_end_date))}}</span>
+                                                    <!-- <input type="text" name="lease_end_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly  class="form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->lease_end_date){{date('m/d/Y', strtotime($tenant->lease_end_date))}}@endif"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Rent Amount</label>
-                                                    <input type="text" name="rental_amount" id="price"  class="form-control form-control-sm" value="${{number_format($tenant->rental_amount,2)}}">
+                                                <span class="fw-bold">${{number_format($tenant->rental_amount,2)}}</span>
+                                                    <!-- <input type="text" name="rental_amount" id="price"  class="form-control form-control-sm" value="${{number_format($tenant->rental_amount,2)}}"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Account Status</label>
                                                     <!-- <input type="text" name="acc_status" class="form-control form-control-sm" readonly value="Current"> -->
-                                                    <span>Current</span>
+                                                    <span class="fw-bold">Current</span>
+                                                   
                                                 </div>
                                                 <div class="data-row"><label for="">Late Fee Owed</label>
-                                                    <input type="text" name="late_fee" class="form-control form-control-sm" value="@if($tenant->late_fee){{$tenant->late_fee}}@else{{0.00}}@endif">
+                                                <span class="fw-bold">{{$tenant->late_fee}}</span>
+                                                    <!-- <input type="text" name="late_fee" class="form-control form-control-sm" value="@if($tenant->late_fee){{$tenant->late_fee}}@else{{0.00}}@endif"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Rental Status</label>
+                                                <span class="fw-bold">{{$tenant->rental_status}}</span>
                                                     <!-- <input type="text" name="rental_status" class="form-control form-control-sm" value="{{$tenant->rental_status}}"> -->
-                                                    <select name="rental_status" id="rental_status" class="form-select form-select-sm @error('rental_status') is-invalid @enderror">
+                                                    <!-- <select name="rental_status" id="rental_status" class="form-select form-select-sm @error('rental_status') is-invalid @enderror">
                                                         
                                                         <option value="Active" @if($tenant->rental_status == 'Active') selected @endif >Active</option> 
                                                         <option value="Expired" @if($tenant->rental_status == 'Expired') selected @endif >Expired</option> 
-                                                    </select>
+                                                    </select> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Lease Type</label>
+                                                <span class="fw-bold">{{$tenant->lease_type}}</span>
                                                     <!-- <input type="text" name="lease_type" class="form-control form-control-sm" value=""> -->
-                                                    <select name="lease_type" id="lease_type" class="form-select form-select-sm @error('lease_type') is-invalid @enderror">
+                                                    <!-- <select name="lease_type" id="lease_type" class="form-select form-select-sm @error('lease_type') is-invalid @enderror">
                                                         <option value="" @if($tenant->lease_type == '') selected @endif > -- Select lease type --</option>
                                                         <option value="Annual" @if($tenant->lease_type == 'Annual') selected @endif >Annual</option> 
                                                         <option value="Month-to-Month" @if($tenant->lease_type == 'Month-to-Month') selected @endif >Month-to-Month</option> 
-                                                    </select>
+                                                    </select> -->
                                                      
                                                 </div>
                                                 @error('lease_type')
@@ -135,16 +149,16 @@
                                                 @if($tenant->image)
                                                 <img src="{{ asset('tenants/'.$tenant->image)}}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
                                                 @else
-                                                <img src="{{ asset('tenants/images/img-1.jpg')}}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
+                                                <img src="{{ asset('tenants/images/img-1.jpg')}}" id="last_fetch_image" class="" alt="" height="200px" width="200px"  >
                                                 @endif
                                                 <img src="" id="profile-img-tag" class="" alt="" height="200px" width="200px">
-                                                <div style="margin-top: -16px;">
+                                                <!-- <div style="margin-left: 3px;">
                                                     <input type="file" name="file" class="d-none opacity-0 position-absolute" id="imgUpload" >
                                                     <label for="imgUpload" class="btn btn-sm btn-color-14 text-white"><i class="fa-solid fa-upload me-2"></i>Edit Photo</label>
                                                     @if($tenant->image)
                                                     <a href="{{route('tenant.tenant.remove.photo', $tenant->id)}}" onclick="return confirm('Are you sure you want to delete this photo ?')" class="btn btn-sm btn-danger text-white"><i class="fa-solid fa-trash me-2"></i>Remove Photo</a>
                                                     @endif
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>

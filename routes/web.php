@@ -213,4 +213,11 @@ Route::group(['middleware' => 'guidtenant'], function () {
     Route::post('/tenant/tenant/update', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantUpdate'])->name('tenant.tenant.update');
     Route::get('/tenant/tenant/delete-photo/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'deletePhoto'])->name('tenant.tenant.remove.photo');
     Route::get('/tenant/tenant-additional-info/', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantAdditionalInfo'])->name('tenant.tenant-additional-information');
+    Route::get('/tenant/additional-information/edit/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantEditAdditionalInfo'])->name('tenant.additional-information');
+    Route::post('/tenant/additional-information/update', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantUpdateAdditionalInfo'])->name('tenant.additional-information-update');
+
+    Route::get('/tenant/make-payment/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantMakePayment'])->name('tenant.tenant-make-payment');
+    Route::get('/tenant/payment-history/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentHistory'])->name('tenant.tenant-payment-history');
+    Route::get('/tenant/payment-review/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentReview'])->name('tenant.tenant-payment-review');
+    
 });

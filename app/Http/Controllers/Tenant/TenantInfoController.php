@@ -30,85 +30,21 @@ class TenantInfoController extends Controller
         // dd($tenant->toArray());
         return view('tenant.edit',compact('tenant'));
     }
-    public function tenantUpdate(request $request){
-      
-        $date1 = new \DateTime($request->lease_start_date);
-        $start = $date1->format('Y-m-d');
-        $date2 = new \DateTime($request->lease_end_date);
-        $end = $date2->format('Y-m-d');
-      
+    public function tenantUpdate(request $request){    
 
-        $validated = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+        $validated = $request->validate([          
             // 'email' => 'required|unique:users',
-            'phone' => 'required|min:10',
-            'lease_type' => "required"
+            'phone' => 'required|min:10'
+           
         ]);
-        
-        $tenant = Tenant::where(['id'=> $request->id])->first();
-        $tenant->first_name = $request->first_name;
-        $tenant->last_name = $request->last_name;
-        $tenant->address = $request->address; 
-        $tenant->added_by_id = Auth::user()->id;
-        $tenant->property_unit = $request->unit_number;
+        $tenant = Tenant::where(['id'=> $request->id])->first();       
         $tenant->email = $request->email;
-        $tenant->phone = $request->phone; 
-        if($request->lease_start_date){
-            $tenant->lease_start_date = $start;
-        }
-        if($request->lease_end_date){
-            $tenant->lease_end_date = $end;
-        }
-        $tenant->rental_amount = str_replace(array('$', ','), '', $request->rental_amount);
-        $tenant->account_status = $request->acc_status;
-        $tenant->late_fee = $request->late_fee;
-        $tenant->rental_status = $request->rental_status;
-        $tenant->lease_type = $request->lease_type;
-        if($request->rental_status == 'Active'){
-            $tenant->status = true;
-        }else{
-            $tenant->status = false;
-            $unit = PropertyUnit::where(['added_by_id' => Auth::user()->id,'property_id' => $tenant->property_id, 'unit_name' => $request->unit_number])->first();
-            if($unit){
-                $unit->booked = 0;
-                $unit->save();
-                $tenant->property_unit = '';
-                $tenant->property_unit_id = null;
-            }
-        }
-
-        if($files = $request->file('file')) {
-            if($tenant->image){
-                unlink(public_path('tenants/'.$tenant->image));
-            }   
-            //$image = $request->file('edit_image');
-            //$request->image->move(public_path('images'), $imageName);
-            $destinationPath = 'public/tenants/'; // upload path
-            $image = time() . "." . $files->getClientOriginalExtension();
-            $request->file->move(public_path('tenants'), $image);
-            $tenant->image = $image;
-            
-        }  
-        
+        $tenant->phone = $request->phone;          
         $tenant->save();
-
         $user = User::where(['id' => $tenant->user_id])->first();
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->address = $request->address; 
-        $user->username = $request->first_name."".$request->last_name;
+      
         $user->email = $request->email;
-        $user->phone = $request->phone; 
-        if($request->status){
-            $user->status = true;
-        }else{
-            $user->status = false;
-        }
-        $user->state = $request->state; 
-        $user->city = $request->city; 
-        $user->country = $request->country;
-        $user->zipcode = $request->zipcode; 
+        $user->phone = $request->phone;         
         $user->save();
         return redirect()->route('tenant.tenant-information')->with('message', 'Tenant updated successfully.');
 
@@ -128,6 +64,31 @@ class TenantInfoController extends Controller
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
         $user = User::where('id',$tenant_info->user_id)->first();                  
         return view('tenant.tenant-additional-information', compact('tenant_info','user'));           
+    }
+    public function tenantEditAdditionalInfo($id){
+       
+        $tenant = User::where('users.id', $id)
+            ->join('tenants as t', 't.user_id', '=', 'users.id')
+                ->select('*')->first();
+        // dd($tenant->toArray());
+        return view('tenant.additional-information-edit',compact('tenant'));
+     
+    }
+    public function tenantUpdateAdditionalInfo(request $request){    
+              
+        $tenant = Tenant::where(['id'=> $request->id])->first();       
+        $tenant->late_fee = $request->late_fee;
+        $tenant->grace_period_days = $request->grace_period_days;   
+        $tenant->number_of_decurity_deposit = $request->number_of_decurity_deposit;
+        $tenant->total_security_deposit = $request->total_security_deposit;   
+        $tenant->rent_due_date = $request->rent_due_date;
+        $tenant->pets = $request->pets;    
+        $tenant->storage = $request->storage;      
+        $tenant->parking = $request->parking;      
+        $tenant->notes = $request->notes;            
+        $tenant->save();       
+        return redirect()->route('tenant.tenant-additional-information')->with('message', 'Tenant Additional Information updated successfully.');
+
     }
 
     

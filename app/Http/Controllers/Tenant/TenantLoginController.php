@@ -25,7 +25,7 @@ class TenantLoginController extends Controller
                 $user_id = Auth::user()->id;
                 $user = User::where('id', $user_id)->first();         
                 Session::put('userdetsils', $user);
-                return redirect()->intended('tenant-dashboard')->withSuccess('Youh have Successfully loggedin');
+                return redirect()->intended('tenant/tenant-info')->withSuccess('Youh have Successfully loggedin');
             }
         }
             return back()->withErrors([
