@@ -7,6 +7,7 @@
     <title>Tenant Information</title>
     @include('landlord_layouts.header')
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" integrity="sha512-UtLOu9C7NuThQhuXXrGwx9Jb/z9zPQJctuAgNUBK3Z6kkSYT9wJ+2+dh6klS+TDBCV9kNPBbAxbVD+vCcfGPaA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -127,7 +128,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4 text-end">
+                                        {{--<div class="col-sm-4 text-end">
                                             <div class="d-inline-flex flex-column text-center">
                                                 @if($tenant->image)
                                                 <img src="{{ asset('landlord/tenants/'.$tenant->image)}}" id="last_fetch_image" class="img-fluid" alt="">
@@ -142,6 +143,33 @@
                                                     <a href="{{route('landlord.tenant.remove.photo', $tenant->id)}}" onclick="return confirm('Are you sure you want to delete this photo ?')" class="btn btn-sm btn-danger text-white"><i class="fa-solid fa-trash me-2"></i>Remove Photo</a>
                                                     @endif
                                                 </div>
+                                            </div>
+                                        </div>
+                                        --}}
+                                        <div class="col-sm-4 text-end">
+                                            <div class="d-inline-flex flex-column text-center">
+                                                @if($tenant->image)
+                                                    <img src="{{ asset('landlord/tenants/'.$tenant->image) }}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
+                                                @else
+                                                    <img src="{{ asset('landlord/images/img-1.jpg') }}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
+                                                @endif
+                                                <img src="" id="profile-img-tag" class="" alt="" height="200px" width="200px" style="display:none;">
+                                                <div id="image-cropper-container" style="display:none;">
+                                                    <img id="cropper-image" style="max-width: 100%;" />
+                                                </div>
+                                                <div style="margin-top: 16px" id="btnSection">
+                                                    <input type="file" class="d-none opacity-0 position-absolute" id="imgUpload" name="file">
+                                                    <label for="imgUpload" class="btn btn-sm btn-color-14 text-white">
+                                                        <i class="fas fa-upload me-2"></i>Edit Photo
+                                                    </label>
+                                                    @if($tenant->image)
+                                                        <a href="{{route('landlord.tenant.remove.photo', $tenant->id)}}" onclick="return confirm('Are you sure you want to delete this photo?')" class="btn btn-sm btn-danger text-white">
+                                                            <i class="fa-solid fa-trash me-2"></i>Remove Photo
+                                                        </a>
+                                                    @endif
+                                                </div>
+                                                <button type="button" id="crop-button" style="display:none;" class="btn btn-sm btn-success mt-2">Crop</button>
+                                                <input type="hidden" name="cropped_image" value=""/>
                                             </div>
                                         </div>
                                     </div>
@@ -162,9 +190,10 @@
     @include('landlord_layouts.script')
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" integrity="sha512-JyCZjCOZoyeQZSd5+YEAcFgz2fowJ1F1hyJOXgtKu4llIa0KneLcidn5bwfutiehUTiOuK87A986BZJMko0eWQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
-<script>
+<!-- <script>
     $(function(){
         $( ".date" ).datepicker(
             {
@@ -187,6 +216,158 @@
             $("#imgUpload").change(function(){
                 readURL(this);
             });
+        //phone number implementation
+        $('#phoneInput').on('input', function(){
+            // Get the current value of the input field
+            var inputValue = $(this).val();
+            
+            // Remove non-numeric characters from the input
+            var numericValue = inputValue.replace(/\D/g,'');
+            
+            // Format the phone number as (###) ###-####
+            var formattedValue = numericValue.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+            
+            // Set the formatted value back to the input field
+            $(this).val(formattedValue);
+        });//phone number implementation end
+
+        $('#phoneInput').on('input', function() {
+            var phoneNumber = $(this).val();
+            if (phoneNumber.charAt(0) === '0') {
+                $('#phone-error').text('Phone number cannot start with 0.');
+                return false;
+            }if (phoneNumber.charAt(1) === '0') {
+                $('#phone-error').text('Phone number cannot start with 0.');
+                return false;
+            } else {
+                $('#phone-error').text('');
+            }
+        });
+
+           // Function to format price
+    function formatPrice(price) {
+        // Add commas as thousand separators
+        var parts = price.toString().split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (parts.length > 1) {
+            // Limit decimal places to 2
+            parts[1] = parts[1].slice(0, 2);
+        }
+        return "$" + parts.join(".");
+    }
+
+    // Function to update formatted price on page load
+    // window.onload = function() {
+    //     var priceInput = document.getElementById("price");
+    //     var amount = priceInput.value;
+    //     priceInput.value = formatPrice(amount);
+    // };
+
+    $("#price").on("keyup", function() {
+        // Get the entered price
+        var price = $(this).val();
+        
+        // Remove non-numeric characters and allow only one dot
+        price = price.replace(/[^\d.]/g, '');
+        var dotCount = price.split('.').length - 1;
+        if(dotCount > 1) {
+            price = price.substr(0, price.lastIndexOf('.'));
+        }
+        
+        // Format the price
+        var formattedPrice = formatPrice(price);
+        
+        // Display the formatted price
+        $(this).val(formattedPrice);
+    });
+    
+    })
+</script> -->
+
+<script>
+    $(function(){
+        $( ".date" ).datepicker(
+            {
+                dateFormat: "mm/dd/yy",
+            }
+        );
+
+        / CFetching image instantly /
+        // $('#profile-img-tag').hide();
+        // function readURL(input) {
+        //         if (input.files && input.files[0]) {
+        //             var reader = new FileReader();
+                    
+        //             reader.onload = function (e) {
+        //                 $('#profile-img-tag').attr('src', e.target.result);
+        //                 $('#profile-img-tag').show();
+        //                 $('#last_fetch_image').hide();
+        //             }
+        //             reader.readAsDataURL(input.files[0]);
+        //         }
+        // }
+        // $("#imgUpload").change(function(){
+        //     readURL(this);
+        // });
+        var cropper;
+        var image = document.getElementById('cropper-image');
+        
+        $('#imgUpload').change(function(event) {
+            var files = event.target.files;
+            var done = function(url) {
+                image.src = url;
+                $('#last_fetch_image').hide();
+                $('#profile-img-tag').hide();
+                $('#btnSection').hide();
+                $('#image-cropper-container').show();
+                $('#crop-button').show();
+                if (cropper) cropper.destroy(); // Destroy previous instance if it exists
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    minContainerWidth: 200,
+                    minContainerHeight: 200
+                });
+            };
+            var reader;
+            var file;
+            var url;
+            
+            if (files && files.length > 0) {
+                file = files[0];
+                
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                    console.log(1);
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    console.log(2);
+                    reader.onload = function(e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        $('#crop-button').click(function() {
+            var canvas;
+            
+            if (cropper) {
+                canvas = cropper.getCroppedCanvas({
+                    width: 200,
+                    height: 200
+                });
+                $('#profile-img-tag').attr('src', canvas.toDataURL());
+                $('#profile-img-tag').show();
+                $('#image-cropper-container').hide();
+                $('#crop-button').hide();
+                $('#last_fetch_image').hide();
+                $('#btnSection').show();
+                $('[name=cropped_image]').val(canvas.toDataURL());
+            }
+        });
+
         //phone number implementation
         $('#phoneInput').on('input', function(){
             // Get the current value of the input field

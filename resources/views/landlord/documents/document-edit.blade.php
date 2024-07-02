@@ -26,7 +26,7 @@
                                 <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <span id="activepage"></span> / Edit</div>
                                 <h1><span id="title"></span></h1>
                             </div>
-                            <a href="{{route('landlord.document')}}" class="btn btn-xs btn-danger"><i class="fa-solid fa-delete-left"></i> Cancel</a>
+                            <a href="{{route('landlord.document')}}" class="btn btn-xs btn-danger"><i class="fa-solid fa-delete-left"></i> Close</a>
                         </div>
                     </div>
                     <div class="container-fluid">
@@ -128,10 +128,10 @@
             //alert(status);
             
             $.ajax({
-                type: "GET",
+                type: "post",
                 dataType: "json",
                 url: '{{route("landlord.document.changeStatus")}}',
-                data: {'status': status, 'doc_id': doc_id},
+                data: {'status': status, 'doc_id': doc_id, "_token": "{{ csrf_token() }}"},
                 success: function(data){
                 console.log(data.success)
                     if(status)
@@ -186,10 +186,10 @@
             if(status == false){
                 if(confirm('Are you sure you want to delete this document?')){
                     $.ajax({
-                type: "GET",
+                type: "post",
                 dataType: "json",
                 url: "{{route('landlord.document.delete')}}",
-                data: {'status': status, 'doc_id': doc_id},
+                data: {'status': status, 'doc_id': doc_id, "_token": "{{ csrf_token() }}"},
                 success: function(data){
                     console.log(data.success)
                         

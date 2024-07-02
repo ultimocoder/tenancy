@@ -17,6 +17,26 @@
             <div class="top">
             @include('landlord_layouts.topbar')
 
+    <div class="tab-buttons">
+        @if(isset($popups))  
+          @if(count($popups) > 0)
+            @foreach($popups as $tenant)
+
+            <div class="btn-tab-button @if(session('tenant_id') == $tenant->tenant_id) active @endif">
+              
+              @if(session('tenant_id') != $tenant->tenant_id)
+              <i class="fa-solid fa-xmark remove cursor-pointer" data-tid="no" data-id="{{$tenant->tenant_id}}"></i>
+              @endif
+              @if(count($popups) == 1)
+                <i class="fa-solid fa-xmark remove cursor-pointer" data-tid="yes" data-id="{{$tenant->tenant_id}}"></i>
+              @endif
+              <a href="{{route('landlord.document', $tenant->tenant_id)}}">{{$tenant->unique_id}}</a>
+            </div>
+            @endforeach
+          @endif
+        @endif
+      </div>
+
                 <div class="page">
                     <div class="page-title">
                         <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <span id="activepage"></span></div>
@@ -148,7 +168,38 @@
             var fileSizeInKB = fileSize / 1024; // Convert to KB
             $('#fileSizeDisplay').val(fileSizeInKB.toFixed(2) + ' KB');
         });
+        
     });
+
+    jQuery(".tab-buttons").on('click', '.btn-tab-button', function() {
+      jQuery(this).addClass("active").siblings().removeClass("active");
+    });
+
+$(function(){
+  $('body').on('click','.remove', function(){
+    
+    var tenant_id = $(this).attr('data-id');
+    tid = $(this).attr('data-tid');
+      $.ajax({
+              url: "{{route('landlord.tenant.session.delete')}}",
+              type: 'DELETE',
+              data: {
+                  "id": tenant_id,
+                  "_token": "{{ csrf_token() }}",
+              },
+              success: function (){
+                //alert('done');
+                if(tid == 'yes'){
+                  window.location.href = "{{route('landlord.tenant.advanced.search')}}";
+                }else{
+                  $(".tab-buttons").load(location.href + " .tab-buttons");
+                }
+                  
+                  
+              }
+          });
+  });
+});
     </script>
 </body>
 

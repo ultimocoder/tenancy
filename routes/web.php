@@ -86,12 +86,12 @@ Route::delete('/landlord/tenant/session/delete', [App\Http\Controllers\Landlord\
 
 //landlord document
 
-Route::get('/landlord/document', [App\Http\Controllers\Landlord\DocumentController::class, 'document'])->name('landlord.document');
+Route::get('/landlord/document/{id?}', [App\Http\Controllers\Landlord\DocumentController::class, 'document'])->name('landlord.document');
 Route::post('/landlord/document/save', [App\Http\Controllers\Landlord\DocumentController::class, 'store'])->name('landlord.document.save');
 Route::get('/landlord/document/download/{id}', [App\Http\Controllers\Landlord\DocumentController::class, 'download'])->name('landlord.document.download');
 Route::get('/landlord/document/edit/list', [App\Http\Controllers\Landlord\DocumentController::class, 'documentEditList'])->name('landlord.document.edit');
-Route::get('/landlord/document/delete', [App\Http\Controllers\Landlord\DocumentController::class, 'documentDelete'])->name('landlord.document.delete');
-Route::get('/landlord/document/changeStatus', [App\Http\Controllers\Landlord\DocumentController::class, 'changeStatus'])->name('landlord.document.changeStatus');
+Route::post('/landlord/document/delete', [App\Http\Controllers\Landlord\DocumentController::class, 'documentDelete'])->name('landlord.document.delete');
+Route::post('/landlord/document/changeStatus', [App\Http\Controllers\Landlord\DocumentController::class, 'changeStatus'])->name('landlord.document.changeStatus');
 Route::delete('/landlord/document/deleteAll', [App\Http\Controllers\Landlord\DocumentController::class, 'deleteAll'])->name('landlord.multiple.document.delete');
 
 //landlord expenses

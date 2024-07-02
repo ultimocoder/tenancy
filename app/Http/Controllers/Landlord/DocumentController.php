@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Landlord;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Document;
+use App\Models\Tenant;
+use App\Models\PopupTenant;
+use App\Models\User;
+
 use Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -15,12 +19,44 @@ class DocumentController extends Controller
         $this->middleware('auth');
     }
 
-    public function document(){
+    public function document($id = null){
         
         $tenant = Session::get('tenant_id');
+        $tenant_info=array();
+        if($id == '')
+        {
+            if(session()->has('tenant_id') && !empty(session('tenant_id')))
+            {
+                $sessionId = Session::get('tenant_id');   
+                $tenant_info = Tenant::where(['id'=> $sessionId])->first();
+                $user = User::where('id',$tenant_info->user_id)->first();
+                $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
+                $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $tenant])->get()->sortByDesc('id');
+                return view('landlord.documents.document',compact('docs','popups'));
+            }
+            else
+            {
+                
+                 //return view('landlord.tenant.tenant-additional-information', compact('tenant_info'));
+                 $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $tenant])->get()->sortByDesc('id');
+                return view('landlord.documents.document',compact('docs'));
+            }
+        }
+        else
+        {  
+             $tenant_info = Tenant::where(['id'=> $id])->first();
+             $user = User::where('id',$tenant_info->user_id)->first();
+             Session::put('tenant_id', $id);
+             $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
+             //return view('landlord.tenant.tenant-additional-information', compact('tenant_info','user','popups'));
+             $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $id])->get()->sortByDesc('id');
+            return view('landlord.documents.document',compact('docs','popups'));
+        } 
+
+        // $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $tenant])->get()->sortByDesc('id');
+        //         return view('landlord.documents.document',compact('docs','popups'));
         
-        $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $tenant])->get()->sortByDesc('id');
-        return view('landlord.documents.document',compact('docs'));
+        
     }
 
     public function store(request $request){

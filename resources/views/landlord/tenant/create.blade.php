@@ -179,13 +179,23 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Lease start date</label>
-                                    <input type="text" name="lease_start_date" value="{{old('lease_start_date')}}" autocomplete="off" id="lease_start_date" class="form-control form-control-sm date" placeholder="Enter start date">
+                                    <input type="text" name="lease_start_date" value="{{old('lease_start_date')}}" autocomplete="off" id="lease_start_date" class="form-control form-control-sm date @error('lease_start_date') is-invalid @enderror" placeholder="Enter start date">
+                                    @error('lease_start_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Lease end date</label>
-                                    <input type="text" name="lease_end_date" value="{{old('lease_end_date')}}" autocomplete="off" class="form-control form-control-sm date" placeholder="Enter end date">
+                                    <input type="text" name="lease_end_date" value="{{old('lease_end_date')}}" autocomplete="off" class="form-control form-control-sm date @error('lease_end_date') is-invalid @enderror" placeholder="Enter end date">
+                                    @error('lease_end_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-sm-6">

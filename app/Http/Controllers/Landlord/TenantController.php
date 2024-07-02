@@ -93,7 +93,9 @@ class TenantController extends Controller
             'property' => 'required',
             'address' => 'required',
             'unit' => 'required',
-            'lease_type' => "required"
+            'lease_type' => "required",
+            'lease_start_date' => 'required',
+            'lease_end_date' => 'required'
 
         ]);
         
@@ -280,7 +282,8 @@ class TenantController extends Controller
                 $sessionId = Session::get('tenant_id');   
                 $tenant_info = Tenant::where(['id'=> $sessionId])->first();
                 $user = User::where('id',$tenant_info->user_id)->first();
-                return view('landlord.tenant.tenant-additional-information', compact('tenant_info','user'));
+                $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
+                return view('landlord.tenant.tenant-additional-information', compact('tenant_info','user','popups'));
             }
             else
             {
@@ -294,7 +297,8 @@ class TenantController extends Controller
              $tenant_info = Tenant::where(['id'=> $id])->first();
              $user = User::where('id',$tenant_info->user_id)->first();
              Session::put('tenant_id', $id);
-             return view('landlord.tenant.tenant-additional-information', compact('tenant_info','user'));
+             $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
+             return view('landlord.tenant.tenant-additional-information', compact('tenant_info','user','popups'));
         } 
     }
 
@@ -391,19 +395,37 @@ class TenantController extends Controller
 
         }
 
-        if($files = $request->file('file')) {
+        // if($files = $request->file('file')) {
 
+        //     if($tenant->image){
+        //         unlink(public_path('landlord/tenants/'.$tenant->image));
+        //     }   
+        //     //$image = $request->file('edit_image');
+        //     //$request->image->move(public_path('images'), $imageName);
+        //     $destinationPath = 'public/landlord/tenants/'; // upload path
+        //     $image = time() . "." . $files->getClientOriginalExtension();
+        //     $request->file->move(public_path('landlord/tenants'), $image);
+        //     $tenant->image = $image;
+            
+        // }  
+
+        if($request->cropped_image) {
             if($tenant->image){
                 unlink(public_path('landlord/tenants/'.$tenant->image));
-            }   
-            //$image = $request->file('edit_image');
-            //$request->image->move(public_path('images'), $imageName);
-            $destinationPath = 'public/landlord/tenants/'; // upload path
-            $image = time() . "." . $files->getClientOriginalExtension();
-            $request->file->move(public_path('landlord/tenants'), $image);
-            $tenant->image = $image;
-            
-        }  
+            }
+
+            $data = $request->cropped_image;
+            $image_array_1 = explode(";", $data);
+            $image_array_2 = explode(",", $image_array_1[1]);
+            $data = base64_decode($image_array_2[1]);
+    
+            $image_name = time() . '.png';
+            $image_path = public_path('landlord/tenants') . '/' . $image_name;
+    
+            file_put_contents($image_path, $data);
+    
+            $tenant->image = $image_name;
+        }
         
         $tenant->save();
 
