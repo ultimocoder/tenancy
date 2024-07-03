@@ -17,7 +17,7 @@ use Carbon\Carbon;
 
 class TenantInfoController extends Controller
 {
-    public function tenantInfo(){                 
+    public function tenantsInfo(){                 
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
         $user = User::where('id',$tenant_info->user_id)->first();
         $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();

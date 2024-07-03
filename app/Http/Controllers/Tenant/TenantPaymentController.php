@@ -23,15 +23,18 @@ class TenantPaymentController extends Controller
 {
     public function tenantMakePayment()
     {
-        return view('tenant.payments.make-payment');
+        $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();
+        return view('tenant.payments.make-payment', compact('tenant_info'));
+    }
+   
+    public function tenantPaymentReview()
+    {
+        $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();
+        return view('tenant.payments.payment-review', compact('tenant_info'));
     }
     public function tenantPaymentHistory()
     {
         return view('tenant.payments.payment-history');
-    }
-    public function tenantPaymentReview()
-    {
-        return view('tenant.payments.payment-review');
     }
     
     

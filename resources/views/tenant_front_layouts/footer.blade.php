@@ -61,7 +61,7 @@
               <a href="#">Cookie Policy</a>
             </div>
           </div>
-          <div class="col-sm-6 text-sm-end">Copyright © 2024 Tenancy.</div>
+          <div class="col-sm-6 text-sm-end">Copyright © 2024 Tenant.</div>
         </div>
       </div>
     </div>

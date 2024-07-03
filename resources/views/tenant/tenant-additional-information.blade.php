@@ -37,46 +37,45 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3" style="width: 33%;">
                       <div class="data-box">
-                        <div class="data-row"><label for="">Account number</label>
-                          <div class="value">{{$tenant_info->unique_id}}</div>
-                        </div>
-                        <div class="data-row"><label for="">late Fee Amount</label>
-                        <div class="value">${{$tenant_info->late_fee}}</div>
-                        </div>
-                        <div class="data-row"><label for="">Grace Period Days</label>
-                        <div class="value">{{$tenant_info->grace_period_days}}</div>
-                        </div>  
-
-                        <div class="data-row"><label for="">Notes</label>
-                        <div class="value">{{$tenant_info->notes}}</div>
-                        </div>  
+                          <div class="data-row"><label for="">Account number</label>
+                            <div class="value">{{$tenant_info->unique_id}}</div>
+                          </div>
+                          <div class="data-row"><label for="">late Fee Amount</label>
+                              <div class="value">${{$tenant_info->late_fee}}</div>
+                          </div>
+                          <div class="data-row"><label for="">Grace Period Days</label>
+                              <div class="value">{{$tenant_info->grace_period_days}}</div>
+                          </div>  
+                          <div class="data-row"><label for="">Notes</label>
+                                <div class="value">{{$tenant_info->notes}}</div>
+                          </div>  
                       </div>
-                    </div>   
-                    <div class="col-sm-3">
+                  </div>   
+                 <div class="col-sm-3" style="width: 33%;">
                     <div class="data-box">
                         <div class="data-row"><label for="">Number of Security Deposit</label>
-                        <div class="value">{{$tenant_info->number_of_decurity_deposit}}</div>
+                           <div class="value">{{$tenant_info->number_of_decurity_deposit}}</div>
                         </div>
                         <div class="data-row"><label for="">Total Security Deposit</label>
-                        <div class="value">${{$tenant_info->total_security_deposit}}</div>
+                            <div class="value">${{$tenant_info->total_security_deposit}}</div>
                         </div>
                         <div class="data-row"><label for="">Rent Due Date</label>
-                        <div class="value">{{$tenant_info->rent_due_date}}</div>
-                    </div>
-                  </div>
-                     </div>    
+                            <div class="value">{{$tenant_info->rent_due_date}}</div>
+                        </div>
+                     </div>
+                   </div>    
                      <div class="col-sm-3">
                      <div class="data-box"> 
                         <div class="data-row"><label for="">Pets</label>
-                        <div class="value">{{$tenant_info->pets}}</div>
+                            <div class="value">{{$tenant_info->pets}}</div>
                         </div>
                         <div class="data-row"><label for="">Storage</label>
-                        <div class="value">{{$tenant_info->storage}}</div>
+                            <div class="value">{{$tenant_info->storage}}</div>
                         </div>
                         <div class="data-row"><label for="">Parking</label>
-                        <div class="value">{{$tenant_info->parking}}</div>
+                            <div class="value">{{$tenant_info->parking}}</div>
                         </div>
                       </div>
                     </div>

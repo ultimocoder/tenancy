@@ -42,7 +42,7 @@ class TenantAccountController extends Controller
         $user->country = $request->country;
         $user->zipcode = $request->zipcode;
         if($files = $request->file('file')) {
-            $fileName = $request->file('file')->getClientOriginalName();
+            $fileName = $request->file('file')->getClientOriginalName(); 
             $request->file->move(public_path('tenants/profile'), $fileName);
     
             if($fileName){

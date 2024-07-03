@@ -22,28 +22,28 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <form action="payment-confirmation.php" class="page-card">
+                                <form action="" method="POST" class="page-card">
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="data-box">
                                                 <div class="data-row"><label for="">Account Number</label>
-                                                    <div class="value">SC417956</div>
+                                                    <div class="value">{{$tenant_info->unique_id}}</div>
                                                 </div>
                                                 <div class="data-row"><label for="">Payment due date</label>
                                                     <div class="value">01/01/2024</div>
                                                 </div>
                                                 <div class="data-row"><label for="">Amount to Pay</label>
-                                                    <div class="value">$1850.00</div>
+                                                    <div class="value">${{$tenant_info->rental_amount}}</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="data-box">
                                                 <div class="data-row"><label for="">Late fee</label>
-                                                    <div class="value">$0.00</div>
+                                                    <div class="value">${{$tenant_info->late_fee}}</div>
                                                 </div>
                                                 <div class="data-row"><label for="">Total payment amount</label>
-                                                    <div class="value">$1850.00</div>
+                                                    <div class="value">${{$tenant_info->rental_amount}}</div>
                                                 </div>
                                                 <div class="data-row"><label for="">Payment method</label>
                                                     <div class="value">CHASE</div>
@@ -51,12 +51,12 @@
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <div class="data-box">
+                                            <div class="data-box"> 
                                                 <div class="data-row"><label for="">Payment date</label>
-                                                    <div class="value">01/01/2024</div>
+                                                    <div class="value">@if($tenant_info->lease_end_date){{ date('m/d/Y', strtotime($tenant_info->lease_end_date))}} @endif</div>
                                                 </div>
                                                 <div class="data-row"><label for="">Confirmation Email</label>
-                                                    <div class="value">sharod.cambell@hotmail.com</div>
+                                                    <div class="value">{{$tenant_info->email}}</div>
                                                 </div>
                                             </div>
                                         </div>

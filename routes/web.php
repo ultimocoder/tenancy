@@ -208,7 +208,7 @@ Route::group(['middleware' => 'guidtenant'], function () {
     Route::post('/tenant/account-username-save', [App\Http\Controllers\Tenant\TenantAccountController::class, 'accountUsernameSave'])->name('tenant.username.save');
     Route::post('/tenant/account-password-save', [App\Http\Controllers\Tenant\TenantAccountController::class, 'accountPasswordSave'])->name('tenant.password.save');
 
-    Route::get('/tenant/tenant-info/', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantInfo'])->name('tenant.tenant-information');
+    Route::get('/tenant/tenant-info/', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantsInfo'])->name('tenant.tenant-information');
     Route::get('/tenant/tenant/edit/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantEdit'])->name('tenant.tenant.edit');
     Route::post('/tenant/tenant/update', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantUpdate'])->name('tenant.tenant.update');
     Route::get('/tenant/tenant/delete-photo/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'deletePhoto'])->name('tenant.tenant.remove.photo');
