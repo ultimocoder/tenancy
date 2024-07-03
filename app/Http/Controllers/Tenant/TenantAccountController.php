@@ -83,6 +83,7 @@ class TenantAccountController extends Controller
         $user->username = $request->username;
         $user->save();
         return redirect()->route('tenant.account.security')->with('message', 'Username changed successfully.');
+        //test
     }
  
 }
