@@ -151,7 +151,7 @@
                                                 @if($tenant->image)
                                                     <img src="{{ asset('landlord/tenants/'.$tenant->image) }}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
                                                 @else
-                                                    <img src="{{ asset('landlord/images/img-1.jpg') }}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
+                                                    <img src="{{ asset('landlord/images/img-1.jpg') }}" id="last_fetch_image" class="" alt="">
                                                 @endif
                                                 <img src="" id="profile-img-tag" class="" alt="" height="200px" width="200px" style="display:none;">
                                                 <div id="image-cropper-container" style="display:none;">
@@ -168,7 +168,7 @@
                                                         </a>
                                                     @endif
                                                 </div>
-                                                <button type="button" id="crop-button" style="display:none;" class="btn btn-sm btn-success mt-2">Crop</button>
+                                                <button type="button" id="crop-button" style="display:none;" class="btn btn-sm btn-success mt-2">Upload</button>
                                                 <input type="hidden" name="cropped_image" value=""/>
                                             </div>
                                         </div>
@@ -323,7 +323,7 @@
                 $('#crop-button').show();
                 if (cropper) cropper.destroy(); // Destroy previous instance if it exists
                 cropper = new Cropper(image, {
-                    aspectRatio: 1,
+                    aspectRatio: 16 / 9,
                     viewMode: 1,
                     minContainerWidth: 200,
                     minContainerHeight: 200

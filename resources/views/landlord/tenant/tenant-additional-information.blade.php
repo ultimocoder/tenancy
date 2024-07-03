@@ -16,6 +16,7 @@
         @include('landlord_layouts.topbar')
 
       <div class="tab-buttons">
+        
         @if(isset($popups))  
           @if(count($popups) > 0)
             @foreach($popups as $tenant)

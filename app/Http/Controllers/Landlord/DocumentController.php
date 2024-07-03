@@ -38,8 +38,9 @@ class DocumentController extends Controller
             {
                 
                  //return view('landlord.tenant.tenant-additional-information', compact('tenant_info'));
+                 $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
                  $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $tenant])->get()->sortByDesc('id');
-                return view('landlord.documents.document',compact('docs'));
+                return view('landlord.documents.document',compact('docs','popups'));
             }
         }
         else

@@ -242,8 +242,8 @@ class TenantController extends Controller
             }
             else
             {
-                
-                 return view('landlord.tenant-information', compact('tenant_info'));
+                $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
+                 return view('landlord.tenant-information', compact('tenant_info','popups'));
             }
         }
         else
@@ -283,12 +283,13 @@ class TenantController extends Controller
                 $tenant_info = Tenant::where(['id'=> $sessionId])->first();
                 $user = User::where('id',$tenant_info->user_id)->first();
                 $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
+                
                 return view('landlord.tenant.tenant-additional-information', compact('tenant_info','user','popups'));
             }
             else
-            {
-                
-                 return view('landlord.tenant.tenant-additional-information', compact('tenant_info'));
+            {   
+                $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
+                 return view('landlord.tenant.tenant-additional-information', compact('tenant_info','popups'));
             }
         }
         else
@@ -304,6 +305,7 @@ class TenantController extends Controller
 
     public function deleteTenantSession(request $request){
         // echo session('tenant_id');
+        // echo $id = $request->id;
         // dd(session()->all()) ;
         $id = $request->id;
         $tenant = PopupTenant::where('tenant_id',$id)->delete();

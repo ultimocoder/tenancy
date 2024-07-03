@@ -15,8 +15,16 @@
             </h2>
             <div id="menu1" class="accordion-collapse collapse" data-bs-parent="#leftMenu">
                 <div class="accordion-body">
+                    
+                    
+                    @if(session('tenant_id'))
+                    <a href="{{route('landlord.tenant-information', session('tenant_id'))}}" class="{{ Request()->is('landlord/tenant-info/*') || Request()->is('landlord/tenant/*') ? 'active' : '' }}"><i class="fa-regular fa-file-invoice"></i>Tenant Information</a>
+                        <a href="{{route('landlord.tenant-additional-information', session('tenant_id')) }}" class="{{ Request()->is('landlord/tenant-additional-info') ? 'active' : '' }}"><i class="fa-regular fa-file-invoice"></i> Additional Information</a>
+                    @else
                     <a href="{{route('landlord.tenant-information')}}" class="{{ Request()->is('landlord/tenant-info/*') || Request()->is('landlord/tenant/*') ? 'active' : '' }}"><i class="fa-regular fa-file-invoice"></i>Tenant Information</a>
-                    <a href="{{route('landlord.tenant-additional-information')}}" class="{{ Request()->is('landlord/tenant-additional-info') ? 'active' : '' }}"><i class="fa-regular fa-file-invoice"></i> Additional Information</a>
+                        <a href="{{route('landlord.tenant-additional-information')}}" class="{{ Request()->is('landlord/tenant-additional-info') ? 'active' : '' }}"><i class="fa-regular fa-file-invoice"></i> Additional Information</a>
+                    @endif    
+                    
 
                 </div>
             </div>
@@ -33,8 +41,12 @@
                 </div>
             </div>
         </div> -->
-        
+        @if(session('tenant_id'))
+        <a href="{{route('landlord.document',session('tenant_id'))}}">Documents</a>
+        @else
         <a href="{{route('landlord.document')}}">Documents</a>
+        @endif
+        
 
         <!-- <div class="accordion-item">
             <h2 class="accordion-header">
