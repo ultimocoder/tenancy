@@ -150,11 +150,11 @@
                     </div>
                     @if($tenant_info->image)
                     <div class="col-sm-4 text-end">
-                      <img src="{{asset('tenants/'.$tenant_info->image)}}" class="" alt="" height="200px" width="200px">
+                      <img src="{{asset('landlord/tenants/'.$tenant_info->image)}}" class="" alt="" height="200px" width="200px">
                     </div>
                     @else
                     <div class="col-sm-4 text-end">
-                      <img src="{{asset('tenants/images/img-1.jpg')}}" class="img-fluid" alt="">
+                      <img src="{{asset('tenants/img-1.jpg')}}" class="img-fluid" alt="">
                     </div>
                     @endif
                   </div>

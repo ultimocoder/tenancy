@@ -23,7 +23,7 @@
                     <div class="heading-3 mb-4">Account number: <span class="text-color-6 ms-1">SC417956</span></div>
 
                     <div class="container-fluid">
-                        <div class="row">
+                        <div class="row"> 
                             <div class="col-sm-12">
                                 <div class="page-card">
 

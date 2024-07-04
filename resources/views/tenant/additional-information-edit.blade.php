@@ -47,7 +47,7 @@
 
                                                 <div class="data-row"><label for="">Grace Period Days</label><input type="text"  name="grace_period_days" class="form-control form-control-sm" value="{{$tenant->grace_period_days}}"></div>
 
-                                                <div class="data-row"><label for="">Number of Security Deposit</label><input type="text" name="number_of_decurity_deposit"   class="form-control form-control-sm" value="{{$tenant->number_of_decurity_deposit}}"></div>
+                                                <div class="data-row"><label for="">Number of Security Deposit</label><input type="text" name="number_of_security_deposit"   class="form-control form-control-sm" value="{{$tenant->number_of_security_deposit}}"></div>
 
                                                 
                                                 <div class="data-row"><label for="">Total ecurity Deposit</label><input type="text" name="total_security_deposit"  class="form-control form-control-sm" value="{{$tenant->total_security_deposit}}"></div>

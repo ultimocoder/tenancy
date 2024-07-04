@@ -15,7 +15,7 @@ class TenantLoginController extends Controller
     public function tenantloginpost(request $request){  
           
         $credentials = $request->validate([
-            'email' => ['required'],
+            'username' => ['required'],
             'password' => ['required'],
         ]);
         // dd($credentials);
@@ -26,10 +26,10 @@ class TenantLoginController extends Controller
                 $user = User::where('id', $user_id)->first();         
                 Session::put('userdetsils', $user);
                 return redirect()->intended('tenant/tenant-info')->withSuccess('Youh have Successfully loggedin');
-            }
+            } 
         }
             return back()->withErrors([
-                'email' => ' invalid email',
+                'username' => ' invalid username',
                 'password' => ' invalid password',
         ]);
     }
@@ -37,7 +37,7 @@ class TenantLoginController extends Controller
     public function tenantdashboard()
     {
         if(Auth::check()){
-            return view('admin/tenant_dashboard');
+            return view('tenant/tenant_dashboard');
         }
        return redirect("tenant/login")->withSuccess('Opps! You do not have access');
     }

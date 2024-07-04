@@ -67,12 +67,12 @@
                 Documents
                 </button>
             </h2>
-            <!-- <div id="menu5" class="accordion-collapse collapse" data-bs-parent="#leftMenu">
+            <div id="menu5" class="accordion-collapse collapse" data-bs-parent="#leftMenu">
                 <div class="accordion-body">
-                    <a href="{{route('landlord.add.expenses')}}"><i class="fa-regular fa-file-circle-plus"></i> Add Expenses</a>
-                    <a href="{{route('landlord.list.expenses')}}"><i class="fa-regular fa-eye"></i> View Expenses</a>
+                   
+                    <a href="{{route('tenant.documents')}}"><i class="fa-regular fa-eye"></i>Documents</a>
                 </div>
-            </div> -->
+            </div>
         </div>
         <div class="accordion-item">
             <h2 class="accordion-header">

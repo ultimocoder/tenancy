@@ -36,6 +36,10 @@ class TenantPaymentController extends Controller
     {
         return view('tenant.payments.payment-history');
     }
+    public function tenantPaymentMethod()
+    {
+        return view('tenant.payments.payment-method');
+    }
     
     
    

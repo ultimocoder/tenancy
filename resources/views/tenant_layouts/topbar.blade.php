@@ -58,10 +58,10 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item small" href="{{route('tenant.profile')}}">Profile</a></li>
+                    <li><a class="dropdown-item small" href="#">Profile</a></li>
                     <li><a class="dropdown-item small" href="#">Payment Account</a></li>
-                    <li><a class="dropdown-item small" href="{{route('tenant.account.security')}}">Account and Security</a></li>
-                    <li><a class="dropdown-item small" href="{{route('landlord.account.billing')}}">Billing</a></li>
+                    <li><a class="dropdown-item small" href="#">Account and Security</a></li>
+                    <li><a class="dropdown-item small" href="#">Billing</a></li>
                     <li><a class="dropdown-item small" href="{{route('tenantlogout')}}"> 
                             Logout</a></li>
                 </ul>

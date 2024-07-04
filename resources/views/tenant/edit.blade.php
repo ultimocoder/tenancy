@@ -147,9 +147,9 @@
                                         <div class="col-sm-4 text-end">
                                             <div class="d-inline-flex flex-column text-center">
                                                 @if($tenant->image)
-                                                <img src="{{ asset('tenants/'.$tenant->image)}}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
+                                                <img src="{{ asset('landlord/tenants/'.$tenant->image)}}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
                                                 @else
-                                                <img src="{{ asset('tenants/images/img-1.jpg')}}" id="last_fetch_image" class="" alt="" height="200px" width="200px"  >
+                                                <img src="{{ asset('tenants/img-1.jpg')}}" id="last_fetch_image" class="" alt="" height="200px" width="200px"  >
                                                 @endif
                                                 <img src="" id="profile-img-tag" class="" alt="" height="200px" width="200px">
                                                 <!-- <div style="margin-left: 3px;">

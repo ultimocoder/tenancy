@@ -189,10 +189,11 @@ Route::post('stripe', [App\Http\Controllers\Landlord\AccountController::class, '
 });
 
 //Tenant Routes
-Route::get('/tenant/login', function () {
-    return view('auth.tenant_login');
-});
-Route::post('/telantlogin', [App\Http\Controllers\Tenant\TenantLoginController::class, 'tenantloginpost'])->name('telantlogin');
+    Route::get('/tenant/login', function () {
+        return view('auth.tenant_login');
+    });
+    Route::post('/telantlogin', [App\Http\Controllers\Tenant\TenantLoginController::class, 'tenantloginpost'])->name('telantlogin');
+
 Route::group(['middleware' => 'guidtenant'], function () {
 
     Route::get('/tenant-dashboard', [App\Http\Controllers\Tenant\TenantLoginController::class, 'tenantdashboard'])->name('tenant-dashboard');
@@ -208,6 +209,7 @@ Route::group(['middleware' => 'guidtenant'], function () {
     Route::post('/tenant/account-username-save', [App\Http\Controllers\Tenant\TenantAccountController::class, 'accountUsernameSave'])->name('tenant.username.save');
     Route::post('/tenant/account-password-save', [App\Http\Controllers\Tenant\TenantAccountController::class, 'accountPasswordSave'])->name('tenant.password.save');
 
+    //tenant information & additional-information
     Route::get('/tenant/tenant-info/', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantsInfo'])->name('tenant.tenant-information');
     Route::get('/tenant/tenant/edit/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantEdit'])->name('tenant.tenant.edit');
     Route::post('/tenant/tenant/update', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantUpdate'])->name('tenant.tenant.update');
@@ -216,8 +218,13 @@ Route::group(['middleware' => 'guidtenant'], function () {
     Route::get('/tenant/additional-information/edit/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantEditAdditionalInfo'])->name('tenant.additional-information');
     Route::post('/tenant/additional-information/update', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantUpdateAdditionalInfo'])->name('tenant.additional-information-update');
 
+    //tenant payment
     Route::get('/tenant/make-payment/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantMakePayment'])->name('tenant.tenant-make-payment');
     Route::get('/tenant/payment-history/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentHistory'])->name('tenant.tenant-payment-history');
     Route::get('/tenant/payment-review/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentReview'])->name('tenant.tenant-payment-review');
-    
+    Route::get('/tenant/payment-method/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentMethod'])->name('tenant.tenant-payment-method');
+
+    //tenant documents
+
+    Route::get('/tenant/documents', [App\Http\Controllers\Tenant\TenantDocumentController::class, 'documents'])->name('tenant.documents');
 });

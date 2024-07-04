@@ -56,7 +56,7 @@
                  <div class="col-sm-3" style="width: 33%;">
                     <div class="data-box">
                         <div class="data-row"><label for="">Number of Security Deposit</label>
-                           <div class="value">{{$tenant_info->number_of_decurity_deposit}}</div>
+                           <div class="value">{{$tenant_info->number_of_security_deposit}}</div>
                         </div>
                         <div class="data-row"><label for="">Total Security Deposit</label>
                             <div class="value">${{$tenant_info->total_security_deposit}}</div>

@@ -79,7 +79,7 @@ class TenantInfoController extends Controller
         $tenant = Tenant::where(['id'=> $request->id])->first();       
         $tenant->late_fee = $request->late_fee;
         $tenant->grace_period_days = $request->grace_period_days;   
-        $tenant->number_of_decurity_deposit = $request->number_of_decurity_deposit;
+        $tenant->number_of_security_deposit = $request->number_of_security_deposit;
         $tenant->total_security_deposit = $request->total_security_deposit;   
         $tenant->rent_due_date = $request->rent_due_date;
         $tenant->pets = $request->pets;    
