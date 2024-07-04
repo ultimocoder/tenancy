@@ -26,7 +26,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <form action="{{route('landlord.tenant.save')}}" method="post">
+                    <form action="{{route('landlord.tenant.save')}}" method="post" autocomplete="off">
                         @csrf
                     <div class="page-card mx-auto" style="width: 600px;">
 
@@ -59,9 +59,33 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
+                                    <label for="">Username</label>
+                                    <input type="text" name="username" value="{{old('username')}}"  class="form-control form-control-sm @error('username') is-invalid @enderror" placeholder="Enter Username">
+                                    @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
                                     <label for="">Email</label>
                                     <input type="email" name="email" value="{{old('email')}}" class="form-control form-control-sm @error('email') is-invalid @enderror" placeholder="Enter Email Address">
                                     @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">Password</label>
+                                    <input type="password" name="password" value="{{old('password')}}" class="form-control form-control-sm @error('password') is-invalid @enderror" placeholder="Enter Password">
+                                    @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -198,6 +222,22 @@
                                     @enderror
                                 </div>
                             </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="">When will the first months payment be due?</label>
+                                    <input type="text" name="first_payment_due_date" value="{{old('first_payment_due_date')}}" autocomplete="off" class="form-control form-control-sm date @error('first_payment_due_date') is-invalid @enderror" placeholder="Enter first months payment be due">
+                                    @error('first_payment_due_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            </div>
+                            <div class="row">
+
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Rental amount</label>

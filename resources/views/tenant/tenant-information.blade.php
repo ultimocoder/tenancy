@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tenant Information</title>
-  @include('landlord_layouts.header')
+  @include('tenant_layouts.header')
 </head>
 <style>
   .tag-red {
@@ -15,27 +15,12 @@
   </style>
 <body>
   <div class="admin-container">
-  @include('landlord_layouts.navbar')
+  @include('tenant_layouts.navbar')
   <div class="rightside">
       <div class="top">
-      @include('landlord_layouts.topbar')
+      @include('tenant_layouts.topbar')
       
-        {{--<div class="tab-buttons">
-          @if(isset($popups))  
-          @if(count($popups) > 0)
-              @foreach($popups as $tenant)
-
-              <div class="btn-tab-button @if(session('tenant_id') == $tenant->tenant_id) active @endif">
-                
-                <i class="fa-solid fa-xmark remove cursor-pointer" data-id="{{$tenant->tenant_id}}"></i>
-                
-                <a href="{{route('landlord.tenant-information', $tenant->tenant_id)}}">{{$tenant->unique_id}}</a>
-              </div>
-              @endforeach
-            @endif
-            @endif
-          </div>--}}
-          <div class="tab-buttons">
+     <div class="tab-buttons">
       @if(isset($popups))  
       @if(count($popups) > 0)
           @foreach($popups as $tenant)
@@ -54,8 +39,24 @@
         @endif
         @endif
       </div>
-        <div class="page">
+      
+      {{--<div class="tab-buttons">
+          @if(isset($popups))  
+          @if(count($popups) > 0)
+              @foreach($popups as $tenant)
+
+              <div class="btn-tab-button @if(session('tenant_id') == $tenant->tenant_id) active @endif">
+                
+                <i class="fa-solid fa-xmark remove cursor-pointer" data-id="{{$tenant->tenant_id}}"></i>
+                
+                <a href="{{route('landlord.tenant-information', $tenant->tenant_id)}}">{{$tenant->unique_id}}</a>
+              </div>
+              @endforeach
+            @endif
+            @endif
+          </div>--}}
           
+        <div class="page">
           <div class="page-title">
             <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <span id="activepage"></span></div>
             <h1><span id="title"></span></h1>
@@ -81,7 +82,7 @@
                       <a href="#" class="tag tag-red text-red">Status: Inactive</a>
 
                       @endif
-                      <a href="{{route('landlord.tenant.edit', $tenant_info->user_id)}}" class="btn-xs btn-1"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
+                      <a href="{{route('tenant.tenant.edit', $tenant_info->user_id)}}" class="btn-xs btn-1"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                     </div>
                   </div>
                   <div class="row">
@@ -89,9 +90,6 @@
                       <div class="data-box">
                         <div class="data-row"><label for="">Account number</label>
                           <div class="value fw-bold">{{$user->unique_id}}</div>
-                        </div>
-                        <div class="data-row"><label for="">Username</label>
-                          <div class="value">{{$user->username}}</div>
                         </div>
                         <div class="data-row"><label for="">First name</label>
                           <div class="value">{{$tenant_info->first_name}}</div>
@@ -127,14 +125,11 @@
                         <div class="data-row"><label for="">Created Date</label>
                           <div class="value">{{date_format($tenant_info->created_at,"m/d/Y")}}</div>
                         </div>
-                        <div class="data-row"><label for="">Lease Start Date</label>
+                         <div class="data-row"><label for="">Lease Start Date</label>
                           <div class="value">@if($tenant_info->lease_start_date){{ date('m/d/Y', strtotime($tenant_info->lease_start_date))}} @endif</div>
                         </div>
-                        <div class="data-row"><label for="">Lease End Date</label>
+                        <div class="data-row"><label for="">Lease End</label>
                           <div class="value">@if($tenant_info->lease_end_date){{date('m/d/Y', strtotime($tenant_info->lease_end_date))}} @endif</div>
-                        </div>
-                        <div class="data-row"><label for="">First Payment Due Date</label>
-                          <div class="value">@if($tenant_info->first_payment_due_date){{date('m/d/Y', strtotime($tenant_info->first_payment_due_date))}} @endif</div>
                         </div>
                         <div class="data-row"><label for="">Rent Amount</label>
                         <div class="value">${{number_format($tenant_info->rental_amount, 2)}}</div>
@@ -155,11 +150,11 @@
                     </div>
                     @if($tenant_info->image)
                     <div class="col-sm-4 text-end">
-                      <img src="{{asset('landlord/tenants/'.$tenant_info->image)}}" class="img-fluid" alt="">
+                      <img src="{{asset('landlord/tenants/'.$tenant_info->image)}}" class="" alt="" height="200px" width="200px">
                     </div>
                     @else
                     <div class="col-sm-4 text-end">
-                      <img src="{{asset('landlord/images/img-1.jpg')}}" class="img-fluid" alt="">
+                      <img src="{{asset('tenants/images/img-1.jpg')}}" class="img-fluid" alt="">
                     </div>
                     @endif
                   </div>
@@ -170,11 +165,12 @@
           @endif
         </div>
       </div>
-      @include('landlord_layouts.footer')
+      @include('tenant_layouts.footer')
     </div>
   </div>
-  @include('landlord_layouts.script')
+  @include('tenant_layouts.script')
 </body>
+
 <script>
    jQuery(".tab-buttons").on('click', '.btn-tab-button', function() {
       jQuery(this).addClass("active").siblings().removeClass("active");
@@ -182,7 +178,6 @@
 
 $(function(){
   $('body').on('click','.remove', function(){
-    
     var tenant_id = $(this).attr('data-id');
     tid = $(this).attr('data-tid');
       $.ajax({
@@ -193,19 +188,17 @@ $(function(){
                   "_token": "{{ csrf_token() }}",
               },
               success: function (){
-                //alert('done');
                 if(tid == 'yes'){
                   window.location.href = "{{route('landlord.tenant.advanced.search')}}";
                 }else{
                   $(".tab-buttons").load(location.href + " .tab-buttons");
                 }
-                  
-                  
               }
           });
   });
 });
-</script>
 
+
+</script>
 
 </html>

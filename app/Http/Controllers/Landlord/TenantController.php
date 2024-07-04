@@ -85,6 +85,8 @@ class TenantController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|unique:users',
+            'username' => 'required|unique:users',
+            'password' => 'required',
             'phone' => 'required|min:10',
             'address' => 'required',
             // 'secondary_first_name' => 'required',
@@ -103,6 +105,9 @@ class TenantController extends Controller
         $start = $date1->format('Y-m-d');
         $date2 = new \DateTime($request->lease_end_date);
         $end = $date2->format('Y-m-d');
+
+        $date3 = new \DateTime($request->first_payment_due_date);
+        $due_date = $date3->format('Y-m-d');
       
 
         $property = Property::where('id',$request->property)->first();
@@ -111,7 +116,8 @@ class TenantController extends Controller
         
         $user = new User;
         $user->role = 'tenant';
-        $user->username = $request->first_name."".$request->last_name;
+        //$user->username = $request->first_name."".$request->last_name;
+        $user->username = $request->username;
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
@@ -120,7 +126,7 @@ class TenantController extends Controller
         $user->city = $property->city; 
         $user->state = $property->state; 
         $user->zipcode = $property->postal_code;
-        $user->password = '12345678';
+        $user->password = $request->password;
         $user->status = true;
         $user->unique_id = "T".$this->generateAccountId();
         $user->save();
@@ -139,6 +145,9 @@ class TenantController extends Controller
         }
         if($request->lease_end_date){
             $tenant->lease_end_date = $end;
+        }
+        if($request->first_payment_due_date){
+            $tenant->first_payment_due_date = $due_date;
         }
         
         $tenant->rental_amount = str_replace(array('$', ','), '', $request->rental_amount);
@@ -317,7 +326,7 @@ class TenantController extends Controller
     public function tenantEdit($id){
         $tenant = User::where('users.id', $id)
             ->join('tenants as t', 't.user_id', '=', 'users.id')
-                ->select('t.id','t.first_name','t.last_name','t.email','t.phone','t.address','users.unique_id','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image')->first();
+                ->select('t.id','t.first_name','t.last_name','t.email','t.phone','t.address','t.first_payment_due_date','users.unique_id','users.username','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image')->first();
         // dd($tenant->toArray());
         return view('landlord.tenant.edit',compact('tenant'));
     }
@@ -336,6 +345,9 @@ class TenantController extends Controller
         $start = $date1->format('Y-m-d');
         $date2 = new \DateTime($request->lease_end_date);
         $end = $date2->format('Y-m-d');
+
+        $date3 = new \DateTime($request->first_payment_due_date);
+        $due_date = $date3->format('Y-m-d');
       //echo  date('Y-m-d',strtotime($request->lease_end_date));
      //dd($request->toArray());
 
@@ -374,6 +386,9 @@ class TenantController extends Controller
         }
         if($request->lease_end_date){
             $tenant->lease_end_date = $end;
+        }
+        if($request->first_payment_due_date){
+            $tenant->first_payment_due_date = $due_date;
         }
         $tenant->rental_amount = str_replace(array('$', ','), '', $request->rental_amount);
         $tenant->account_status = $request->acc_status;

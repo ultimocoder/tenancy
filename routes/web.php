@@ -160,6 +160,48 @@ Route::get('/landlord/account/payment/add-card', [App\Http\Controllers\Landlord\
 Route::post('stripe', [App\Http\Controllers\Landlord\AccountController::class, 'stripePost'])->name('stripe.post');
 
 
+//Tenant Routes
+Route::get('/tenant/login', function () {
+    return view('auth.tenant_login');
+});
+Route::post('/telantlogin', [App\Http\Controllers\Tenant\TenantLoginController::class, 'tenantloginpost'])->name('telantlogin');
+
+Route::group(['middleware' => 'guidtenant'], function () {
+
+Route::get('/tenant-dashboard', [App\Http\Controllers\Tenant\TenantLoginController::class, 'tenantdashboard'])->name('tenant-dashboard');
+Route::get('/tenantlogout',[App\Http\Controllers\Tenant\TenantLoginController::class,'tenantlogout'])->name('tenantlogout');
+
+//Tenant Profile Routes
+Route::get('/tenant/profile-section', [App\Http\Controllers\Tenant\TenantAccountController::class, 'profile'])->name('tenant.profile');
+Route::get('/tenant/profile/edit', [App\Http\Controllers\Tenant\TenantAccountController::class, 'profileEdit'])->name('tenant.profile.edit');
+Route::post('/tenant/profile/update', [App\Http\Controllers\Tenant\TenantAccountController::class, 'profileUpdate'])->name('tenant.profile.update');
+Route::get('/tenant/account-and-security', [App\Http\Controllers\Tenant\TenantAccountController::class, 'account'])->name('tenant.account.security');
+Route::get('/tenant/account-password-change', [App\Http\Controllers\Tenant\TenantAccountController::class, 'accountPasswordChange'])->name('tenant.account.password.change');
+Route::get('/tenant/account-username-change', [App\Http\Controllers\Tenant\TenantAccountController::class, 'accountUsernameChange'])->name('tenant.account.username.change');
+Route::post('/tenant/account-username-save', [App\Http\Controllers\Tenant\TenantAccountController::class, 'accountUsernameSave'])->name('tenant.username.save');
+Route::post('/tenant/account-password-save', [App\Http\Controllers\Tenant\TenantAccountController::class, 'accountPasswordSave'])->name('tenant.password.save');
+
+//tenant information & additional-information
+Route::get('/tenant/tenant-info/', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantsInfo'])->name('tenant.tenant-information');
+Route::get('/tenant/tenant/edit/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantEdit'])->name('tenant.tenant.edit');
+Route::post('/tenant/tenant/update', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantUpdate'])->name('tenant.tenant.update');
+Route::get('/tenant/tenant/delete-photo/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'deletePhoto'])->name('tenant.tenant.remove.photo');
+Route::get('/tenant/tenant-additional-info/', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantAdditionalInfo'])->name('tenant.tenant-additional-information');
+Route::get('/tenant/additional-information/edit/{id}', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantEditAdditionalInfo'])->name('tenant.additional-information');
+Route::post('/tenant/additional-information/update', [App\Http\Controllers\Tenant\TenantInfoController::class, 'tenantUpdateAdditionalInfo'])->name('tenant.additional-information-update');
+
+//tenant payment
+Route::get('/tenant/make-payment/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantMakePayment'])->name('tenant.tenant-make-payment');
+Route::get('/tenant/payment-history/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentHistory'])->name('tenant.tenant-payment-history');
+Route::get('/tenant/payment-review/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentReview'])->name('tenant.tenant-payment-review');
+Route::get('/tenant/payment-method/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentMethod'])->name('tenant.tenant-payment-method');
+
+//tenant documents
+
+Route::get('/tenant/documents', [App\Http\Controllers\Tenant\TenantDocumentController::class, 'documents'])->name('tenant.documents');
+});
+
+
 
 
 

@@ -49,6 +49,9 @@
                                                 <div class="data-row"><label for="">Account number</label>
                                                     <span class="fw-bold">{{$tenant->unique_id}}</span>
                                                 </div>
+                                                <div class="data-row"><label for="">Username</label>
+                                                    <input type="text" name="first_name" class="form-control form-control-sm" readonly value="{{$tenant->username}}">
+                                                </div>
                                                 <div class="data-row"><label for="">First name</label>
                                                     <input type="text" name="first_name" class="form-control form-control-sm" value="{{$tenant->first_name}}">
                                                 </div>
@@ -96,6 +99,9 @@
                                                 </div>
                                                 <div class="data-row"><label for="">Lease End Date</label>
                                                     <input type="text" name="lease_end_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly  class="form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->lease_end_date){{date('m/d/Y', strtotime($tenant->lease_end_date))}}@endif">
+                                                </div>
+                                                <div class="data-row"><label for="">First Payment Due Date</label>
+                                                    <input type="text" name="first_payment_due_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly  class="form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->first_payment_due_date){{date('m/d/Y', strtotime($tenant->first_payment_due_date))}}@endif">
                                                 </div>
                                                 <div class="data-row"><label for="">Rent Amount</label>
                                                     <input type="text" name="rental_amount" id="price" @if($tenant->rental_status == 'Expired') readonly @endif  class="form-control form-control-sm" value="${{number_format($tenant->rental_amount,2)}}">
@@ -323,7 +329,7 @@
                 $('#crop-button').show();
                 if (cropper) cropper.destroy(); // Destroy previous instance if it exists
                 cropper = new Cropper(image, {
-                    aspectRatio: 16 / 9,
+                    aspectRatio: 1,
                     viewMode: 1,
                     minContainerWidth: 200,
                     minContainerHeight: 200
