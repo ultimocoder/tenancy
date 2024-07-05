@@ -334,8 +334,8 @@ class TenantController extends Controller
     public function tenantEditAdditional($id){
         $tenant = User::where('users.id', $id)
             ->join('tenants as t', 't.user_id', '=', 'users.id')
-                ->select('t.id','t.first_name','t.last_name','t.email','t.phone','t.address','users.unique_id','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image')->first();
-        // dd($tenant->toArray());
+                ->select('t.id','t.first_name','t.last_name','t.email','t.phone','t.address','users.unique_id','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image','t.notes','t.storage','t.parking','t.pets','t.rent_due_date','t.total_security_deposit','t.number_of_security_deposit','t.late_fee','t.grace_period_days')->first();
+        //dd($tenant->toArray());
         return view('landlord.tenant.additional-edit',compact('tenant'));
     }
 
@@ -466,5 +466,29 @@ class TenantController extends Controller
 
         return redirect()->route('landlord.tenant-information')->with('message', 'Tenant updated successfully.');
 
+    }
+
+    public function tenantUpdateAdditional(request $request){
+        
+        $tenant = Tenant::where(['unique_id'=> $request->unique_id])->first();
+
+        $date3 = new \DateTime($request->rent_due_date);
+        $due_date = $date3->format('Y-m-d');
+        
+        $tenant->number_of_security_deposit = $request->number_of_security_deposit;
+        //$tenant->late_fee = $request->late_fee_amount;
+        $tenant->late_fee = str_replace(array('$', ','), '', $request->late_fee_amount);
+        $tenant->grace_period_days = $request->grace_period_days;
+        $tenant->total_security_deposit = $request->total_security_deposit;
+        if($request->rent_due_date){
+            $tenant->rent_due_date = $due_date;
+        }
+        
+        $tenant->pets = $request->pets;
+        $tenant->storage = $request->storage;
+        $tenant->parking = $request->parking;
+        $tenant->notes = $request->notes;
+        $tenant->save(); 
+        return redirect()->route('landlord.tenant-additional-information')->with('message', 'Tenant Additional Information updated successfully.');
     }
 }

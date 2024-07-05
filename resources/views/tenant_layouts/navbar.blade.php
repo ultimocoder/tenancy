@@ -1,7 +1,7 @@
 <div class="leftbar">
     <a href="{{route('tenant.tenant-information')}}" class="logo text-black text-center">
-        <img src="{{ asset('images/tenant_logo.svg')}}" alt="">
-        
+        <img src="{{ asset('images/logo-icon.svg')}}" alt="">
+        Tenancy
     </a>
     <div class="accordion" id="leftMenu">
         <div class="accordion-item">

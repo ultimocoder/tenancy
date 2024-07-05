@@ -79,6 +79,7 @@ Route::get('/landlord/tenant/delete-photo/{id}', [App\Http\Controllers\Landlord\
 Route::get('/landlord/tenant-additional-info/{id?}', [App\Http\Controllers\Landlord\TenantController::class, 'tenantAdditionalInfo'])->name('landlord.tenant-additional-information');
 Route::get('/landlord/tenant/additional-information/edit/{id}', [App\Http\Controllers\Landlord\TenantController::class, 'tenantEditAdditional'])->name('landlord.tenant.additional.edit');
 Route::delete('/landlord/tenant/session/delete', [App\Http\Controllers\Landlord\TenantController::class, 'deleteTenantSession'])->name('landlord.tenant.session.delete');
+Route::post('/landlord/tenant/additional-information/update', [App\Http\Controllers\Landlord\TenantController::class, 'tenantUpdateAdditional'])->name('landlord.tenant.additional.update');
 
 
 // Route::get('/landlord/tenant/list', [App\Http\Controllers\Landlord\TenantController::class, 'tenantList'])->name('landlord.tenants');
