@@ -40,7 +40,12 @@ class TenantPaymentController extends Controller
     {
         return view('tenant.payments.payment-method');
     }
+    public function tenantAddPaymentMethod()
+    {
+        return view('tenant.payments.add-payment-method');
+    }
     
+     
     
    
 }

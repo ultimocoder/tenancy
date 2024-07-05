@@ -223,6 +223,7 @@ Route::group(['middleware' => 'guidtenant'], function () {
     Route::get('/tenant/payment-history/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentHistory'])->name('tenant.tenant-payment-history');
     Route::get('/tenant/payment-review/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentReview'])->name('tenant.tenant-payment-review');
     Route::get('/tenant/payment-method/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantPaymentMethod'])->name('tenant.tenant-payment-method');
+    Route::get('/tenant/add-payment-method/', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'tenantAddPaymentMethod'])->name('tenant.tenant-add-payment-method');
 
     //tenant documents
 

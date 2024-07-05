@@ -27,30 +27,24 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th> Description</th>
-                                                <th> Date</th>
-                                                <th> Size</th>
+                                                <th>Description</th>
+                                                <th>Date</th>
+                                                <th>Size</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td> Lease Agreement.docx</td>
-                                                <td> Lease Agreement</td>
-                                                <td> 10/20/2022</td>
-                                                <td> 114 KB</td>
-                                            </tr>
-                                            <tr>
-                                                <td> Credit Report.docx</td>
-                                                <td> Credit Report</td>
-                                                <td> 09/25/2019</td>
-                                                <td> 130 KB</td>
-                                            </tr>
-                                            <tr>
-                                                <td> Application.pdf</td>
-                                                <td> Application for tenancy</td>
-                                                <td> 09/25/2016</td>
-                                                <td> 120 KB</td>
-                                            </tr>
+                                        @if(count($document_info) > 0)
+                                        @foreach($document_info as $document)
+                                        <tr>
+                                            <td><a href="/tenancy/public/landlord/upload-documents/{{$document->document}}" download>{{$document->document}}</a></td>
+                                            <td>{{$document->desc}}</td>
+                                            <td>@if($document->date){{ date('m/d/Y', strtotime($document->date))}} @endif</td>
+                                            <td>{{$document->size}}</td>
+                                        </tr>
+                                          
+                                            @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -72,11 +66,14 @@
             info: false,
             ordering: false,
             paging: true
+            
         });
+
 
         new DataTable('#example');
     </script>
     <script>
+
         $("#example_wrapper").addClass("reset");
     </script>
 </body>

@@ -77,6 +77,7 @@
             info: false,
             ordering: false,
             paging: true
+            
         });
 
         new DataTable('#example');
