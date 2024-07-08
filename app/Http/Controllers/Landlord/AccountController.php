@@ -232,6 +232,7 @@ class AccountController extends Controller
             'card' => [
              'token' =>$request->stripeToken,
             ],
+            
             'billing_details' => [
                 'address' => [
                     'line1' =>$request->address,
