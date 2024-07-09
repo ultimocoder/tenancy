@@ -15,6 +15,7 @@ use App\Models\SubscriptionHistory;
 use App\Models\PackagePrice;
 use App\Models\Package;
 use App\Models\Country;
+use App\Models\AddPayment;
 use auth;
 use Session;
 use stripe;
@@ -44,62 +45,86 @@ class TenantPaymentController extends Controller
     public function tenantAddPaymentMethod()
     {
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
-        $user = User::where('id',$tenant_info->user_id)->first();      
-        
+        $user = User::where('id',$tenant_info->user_id)->first();          
         return view('tenant.payments.add-payment-method', compact('user'));
     }
 
     public function tenantAddPayment(request $request)
     {
+      
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
         $user = User::where('id',$tenant_info->user_id)->first();       
-       
-        // $customer  = $stripe->customers->create([
-        //     'name' => $user->first_name." ".$user->last_name,
-        //     'email' => $user->email,
-        //     'phone' => $user->phone,
-        //     'address' => [
-        //         'line1' => $user->address,
-        //         'city' => $user->city,
-        //         'state' => $user->state,
-        //         'country' => $user->country,
-        //         'postal_code' => $user->zipcode,
-        //     ],
-        //     'metadata' => ["name" => $user->username, 'role' => 'tenant', 'phone' => $user->phone , 'email' => $user->email],
-        
-        // ]);
-       
-      // dd($request->stripeToken);
-       $payment =  $stripe->paymentMethods->create([
-        'type' => 'card',
-            'card' => [
-             'token' =>$request->stripeToken,
-            ],
-           'billing_details'=> ([
-           'name' => $user->first_name." ".$user->last_name,
-           'email' => $user->email,
-           'phone' => $user->phone,
-            'address'=> [
-              'country'=> $request->country,
-              'city' => $request->city,
-              'state' => $request->state, 
-              'line1' =>$request->address,
-              'line2' => '',
-              'postal_code' => $request->postal_code,
-            ]
-          
-           ])
-               
-            
-       
-        ]);
-       echo "<pre>";
-       print_r($payment);die;
-      
+        $paymentcount=AddPayment::all()->count();
     
-     
-       
+        if($paymentcount > 2){
+            // customer create 
+            $customer  = $stripe->customers->create([
+                'name' => $user->first_name." ".$user->last_name,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'address' => [
+                    'line1' => $user->address,
+                    'city' => $user->city,
+                    'state' => $user->state,
+                    'country' => $user->country,
+                    'postal_code' => $user->zipcode,
+                ],
+                'metadata' => ["name" => $user->username, 'role' => 'tenant', 'phone' => $user->phone , 'email' => $user->email],
+            
+            ]);
+        
+        // dd($customer->id);
+        // payment method create
+        $payment =  $stripe->paymentMethods->create([
+            'type' => 'card',
+                'card' => [
+                'token' =>$request->stripeToken,
+                ],
+            'billing_details'=> ([
+            'name' => $user->first_name." ".$user->last_name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+                'address'=> [
+                    'country'=> $request->country,
+                    'city' => $request->city,
+                    'state' => $request->state, 
+                    'line1' =>$request->address,
+                    'line2' => '',
+                    'postal_code' => $request->postal_code,
+                ]          
+            ])       
+            ]);
+        // attach payment methods
+            $attach= $stripe->paymentMethods->attach(
+                $payment->id,
+                ['customer' => $customer->id]
+            );
+
+            $addpayment = new AddPayment;
+            $addpayment->customer_id = $customer->id;
+            $addpayment->payment_id = $payment->id;
+            $addpayment->card_number = $request->card_number;
+            $addpayment->expiration = $request->card_expiry_month." ".$request->card_expiry_year;
+            $addpayment->security_code = $request->card_cvc;
+            $addpayment->billing_zip_code = $request->zip_code;
+            $addpayment->nickname = $request->nick_name;
+            $addpayment->primary = $request->primary;
+            $addpayment->created_at = now();
+            $addpayment->updated_at= now();
+            $addpayment->save();
+            return redirect()->route('tenant.tenant-add-payment-method')->with('message', 'Account Information add successfully.');
+        }
+        else
+        {
+            return redirect()->route('tenant.tenant-add-payment-method')->with('message', 'Already add two payment method.');
+        }
+      
+    }
+
+    public function tenantManagePaymentAccounts()
+    {
+        return view('tenant.payments.manage-payment-accounts');
     }
     
      

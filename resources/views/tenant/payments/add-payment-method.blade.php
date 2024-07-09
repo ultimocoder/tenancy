@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Add Payment Method</title>
     @include('tenant_layouts.header')
+    <style>
+        .has-error .form-control {
+            border-color: #a94442 !important;
+        }
+        </style>
 </head>
 
 <body>
@@ -19,6 +24,13 @@
                         <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <span id="activepage"></span></div>
                         <h1><span id="title"></span></h1>
                     </div>
+
+                    @if(session()->has('message'))    
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session()->get('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <form role="form" action="{{route('tenant.tenant-add-payment')}}" method="post" class="require-validation page-card mx-auto"
                     data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form" style="width: 600px;">
                 
@@ -35,23 +47,23 @@
                         <input class='form-control address' name="address" size='4' type='hidden' value="{{$user->address}}">
                         <input class='form-control city' name="city"  size='4' type='hidden' value="{{$user->city}}">
                         <input class='form-control state' size='4' name="state" type='hidden' value="{{$user->state}}">
-                        <input class='form-control country' size='4' name="country"  type='text' value="{{$user->country}}">
+                        <input class='form-control country' size='4' name="country"  type='hidden' value="{{$user->country}}">
 
                         <input class='form-control postal_code' size='4' name="postal_code" type='hidden' value="{{$user->zipcode}}">
 
                         <div class="row">
                             <div class="col-sm-8">
-                                <div class="form-group fs-16">
+                                <div class="form-group has-error">
                                     <label for="">Card number</label>
-                                    <input type="number" class="form-control  card-number" placeholder="xxxx xxxx xxxx xxxx">
+                                    <input type="number" class="form-control  card-number" name="card_number" placeholder="xxxx xxxx xxxx xxxx">
                                 </div>
                             </div>
                             <div class="col-sm-4">
-                                <div class="form-group fs-16">
+                                <div class="form-group has-error">
                                     <label for="">Expiration</label>
                                     <div class="d-flex column-gap-2">
-                                        <input type="number" class="form-control card-expiry-month" placeholder="MM" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" value="xx">
-                                        <input type="number" class="form-control card-expiry-year" placeholder="YYYY" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" value="xxxx">
+                                        <input type="number" class="form-control card-expiry-month" placeholder="MM" name="card_expiry_month" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="2" value="xx">
+                                        <input type="number" name="card_expiry_year" class="form-control card-expiry-year" placeholder="YYYY" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" value="xxxx">
                                     </div>
                                 </div>
                             </div>
@@ -59,15 +71,15 @@
 
                         <div class="row">
                             <div class="col-sm-4">
-                                <div class="form-group fs-16">
+                                <div class="form-group has-error fs-16">
                                     <label for="">Security code <i class="fa-solid fa-circle-info ms-2 text-black-50 "></i></label>
-                                    <input type="number" class="form-control card-cvc">
+                                    <input type="number" class="form-control card-cvc" name="card_cvc">
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <div class="form-group fs-16">
+                                <div class="form-group has-error fs-16">
                                     <label for="">Billing zip code</label>
-                                    <input type="number" class="form-control">
+                                    <input type="number" class="form-control" name="zip_code">
                                 </div>
                             </div>
                         </div>
@@ -76,13 +88,13 @@
 
                         <div class="row align-items-center">
                             <div class="col-sm-6"><b>Nickname</b></div>
-                            <div class="col-sm-6"><input type="text" class="form-control form-control-sm" placeholder="Account Nickname"></div>
+                            <div class="col-sm-6"><input type="text"  name="nick_name"class="form-control form-control-sm" placeholder="Account Nickname"></div>
                         </div>
 
                         <div class="d-flex">
                             <b class="me-3">Set as primary</b>
                             <div class="form-check form-switch mb-0">
-                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="primary">
                                 <label class="form-check-label" for="flexSwitchCheckChecked"><b>Yes</b></label>
                             </div>
                         </div>
@@ -123,7 +135,7 @@
             // $('.hide').css('display', 'block');
             $errorMessage.addClass('hide');
         
-            $('.has-error').removeClass('has-error');
+          //  $('.has-error').removeClass('has-error');
             $inputs.each(function(i, el) {
               var $input = $(el);
               if ($input.val() === '') {

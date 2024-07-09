@@ -23,15 +23,11 @@
           <div class="offcanvas-body menu-body">
 
             <div class="menu-left">
-              <a href="{{url('/')}}" class=" {{ (request()->is('/')) ? ' active' : '' }}">Home</a>
-              <a href="{{url('plan-and-pricing', 1)}}"  class=" {{ (request()->is('plan-and-pricing/*')) || (request()->is('plan/*')) ? ' active' : '' }}">Plans and Pricing</a>
+              <a href="{{url('/')}}" class=" {{ (request()->is('/')) ? ' active' : '' }}">Home</a>            
             </div>
 
-              <div class="menu-right">
-            {{--<a href="{{url('plan' ,1)}}" class="btn btn-color-2">Sign up</a>--}}
-            <a href="{{url('plan-and-pricing', 1)}}" class="btn btn-color-2">Sign up</a>
-              <div class="px-3"></div>
-              <a href="{{url('login')}}" class="btn btn-color-1 text-white">Log in</a>
+              <div class="menu-right">         
+              <a href="{{url('tenant/login')}}" class="btn btn-color-1 text-white">Log in</a>
             </div>
 
           </div>

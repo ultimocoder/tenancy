@@ -21,7 +21,7 @@ class TenantLoginController extends Controller
         // dd($credentials);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            if(Auth::user()->role == 'tenant'){
+            if(Auth::user()->role == 'tenant' && Auth::user()->status== '1' ){
                 $user_id = Auth::user()->id;
                 $user = User::where('id', $user_id)->first();         
                 Session::put('userdetsils', $user);

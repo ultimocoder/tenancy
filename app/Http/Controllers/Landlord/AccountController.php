@@ -308,7 +308,7 @@ class AccountController extends Controller
             $package = PackagePrice::where(['price_id'=> $subscription->stripe_price])->first();
             $sub = $stripe->subscriptions->retrieve($subscription->subscription_id, []);
             $nextDueDate = date('M d, Y',$sub->current_period_end);
-        }
+        } 
         
 
         //dd($sub->toArray());
