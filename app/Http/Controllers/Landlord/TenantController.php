@@ -225,7 +225,7 @@ class TenantController extends Controller
             if($request->account){
                 $query->where('tenants.unique_id', 'like', '%' . $request->account . '%');
             }
-            $data = $query->where(['added_by_id' => Auth::user()->id])
+            $data = $query->where(['added_by_id' => Auth::user()->id,'profile_status' => true])
                 ->select('id','unique_id','property_unit','first_name','last_name','email','property_name','address','phone')
                     ->get();
             // ->join('properties', 'properties.id', '=', 'tenants.property_id')
@@ -490,5 +490,20 @@ class TenantController extends Controller
         $tenant->notes = $request->notes;
         $tenant->save(); 
         return redirect()->route('landlord.tenant-additional-information')->with('message', 'Tenant Additional Information updated successfully.');
+    }
+
+    public function tenantDelete(request $request){
+        $tenant = Tenant::where('user_id' ,$request->user_id)->first();
+
+        // $id = $request->id;
+        $popup = PopupTenant::where('tenant_id',$tenant->id)->delete();
+        session()->forget('tenant_id');
+
+        $user = User::where('id', $request->user_id)->first();
+        $user->account_status = false;
+        $tenant->profile_status = false;
+        $user->save();
+        $tenant->save();
+        return response()->json(['msg' => 'Deleted successfully.']);
     }
 }

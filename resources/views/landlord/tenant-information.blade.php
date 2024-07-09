@@ -156,12 +156,17 @@
                     @if($tenant_info->image)
                     <div class="col-sm-4 text-end">
                       <img src="{{asset('landlord/tenants/'.$tenant_info->image)}}" class="img-fluid" alt="">
+                      <a href="javascript:void(0);" data-id="{{$tenant_info->user_id}}" onclick="return confirm('Are you sure you want to permanently delete tenants profile?')" class="text-center d-block mt-5 text-danger fs-6 fw-bold tenant-delete">Delete Tenant Profile</a>
+
                     </div>
                     @else
                     <div class="col-sm-4 text-end">
                       <img src="{{asset('landlord/images/img-1.jpg')}}" class="img-fluid" alt="">
+                      <a href="javascript:void(0);" data-id="{{$tenant_info->user_id}}" onclick="return confirm('Are you sure you want to permanently delete tenants profile?')" class="text-center d-block mt-5 text-danger fs-6 fw-bold tenant-delete">Delete Tenant Profile</a>
                     </div>
                     @endif
+
+                    
                   </div>
                 </div>
               </div>
@@ -204,6 +209,25 @@ $(function(){
               }
           });
   });
+
+
+      
+
+        $('.tenant-delete').on('click', function(){
+          var user_id = $(this).data('id');
+          if(confirm('Permanently deleting the tenant profile will remove all information relating to this tenant e.g. Documents, Tenant Login Profile, Correspondence Messaging etc..\n\nAre you sure you want to continue?')){
+            $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "{{route('landlord.tenant.delete')}}",
+            data: {'user_id': user_id, "_token": "{{ csrf_token() }}"},
+            success: function(data){  
+                console.log(data.success)
+                    window.location.href = "{{route('landlord.tenant.advanced.search')}}";
+                }
+            });
+          }
+        })
 });
 </script>
 
