@@ -44,7 +44,7 @@
                                                 
                                                 <div class="data-row"><label for="">Total Security Deposit</label><input type="text" value="{{$tenant->total_security_deposit}}" name="total_security_deposit" class="form-control form-control-sm" placeholder="$3700.00"></div>
                                                 
-                                                <div class="data-row"><label for="">Rent Due Date</label><input type="text" value="{{date('m/d/Y',strtotime($tenant->rent_due_date))}}" name="rent_due_date" autocomplete="off" class="form-control date form-control-sm" placeholder="1st"></div>
+                                                <div class="data-row"><label for="">Rent Due Date</label><input type="text" value="@if($tenant->rent_due_date){{date('m/d/Y',strtotime($tenant->rent_due_date))}}@endif" name="rent_due_date" autocomplete="off" class="form-control date form-control-sm" placeholder="1st"></div>
                                                 
                                                 <div class="data-row"><label for="">Pets</label><input type="text" name="pets" value="{{$tenant->pets}}" class="form-control form-control-sm" placeholder="No"></div>
                                                 

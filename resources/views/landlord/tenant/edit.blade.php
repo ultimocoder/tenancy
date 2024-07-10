@@ -298,6 +298,14 @@
             }
         );
 
+        $('#rental_status').change(function() {
+               let value = $(this).val();
+               if(value == 'Expired'){
+                alert('You are about to change the tenant status from active to expired. Expiring the tenant account will prevent further management of this tenant profile and make the current unit vacant. To continue click okay.');
+               } 
+               //$('#message').show();
+            });
+
         / CFetching image instantly /
         // $('#profile-img-tag').hide();
         // function readURL(input) {

@@ -77,7 +77,7 @@
                           <div class="value">${{$tenant_info->total_security_deposit}}</div>
                         </div>
                         <div class="data-row"><label for="">Rent Due Date</label>
-                          <div class="value">{{date('m/d/Y',strtotime($tenant_info->rent_due_date))}}</div>
+                          <div class="value">@if($tenant_info->rent_due_date){{date('m/d/Y',strtotime($tenant_info->rent_due_date))}} @endif</div>
                         </div>
                         <div class="data-row"><label for="">Pets</label>
                           <div class="value">{{$tenant_info->pets}}</div>
