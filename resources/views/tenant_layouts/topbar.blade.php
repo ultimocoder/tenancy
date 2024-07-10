@@ -50,7 +50,7 @@
                 @else
                 <img src="{{ asset('tenants/profile/user-profile-pic.png')}}" id="previewImage" alt="Preview Image">
                 @endif
-                    Welcome <b class="ms-1 uc">{{ucfirst(auth::user()->username)}}</b>
+                    Welcome <b class="ms-1 uc">{{ucfirst(auth::user()->first_name) }}  {{auth::user()->last_name }}</b>
                 </button>
                 
                 <ul class="dropdown-menu">

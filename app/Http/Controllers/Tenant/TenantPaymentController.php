@@ -50,14 +50,13 @@ class TenantPaymentController extends Controller
     }
 
     public function tenantAddPayment(request $request)
-    {
-      
+    {      
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
         $user = User::where('id',$tenant_info->user_id)->first();       
         $paymentcount=AddPayment::all()->count();
     
-        if($paymentcount > 2){
+      
             // customer create 
             $customer  = $stripe->customers->create([
                 'name' => $user->first_name." ".$user->last_name,
@@ -100,12 +99,19 @@ class TenantPaymentController extends Controller
                 $payment->id,
                 ['customer' => $customer->id]
             );
-
+            if($request->primary == 'on')
+            {
+                $tenant = AddPayment::where(['tenant_id'=> $tenant_info->id])->first();       
+                $tenant->primary = 'NULL';      
+                $tenant->save();
+            }
             $addpayment = new AddPayment;
+            $addpayment->tenant_id = $tenant_info->id;
             $addpayment->customer_id = $customer->id;
             $addpayment->payment_id = $payment->id;
             $addpayment->card_number = $request->card_number;
-            $addpayment->expiration = $request->card_expiry_month." ".$request->card_expiry_year;
+            $addpayment->card_month = $request->card_expiry_month;
+            $addpayment->card_year = $request->card_expiry_year;
             $addpayment->security_code = $request->card_cvc;
             $addpayment->billing_zip_code = $request->zip_code;
             $addpayment->nickname = $request->nick_name;
@@ -113,20 +119,21 @@ class TenantPaymentController extends Controller
             $addpayment->created_at = now();
             $addpayment->updated_at= now();
             $addpayment->save();
-            return redirect()->route('tenant.tenant-add-payment-method')->with('message', 'Account Information add successfully.');
-        }
-        else
-        {
-            return redirect()->route('tenant.tenant-add-payment-method')->with('message', 'Already add two payment method.');
-        }
+            return redirect()->route('tenant.tenant-manage-payment-accounts')->with('message', 'Account Information add successfully.');
+       
       
     }
 
     public function tenantManagePaymentAccounts()
     {
-        return view('tenant.payments.manage-payment-accounts');
+        $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
+        $cardlist = AddPayment::where(['tenant_id'=> $tenant_info->id])->get();  
+        return view('tenant.payments.manage-payment-accounts',compact('cardlist'));
     }
-    
+    public function tenantEditPaymentMethod($id)
+    {
+        dd($id);
+    }
      
     
    

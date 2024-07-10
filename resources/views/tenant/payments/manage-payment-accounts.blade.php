@@ -27,13 +27,15 @@
                     @endif
                     <div class="page-card mx-auto" style="width: 600px;">
                         <div class="heading-underline">Payment Methods</div>
+                        @foreach($cardlist as $card)
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="form-group">
-                                <label for="">Chase <span class="badge text-bg-success">Primary</span></label>
-                                <div><b class="ls-2 text-black-50">*******4839</b></div>
+                                <label for="">{{$card->nickname}} <span class="badge text-bg-success">@if($card->primary == 'on') PRIMARY @endif</span></label>
+                                <div><b class="ls-2 text-black-50">{{ '**************' . substr($card->card_number,-4);}}</b></div>
                             </div>
-                            <a href="edit-bank-account.php" class="btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
+                            <a href="{{route('tenant.tenant-payment.method.edit', $card->id)}}" class="btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                         </div>
+                        @endforeach
                         <div class="lr-line-text">Add a payment method</div>
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="form-group">

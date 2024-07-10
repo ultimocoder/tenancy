@@ -1,7 +1,8 @@
 <div class="leftbar">
+  
     <a href="{{route('tenant.tenant-information')}}" class="logo text-black text-center">
-        <img src="{{ asset('images/tenant_logo.svg')}}" alt="">
-        
+        <img src="{{ asset('images/logo-icon.svg')}}" alt="">
+        Tenancy
     </a>
     <div class="accordion" id="leftMenu">
         <div class="accordion-item">
@@ -42,7 +43,7 @@
                 <a href="{{route('tenant.tenant-make-payment')}}" class="{{ Request()->is('tenant/make-payment') ? 'active' : '' }}"><i class="fa-regular fa-receipt"></i>Make a Payment</a>
                 <a href="{{route('tenant.tenant-payment-history')}}" class="{{ Request()->is('tenant/payment-history') ? 'active' : '' }}"><i class="fa-solid fa-clock-rotate-left"></i>Payment History</a>
                    
-                    <a href="#"><i class="fa-solid fa-list-check"></i>Manage payment account</a>
+                    <a href="{{route('tenant.tenant-manage-payment-accounts')}}"><i class="fa-solid fa-list-check"></i>Manage payment account</a>
                     <a href="#"><i class="fa-regular fa-receipt"></i>Receipt</a>
                 </div>
             </div>
@@ -61,19 +62,8 @@
                 </div>
             </div>
         </div> -->
-        <div class="accordion-item">
-            <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menu5" aria-expanded="true" aria-controls="menu5">
-                Documents
-                </button>
-            </h2>
-            <div id="menu5" class="accordion-collapse collapse" data-bs-parent="#leftMenu">
-                <div class="accordion-body">
-                   
-                    <a href="{{route('tenant.documents')}}"><i class="fa-regular fa-eye"></i>Documents</a>
-                </div>
-            </div>
-        </div>
+        <a href="{{route('tenant.documents')}}">Documents</a>
+       
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menu3" aria-expanded="false" aria-controls="menu3">

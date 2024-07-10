@@ -2,9 +2,9 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <a href="#" class="logo text-white mb-3">
-            <img src="{{asset('images/tenant_white-logo.svg')}}" alt="">
-           
+        <a href="#" class="logo text-white mb-3">
+            <img src="{{asset('images/logo-icon-white.svg')}}" alt="">
+            Tenancy
           </a>
   <div class="mb-4">USA</div>
           <div class="social">
@@ -23,17 +23,17 @@
                     <div class="row">
                 <div class="col-6">
                   <div class="menu-links">
-                    <a href="https://builtdemo.info/tenancy/public">Home</a>
-                    <a href="https://builtdemo.info/tenancy/public/#Payments">Payments</a>
-                    <a href="https://builtdemo.info/tenancy/public/#Correspondence">Correspondence</a>
-                    <a href="https://builtdemo.info/tenancy/public/#DocumentManagement">Document Management</a>
+                    <a href="#">Home</a>
+                    <a href="#">Payments</a>
+                    <a href="#">Correspondence</a>
+                    <a href="#">Document Management</a>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="menu-links">
-                    <a href="https://builtdemo.info/tenancy/public/#Reporting">Reporting</a>
-                    <a href="https://builtdemo.info/tenancy/public/#PropertyManagement">Property Management</a>
-                    <a href="https://builtdemo.info/tenancy/public/#ExpenseTracking">Expense Tracking</a>
+                    <a href="#">Reporting</a>
+                    <a href="#">Property Management</a>
+                    <a href="#">Expense Tracking</a>
                   </div>
                 </div>
               </div>
@@ -61,7 +61,7 @@
               <a href="#">Cookie Policy</a>
             </div>
           </div>
-          <div class="col-sm-6 text-sm-end">Copyright © 2024 Tenant.</div>
+          <div class="col-sm-6 text-sm-end">Copyright © 2024 Tenancy.</div>
         </div>
       </div>
     </div>

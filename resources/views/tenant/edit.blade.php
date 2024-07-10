@@ -48,6 +48,10 @@
                                                 <div class="data-row"><label for="">Account number</label>
                                                     <span class="fw-bold">{{$tenant->unique_id}}</span>
                                                 </div>
+                                                <div class="data-row"><label for="">User name</label>
+                                                <span class="fw-bold">{{$tenant->username}}</span>
+                                                  
+                                                </div>
                                                 <div class="data-row"><label for="">First name</label>
                                                 <span class="fw-bold">{{$tenant->first_name}}</span>
                                                   

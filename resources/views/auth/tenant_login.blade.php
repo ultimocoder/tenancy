@@ -1,6 +1,6 @@
 @extends('tenant_front_layouts.master')
 
-    @section('title' , 'Tenant')
+    @section('title' , 'Tenancy')
 
 @section('main-content')
 
@@ -20,9 +20,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="new-form">
-                                <a href="{{url('/')}}" class="logo text-black mb-3">
-                                    <img src="{{asset('images/tenant_logo.svg')}}" alt="">
-                                    Login 
+                            <a href="#" class="logo text-black mb-3">
+                                    <img src="{{asset('images/logo-icon.svg')}}" alt="">
+                                    Tenant Login
                                 </a>
                                 <h2 class="heading-1 mb-2">Welcome Back!</h2>
                                 <h3 class="heading-2 mb-4">Sign in to continue with Tenancy</h3>

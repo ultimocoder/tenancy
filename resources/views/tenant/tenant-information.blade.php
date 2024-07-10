@@ -91,6 +91,9 @@
                         <div class="data-row"><label for="">Account number</label>
                           <div class="value fw-bold">{{$user->unique_id}}</div>
                         </div>
+                        <div class="data-row"><label for="">User Name</label>
+                          <div class="value">{{$user->username}}</div>
+                        </div>
                         <div class="data-row"><label for="">First name</label>
                           <div class="value">{{$tenant_info->first_name}}</div>
                         </div>
