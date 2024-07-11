@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                             <div class='row'>
-                                <div class='col-sm-6 required'>
+                                <div class='col-sm-6 required'> 
                                     <div class="form-group">
                                         <label for="">Country</label> 
                                             <select name="country" class="form-control country" id="">

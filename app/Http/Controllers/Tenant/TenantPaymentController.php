@@ -55,7 +55,8 @@ class TenantPaymentController extends Controller
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
         $user = User::where('id',$tenant_info->user_id)->first();       
         $paymentcount=AddPayment::all()->count();
-    
+  
+        $user_country = Country::where('nicename', $user->country)->first();
       
             // customer create 
             $customer  = $stripe->customers->create([
@@ -66,7 +67,7 @@ class TenantPaymentController extends Controller
                     'line1' => $user->address,
                     'city' => $user->city,
                     'state' => $user->state,
-                    'country' => $user->country,
+                    'country' => $user_country->iso,
                     'postal_code' => $user->zipcode,
                 ],
                 'metadata' => ["name" => $user->username, 'role' => 'tenant', 'phone' => $user->phone , 'email' => $user->email],
@@ -75,6 +76,8 @@ class TenantPaymentController extends Controller
         
         // dd($customer->id);
         // payment method create
+
+        $request_country = Country::where('nicename', $request->country)->first();
         $payment =  $stripe->paymentMethods->create([
             'type' => 'card',
                 'card' => [
@@ -85,7 +88,7 @@ class TenantPaymentController extends Controller
             'email' => $user->email,
             'phone' => $user->phone,
                 'address'=> [
-                    'country'=> $request->country,
+                    'country'=> $request_country->iso,
                     'city' => $request->city,
                     'state' => $request->state, 
                     'line1' =>$request->address,
@@ -130,11 +133,40 @@ class TenantPaymentController extends Controller
         $cardlist = AddPayment::where(['tenant_id'=> $tenant_info->id])->get();  
         return view('tenant.payments.manage-payment-accounts',compact('cardlist'));
     }
-    public function tenantEditPaymentMethod($id)
+    public function tenantEditBankAccount($id)
     {
-        dd($id);
+        $editbankaccount = AddPayment::where(['id'=> $id])->first();  
+        $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
+        $user = User::where('id',$tenant_info->user_id)->first();  
+        return view('tenant.payments.edit-bank-account',compact('editbankaccount','user'));
+    }
+
+    public function tenantUpdateBankAccount(request $request){   
+
+        $accountinfo = AddPayment::where(['id'=> $request->id])->first();  
+        if($request->primary == 'on')
+        {
+            $payments = AddPayment::where(['tenant_id'=> $accountinfo->tenant_id])->get();       
+            foreach ($payments as $payment) {
+              
+                $payment->primary = null; 
+                $payment->save();
+            }
+        }
+        $account = AddPayment::where(['id'=> $request->id])->first();       
+        $account->card_number = $request->card_number;
+        $account->card_month = $request->card_expiry_month;
+        $account->card_year = $request->card_expiry_year;
+        $account->security_code = $request->card_cvc;
+        $account->billing_zip_code = $request->zip_code;
+        $account->nickname = $request->nick_name;
+        $account->primary = $request->primary;
+        $account->updated_at= now();          
+        $account->save();
+        return redirect()->route('tenant.tenant-manage-payment-accounts')->with('message', 'Account Information updated successfully.');      
+
     }
      
-    
+     
    
 }
