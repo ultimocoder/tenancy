@@ -54,7 +54,7 @@
                             <div class="col-sm-8">
                                 <div class="form-group fs-16">
                                     <label for="">Card number</label>
-                                    <input autocomplete='off' class='form-control card-number' minlength="16" maxlength="16" size='20' name="card_number" type='text' placeholder="Confirm the card number" value="{{$editbankaccount->card_number}}">
+                                    <input autocomplete='off' class='form-control card-number' minlength="16" maxlength="16" size='20' name="card_number" type='text' placeholder="Confirm the card number" value="{{$editbankaccount->card_number}}" readonly>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -72,16 +72,26 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group fs-16">
-                                    <label for="">CVV <i class="fa-solid fa-circle-info ms-2 text-black-50"></i></label>
+                                    <label for="">Security code <i class="fa-solid fa-circle-info ms-2 text-black-50"></i></label>
                                     <input autocomplete='off'
                                         class='form-control card-cvc' placeholder='ex. 311' size='4'
-                                        type='text' placeholder="" minlength="3" maxlength="3" name="card_cvc"  value="{{$editbankaccount->security_code}}">
+                                        type='text' placeholder="" minlength="3" maxlength="3" name="card_cvc"  value="{{$editbankaccount->security_code}}" readonly>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group fs-16">
                                     <label for="">Billing zip code</label>
                                     <input type="number" class="form-control" name="zip_code" value="{{$editbankaccount->billing_zip_code}}">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group fs-16">
+                                    <label for="">Country</label>
+                                    <select name="country" class="form-control country" id="">
+                                        @foreach($countries as $c)
+                                        <option value="{{$c->nicename}}" @if($c->nicename == Auth::user()->country) selected @endif>{{$c->nicename}}</option>
+                                        @endforeach
+                                 </select>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +114,7 @@
 
                         <div class="text-center">
                             <button type="Submit" class="btn btn-success mx-1">Save</button>
-                            <button type="reset" class="btn btn-danger mx-1">Cancel</button>
+                            <button type="reset" class="btn btn-danger mx-1" onclick="window.location='{{ URL::previous() }}'">Cancel</button>
                         </div>
                     
                 </div>

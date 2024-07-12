@@ -27,15 +27,21 @@
                     @endif
                     <div class="page-card mx-auto" style="width: 600px;">
                         <div class="heading-underline">Payment Methods</div>
+
+                        @if(count($cardlist) > 0)                      
                         @foreach($cardlist as $card)
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="form-group">
-                                <label for="">{{$card->nickname}} <span class="badge text-bg-success">@if($card->primary == 'on') PRIMARY @endif</span></label>
-                                <div><b class="ls-2 text-black-50">{{ '**************' . substr($card->card_number,-4);}}</b></div>
+                            
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="form-group">
+                                    <label for="">{{$card->nickname}} <span class="badge text-bg-success">@if($card->primary == 'on') PRIMARY @endif</span></label>
+                                    <div><b class="ls-2 text-black-50">{{ '**************' . substr($card->card_number,-4);}}</b></div>
+                                </div>
+                                <a href="{{route('tenant.tenant-edit-bank-account', $card->id)}}" class="btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
                             </div>
-                            <a href="{{route('tenant.tenant-edit-bank-account', $card->id)}}" class="btn-xs btn-1"><i class="fa-solid fa-pen-to-square"></i>Edit</a>
-                        </div>
                         @endforeach
+                        @else
+                              <div class="heading-underline">No data available in table</div>         
+                        @endif
                         <div class="lr-line-text">Add a payment method</div>
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="form-group">

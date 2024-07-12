@@ -45,17 +45,21 @@ class TenantPaymentController extends Controller
     public function tenantAddPaymentMethod()
     {
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
-        $user = User::where('id',$tenant_info->user_id)->first();          
-        return view('tenant.payments.add-payment-method', compact('user'));
+        $user = User::where('id',$tenant_info->user_id)->first();  
+        $countries = Country::get();         
+        return view('tenant.payments.add-payment-method', compact('user','countries'));
     }
 
     public function tenantAddPayment(request $request)
     {      
+       
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
         $user = User::where('id',$tenant_info->user_id)->first();       
         $paymentcount=AddPayment::all()->count();
-  
+        $user->country= $request->country;
+        $user->save();
+
         $user_country = Country::where('nicename', $user->country)->first();
       
             // customer create 
@@ -97,17 +101,23 @@ class TenantPaymentController extends Controller
                 ]          
             ])       
             ]);
+          
         // attach payment methods
             $attach= $stripe->paymentMethods->attach(
                 $payment->id,
                 ['customer' => $customer->id]
             );
+
             if($request->primary == 'on')
             {
-                $tenant = AddPayment::where(['tenant_id'=> $tenant_info->id])->first();       
-                $tenant->primary = 'NULL';      
-                $tenant->save();
+                $payments = AddPayment::where(['tenant_id'=> $tenant_info->id])->get();       
+                foreach ($payments as $payment) {
+                
+                    $payment->primary = null; 
+                    $payment->save();
+                }
             }
+           
             $addpayment = new AddPayment;
             $addpayment->tenant_id = $tenant_info->id;
             $addpayment->customer_id = $customer->id;
@@ -138,11 +148,17 @@ class TenantPaymentController extends Controller
         $editbankaccount = AddPayment::where(['id'=> $id])->first();  
         $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
         $user = User::where('id',$tenant_info->user_id)->first();  
-        return view('tenant.payments.edit-bank-account',compact('editbankaccount','user'));
+        $countries = Country::get(); 
+        return view('tenant.payments.edit-bank-account',compact('editbankaccount','user','countries'));
     }
 
-    public function tenantUpdateBankAccount(request $request){   
-
+    public function tenantUpdateBankAccount(request $request){  
+        
+        $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();              
+        $user = User::where('id',$tenant_info->user_id)->first();  
+        $user->country= $request->country;
+        $user->save();
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
         $accountinfo = AddPayment::where(['id'=> $request->id])->first();  
         if($request->primary == 'on')
         {
@@ -152,21 +168,29 @@ class TenantPaymentController extends Controller
                 $payment->primary = null; 
                 $payment->save();
             }
-        }
-        $account = AddPayment::where(['id'=> $request->id])->first();       
-        $account->card_number = $request->card_number;
-        $account->card_month = $request->card_expiry_month;
-        $account->card_year = $request->card_expiry_year;
-        $account->security_code = $request->card_cvc;
-        $account->billing_zip_code = $request->zip_code;
-        $account->nickname = $request->nick_name;
-        $account->primary = $request->primary;
-        $account->updated_at= now();          
-        $account->save();
+        }           
+        $payment = AddPayment::findOrFail($request->id);
+          $stripePaymentMethod = $stripe->paymentMethods->update(
+            $payment->payment_id, // Stripe payment method ID
+            [
+                'card' => [                    
+                    'exp_month' => $request->card_expiry_month,
+                    'exp_year' => $request->card_expiry_year,                    
+                ],
+            ]
+        );       
+        // dd($stripePaymentMethod->toarray());        Update local database payment details
+        $payment->card_number = $request->card_number;
+        $payment->card_month = $request->card_expiry_month;
+        $payment->card_year = $request->card_expiry_year;
+        $payment->security_code = $request->card_cvc;
+        $payment->billing_zip_code = $request->zip_code;
+        $payment->nickname = $request->nick_name;
+        $payment->primary = $request->primary;
+        $payment->updated_at = now();
+        $payment->save();
         return redirect()->route('tenant.tenant-manage-payment-accounts')->with('message', 'Account Information updated successfully.');      
 
-    }
-     
-     
+    }   
    
 }
