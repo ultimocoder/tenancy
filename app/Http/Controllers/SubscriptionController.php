@@ -47,6 +47,7 @@ class SubscriptionController extends Controller
 
     public function index(request $request){
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        //dd($stripe);
         /*check and delete the unpaid subscription customer */
         
         $user = User::where(['email' => $request->email, 'status' => false])->first();
@@ -161,7 +162,8 @@ class SubscriptionController extends Controller
                 ],
                 'mode' => 'subscription',
                 'discounts' => [[
-                    'coupon' => 'Sbj1bqJF',
+                    'coupon' => 'mFiEh66R',
+                    
                 ]],
                 'customer'=> $customer->id,
                 //'success_url' => 'http://127.0.0.1:8000/success',

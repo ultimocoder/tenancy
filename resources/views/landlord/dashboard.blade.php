@@ -46,6 +46,7 @@
                 <label for="">Street address</label>
                 <input type="text" name="address" class="form-control form-control-lg" placeholder="Enter street address">
               </div>
+              <input type="hidden" name="click" value="1">
               <div class="d-grid">
                 <button class="btn btn-1 btn-lg">Search</button>
               </div>

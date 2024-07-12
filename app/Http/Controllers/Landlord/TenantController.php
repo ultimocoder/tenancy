@@ -326,7 +326,7 @@ class TenantController extends Controller
     public function tenantEdit($id){
         $tenant = User::where('users.id', $id)
             ->join('tenants as t', 't.user_id', '=', 'users.id')
-                ->select('t.id','t.first_name','t.last_name','t.email','t.phone','t.address','t.first_payment_due_date','users.unique_id','users.username','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image')->first();
+                ->select('t.id','user_id','t.first_name','t.last_name','t.email','t.phone','t.address','t.first_payment_due_date','users.unique_id','users.username','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image')->first();
         // dd($tenant->toArray());
         return view('landlord.tenant.edit',compact('tenant'));
     }
@@ -404,11 +404,11 @@ class TenantController extends Controller
             if($unit){
                 $unit->booked = 0;
                 $unit->save();
-                $tenant->property_unit = '';
+                
+                $tenant->property_unit_id_temp = $tenant->property_unit_id;
                 $tenant->property_unit_id = null;
 
             }
-            
 
         }
 
@@ -494,7 +494,12 @@ class TenantController extends Controller
 
     public function tenantDelete(request $request){
         $tenant = Tenant::where('user_id' ,$request->user_id)->first();
-
+        
+        if($tenant){
+            $unit = PropertyUnit::where('id',$tenant->property_unit_id)->first();
+            $unit->booked = 0;
+            $unit->save();
+        }
         // $id = $request->id;
         $popup = PopupTenant::where('tenant_id',$tenant->id)->delete();
         session()->forget('tenant_id');
@@ -502,6 +507,8 @@ class TenantController extends Controller
         $user = User::where('id', $request->user_id)->first();
         $user->account_status = false;
         $tenant->profile_status = false;
+        $tenant->property_unit_id_temp = $tenant->property_unit_id;
+        $tenant->property_unit_id = null;
         $user->save();
         $tenant->save();
         return response()->json(['msg' => 'Deleted successfully.']);

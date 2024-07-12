@@ -45,7 +45,7 @@
                                     <div class="title">
                                         <div></div>
                                         <div class="d-flex column-gap-3">
-                                            <a href="#"  class="btn-xs btn-3 delete_all" style="display:none"><i class="fa-solid fa-trash-can"></i>Delete</a>
+                                            <a href="javascript:void(0);"  class="btn-xs btn-3 delete_all" style="display:none"><i class="fa-solid fa-trash-can"></i>Delete</a>
                                         </div>
                                     </div>
                                     <table id="example" class="data-table" style="width:100%">
@@ -298,7 +298,9 @@
                       $('table tr').filter("[data-row-id='" + value + "']").remove();
                     });
                     
-                    location.reload();
+                    setTimeout(function() {
+                        location.reload();
+                            }, 2000);
                 }
             } 
          }); //.delete_all end  

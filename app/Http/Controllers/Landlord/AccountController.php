@@ -223,7 +223,7 @@ class AccountController extends Controller
 
     public function stripePost(Request $request)
     {   
-        //dd($request->toArray());
+        dd($request->toArray());
         $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
 
         $customer = $stripe->customers->retrieve(Auth::user()->customer_id, []);
@@ -700,7 +700,7 @@ class AccountController extends Controller
                     ]
                 ],
                 'discounts' => [[
-                    'coupon' => 'Sbj1bqJF',
+                    'coupon' => 'mFiEh66R',
                 ]],
                 'default_payment_method' => Auth::user()->pm_id,
               ]);
@@ -942,7 +942,7 @@ class AccountController extends Controller
                             'proration_date' => $proration_date,
                             'quantity' => $request->unit,
                             'price' => $package->price_id,
-                            'discounts' => [['coupon' => 'Sbj1bqJF',]],
+                            'discounts' => [['coupon' => 'mFiEh66R',]],
                             ]);
                 }
                 
@@ -992,7 +992,7 @@ class AccountController extends Controller
                             'proration_date' => $proration_date,
                             'quantity' => $request->unit,
                             'price' => $package->price_id,
-                            'discounts' => [['coupon' => 'Sbj1bqJF',]],
+                            'discounts' => [['coupon' => 'mFiEh66R',]],
                             ]);
                 }
                 

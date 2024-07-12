@@ -22,6 +22,9 @@
                     <div class="container-fluid">
                         <!-- <form action=""> -->
                             <div class="row mb-4">
+                                <input type="hidden" name="click" id="click" value = "@if(isset($data->click)){{$data->click}}@endif">
+                                
+
                                 <div class="col-sm-6">
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -195,8 +198,10 @@
             var fname = $('#first_name').val();
             var lname = $('#last_name').val();
             var address = $('#address').val();
+            var click = $('#click').val();
+
             //alert(fname);
-            if(fname != '' || lname != '' || address != ''){
+            if(fname != '' || lname != '' || address != '' || click != ''){
                 $('.exm').show();
                 //dataTable.ajax.reload();
             }else{
@@ -207,6 +212,8 @@
 
 
         })
+
+
     </script>
 </body>
 

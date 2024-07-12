@@ -497,32 +497,42 @@
             $('.remove').on('click', function(){
                var unit_id = $(this).attr('data-id');
                var status = $(this).attr('data-status');
-
+            
                if(status == 'assignedUnit'){
                 alert('You must expire the tenant from that unit');
                     return false;
                }
+
+               if(status == 'unassignedUnit'){
+                    // alert('You must expire the tenant from that unit');
+                    //return false;
+                    if(confirm('Are you sure you want to remove unit permanently?')){
+                        $.ajax(
+                            {
+                                url: "{{route('landlord.property.unit.delete')}}",
+                                type: 'post',
+                                data: {
+                                    "id": unit_id,
+                                    "_token": "{{ csrf_token() }}",
+                                },
+                                success: function (response){
+                                    console.log(response.redirect_url);
+                                    if(response.redirect_url){
+                                        window.location.href = response.redirect_url;
+                                    }
+                                    //$("#unit-div").load(location.href + " #unit-div");
+                                    //$("#cf").load(location.href + " #cf");
+
+                                }
+                            });
+                    }else{
+                        return false;
+                    }
+               }
             
             // alert(unit_id);
             // return false;
-               $.ajax(
-                {
-                    url: "{{route('landlord.property.unit.delete')}}",
-                    type: 'post',
-                    data: {
-                        "id": unit_id,
-                        "_token": "{{ csrf_token() }}",
-                    },
-                    success: function (response){
-                        console.log(response.redirect_url);
-                        if(response.redirect_url){
-                            window.location.href = response.redirect_url;
-                        }
-                        //$("#unit-div").load(location.href + " #unit-div");
-                        //$("#cf").load(location.href + " #cf");
-
-                    }
-                });
+               
 
              });
         });

@@ -145,7 +145,7 @@ class DocumentController extends Controller
     public function deleteAll(Request $request)
     {
         $ids = $request->ids;
-        $docs = Document::whereIn('id',explode(",",$ids))->get();
+        //$docs = Document::whereIn('id',explode(",",$ids))->get();
         // foreach($docs as $doc){
         //     if($doc->document){
         //         unlink(public_path('landlord/upload-documents/'.$doc->document));

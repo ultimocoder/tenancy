@@ -176,6 +176,7 @@
                                                 </div>
                                                 <button type="button" id="crop-button" style="display:none;" class="btn btn-sm btn-success mt-2">Upload</button>
                                                 <input type="hidden" name="cropped_image" value=""/>
+                                                <a href="javascript:void(0);" data-id="{{$tenant->user_id}}" class="text-center d-block mt-5 text-danger fs-6 fw-bold tenant-delete">Delete Tenant Profile</a>
                                             </div>
                                         </div>
                                     </div>
@@ -446,6 +447,31 @@
         // Display the formatted price
         $(this).val(formattedPrice);
     });
+
+
+    $('.tenant-delete').on('click', function(){
+          var user_id = $(this).data('id');
+          
+          if(confirm('Are you sure you want to permanently Delete Profile?')){
+
+            if(confirm('Permanently deleting the tenant profile will remove all information relating to this tenant e.g. Documents, Tenant Login Profile, Correspondence Messaging etc..\n\nAre you sure you want to continue?')){
+            $.ajax({
+                type: "post",
+                dataType: "json",
+                url: "{{route('landlord.tenant.delete')}}",
+                data: {'user_id': user_id, "_token": "{{ csrf_token() }}"},
+                success: function(data){  
+                    console.log(data.success)
+                        window.location.href = "{{route('landlord.tenant.advanced.search')}}";
+                    }
+                });
+            }
+
+          }else{
+            return false;
+          }
+          
+        })
     
     })
 </script>

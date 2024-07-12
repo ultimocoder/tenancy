@@ -32,9 +32,9 @@
                 <div class="page-card">
                   <div class="title">
                     <div></div>
-                    <div class="d-flex column-gap-3">
+                    <!-- <div class="d-flex column-gap-3">
                       <a href="{{route('tenant.additional-information', $tenant_info->user_id)}}" class="btn-xs btn-1"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="row">
                     <div class="col-sm-3" style="width: 33%;">

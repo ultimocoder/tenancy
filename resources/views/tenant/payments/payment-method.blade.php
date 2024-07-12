@@ -25,7 +25,7 @@
                                 <form action="" class="page-card mx-auto" style="width: 600px;">
                                     <div class="heading-underline justify-content-between">
                                         <span>Bank Accounts</span>
-                                        <a href="" class="btn btn-xs btn-1"><i class="fa-regular fa-circle-plus"></i>Add New</a>
+                                        <a href="{{route('tenant.tenant-add-payment-method')}}" class="btn btn-xs btn-1"><i class="fa-regular fa-circle-plus"></i>Add New</a>
                                     </div>
 
                                     <div class="cus-radio-1">
