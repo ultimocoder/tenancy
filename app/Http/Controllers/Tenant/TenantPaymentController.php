@@ -118,9 +118,11 @@ class TenantPaymentController extends Controller
                 }
             }
            
+            $user->customer_id= $customer->id;
+            $user->save();
+
             $addpayment = new AddPayment;
             $addpayment->tenant_id = $tenant_info->id;
-            $addpayment->customer_id = $customer->id;
             $addpayment->payment_id = $payment->id;
             $addpayment->card_number = $request->card_number;
             $addpayment->card_month = $request->card_expiry_month;

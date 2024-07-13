@@ -14,6 +14,7 @@
             <div id="menu1" class="accordion-collapse collapse" data-bs-parent="#leftMenu">
                 <div class="accordion-body">
                     <a href="{{route('tenant.tenant-information')}}" class="{{ Request()->is('tenant/tenant-info/*') || Request()->is('tenant/tenant/*') ? 'active' : '' }}"><i class="fa-regular fa-file-invoice"></i>Tenant Information</a>
+
                     <a href="{{route('tenant.tenant-additional-information')}}" class="{{ Request()->is('tenant/tenant-additional-info') ? 'active' : '' }}"><i class="fa-regular fa-file-invoice"></i> Additional Information</a>
                 </div>
             </div>
@@ -69,7 +70,11 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#menu3" aria-expanded="false" aria-controls="menu3">
                     Correspondence
                 </button>
-            </h2>
+                </h2>
+                <div class="accordion-body">
+                   
+                <a href="{{route('tenant.tenant-Correspondence')}}" class="{{ Request()->is('tenant/correspondence') ? 'active' : '' }}"><i class="fa-regular fa-envelopes-bulk"></i>Correspondence</a>              
+                  </div>        
           
         </div>
       

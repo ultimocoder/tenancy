@@ -100,7 +100,8 @@
 
                         <div class="row align-items-center">
                             <div class="col-sm-6"><b>Nickname</b></div>
-                            <div class="col-sm-6"><input type="text"  name="nick_name"class="form-control form-control-sm" placeholder="Account Nickname" value="{{$editbankaccount->nickname}}"></div>
+                            <div class="col-sm-6">
+                                <input type="text"  name="nick_name"class="form-control form-control-sm" placeholder="Account Nickname" value="{{$editbankaccount->nickname}}"></div>
                         </div>
 
                         <div class="d-flex">

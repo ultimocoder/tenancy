@@ -40,7 +40,8 @@
                             </div>
                         @endforeach
                         @else
-                              <div class="heading-underline">No data available in table</div>         
+                        <div class="text-black-50">No Payment Method Added</div>
+                                      
                         @endif
                         <div class="lr-line-text">Add a payment method</div>
                         <div class="d-flex align-items-center justify-content-between">

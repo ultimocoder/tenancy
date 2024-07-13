@@ -231,4 +231,8 @@ Route::group(['middleware' => 'guidtenant'], function () {
     //tenant documents
 
     Route::get('/tenant/documents', [App\Http\Controllers\Tenant\TenantDocumentController::class, 'documents'])->name('tenant.documents');
+
+
+     //tenant Correspondence
+     Route::get('/tenant/correspondence', [App\Http\Controllers\Tenant\Correspondence::class, 'correspondence'])->name('tenant.tenant-Correspondence');
 });
