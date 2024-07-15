@@ -36,7 +36,7 @@ class TenantPaymentController extends Controller
     }
     public function tenantPaymentHistory()
     {
-        return view('tenant.payments.payment-history');
+        return view('tenant.payments.payment-history'); 
     }
     public function tenantPaymentMethod()
     {
@@ -165,8 +165,7 @@ class TenantPaymentController extends Controller
         if($request->primary == 'on')
         {
             $payments = AddPayment::where(['tenant_id'=> $accountinfo->tenant_id])->get();       
-            foreach ($payments as $payment) {
-              
+            foreach ($payments as $payment) {              
                 $payment->primary = null; 
                 $payment->save();
             }

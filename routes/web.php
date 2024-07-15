@@ -235,4 +235,6 @@ Route::group(['middleware' => 'guidtenant'], function () {
 
      //tenant Correspondence
      Route::get('/tenant/correspondence', [App\Http\Controllers\Tenant\Correspondence::class, 'correspondence'])->name('tenant.tenant-Correspondence');
+     Route::get('/tenant/correspondence-message-send', [App\Http\Controllers\Tenant\Correspondence::class, 'correspondenceMessageSend'])->name('tenant.tenant-Correspondence-message-send');
+     Route::get('/tenant/correspondence-message-receive', [App\Http\Controllers\Tenant\Correspondence::class, 'correspondenceMessageReceive'])->name('tenant.tenant-Correspondence-message-receive');
 });

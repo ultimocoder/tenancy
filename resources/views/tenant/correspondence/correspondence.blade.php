@@ -26,7 +26,7 @@
                                     <div class="title">
                                         <div></div>
                                         <div class="d-flex column-gap-3">
-                                            <a href="message-send.php" class="btn-xs btn-2"><i class="fa-regular fa-envelope"></i>New Message</a>
+                                            <a href="{{route('tenant.tenant-Correspondence-message-send')}}" class="btn-xs btn-2"><i class="fa-regular fa-envelope"></i>New Message</a>
                                         </div>
                                     </div>
                                     <table id="example" class="data-table" style="width:100%">
@@ -43,7 +43,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><a href="message-receive.php">51 Blake Avenue</a></td>
+                                                <td><a href="{{route('tenant.tenant-Correspondence-message-receive')}}">51 Blake Avenue</a></td>
                                                 <td> Amy Smith</td>
                                                 <td> Refrigerator water filter</td>
                                                 <td> Closed</td>
