@@ -1002,7 +1002,9 @@ class AccountController extends Controller
         $list = $stripe->invoices->all(['customer'=> Auth::user()->customer_id,'limit' =>1]);
         $invoice = $list['data'];
         $invoice_status = $list['data'][0]['status'];
+        $amount_paid = $list['data'][0]['amount_paid'];
         // echo $invoice_status;
+        // echo $amount_paid;
         // dd($list->toARray());
         if($invoice_status != 'paid'){
             $pay = $stripe->invoices->pay($invoice[0]->id, [
@@ -1205,7 +1207,7 @@ class AccountController extends Controller
                     $unit->delete();
                 }
             }
-            return redirect()->route('landlord.account.subscription')->with('message', 'Your subscription updated successfully! Amount charged $0.00');
+            return redirect()->route('landlord.account.subscription')->with('message', 'Your subscription updated successfully! Amount charged $'.$amount_paid/100);
 
 
         }

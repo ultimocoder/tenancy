@@ -165,18 +165,18 @@
                                                 </div>
                                                 <div style="margin-top: 16px" id="btnSection">
                                                     <input type="file" class="d-none opacity-0 position-absolute" id="imgUpload" name="file">
-                                                    <label for="imgUpload" class="btn btn-sm btn-color-14 text-white">
+                                                    <label for="imgUpload" class="btn btn-sm btn-color-14 text-white fs-11">
                                                         <i class="fas fa-upload me-2"></i>Edit Photo
                                                     </label>
                                                     @if($tenant->image)
-                                                        <a href="{{route('landlord.tenant.remove.photo', $tenant->id)}}" onclick="return confirm('Are you sure you want to delete this photo?')" class="btn btn-sm btn-danger text-white">
+                                                        <a href="{{route('landlord.tenant.remove.photo', $tenant->id)}}" onclick="return confirm('Are you sure you want to delete this photo?')" class="btn btn-sm btn-danger text-white fs-11">
                                                             <i class="fa-solid fa-trash me-2"></i>Remove Photo
                                                         </a>
                                                     @endif
                                                 </div>
                                                 <button type="button" id="crop-button" style="display:none;" class="btn btn-sm btn-success mt-2">Upload</button>
                                                 <input type="hidden" name="cropped_image" value=""/>
-                                                <a href="javascript:void(0);" data-id="{{$tenant->user_id}}" class="text-center d-block mt-5 text-danger fs-6 fw-bold tenant-delete">Delete Tenant Profile</a>
+                                                <a href="javascript:void(0);" data-id="{{$tenant->user_id}}" class="text-center d-block mt-5 text-dark fs-6 fw-bold tenant-delete hover-text-color-6">Delete Profile</a>
                                             </div>
                                         </div>
                                     </div>
@@ -302,7 +302,11 @@
         $('#rental_status').change(function() {
                let value = $(this).val();
                if(value == 'Expired'){
-                alert('You are about to change the tenant status from active to expired. Expiring the tenant account will prevent further management of this tenant profile and make the current unit vacant. To continue click okay.');
+                if(!confirm('You are about to change the tenant status from active to expired. Expiring the tenant account will prevent further management of this tenant profile and make the current unit vacant.\n\nTo continue click ok.')){
+                    location.reload();
+                }
+               }else{
+                window.history.back();
                } 
                //$('#message').show();
             });
@@ -452,7 +456,7 @@
     $('.tenant-delete').on('click', function(){
           var user_id = $(this).data('id');
           
-          if(confirm('Are you sure you want to permanently Delete Profile?')){
+          if(confirm('Are you sure you want to permanently delete the tenant profile?')){
 
             if(confirm('Permanently deleting the tenant profile will remove all information relating to this tenant e.g. Documents, Tenant Login Profile, Correspondence Messaging etc..\n\nAre you sure you want to continue?')){
             $.ajax({

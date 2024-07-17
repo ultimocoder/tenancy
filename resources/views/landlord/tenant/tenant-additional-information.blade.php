@@ -54,10 +54,13 @@
                 <div class="page-card">
                   <div class="title">
                     <div></div>
+                    @if($tenant_info->rental_status != 'Expired')
                     <div class="d-flex column-gap-3">
                       <a href="{{route('landlord.tenant.additional.edit', $tenant_info->user_id)}}" class="btn-xs btn-1"><i class="fa-regular fa-pen-to-square"></i>Edit</a>
                     </div>
+                    @endif
                   </div>
+                  
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="data-box">

@@ -209,7 +209,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <a href="{{url()->previous()}}" class="btn btn-color-11 text-white rounded-2 px-4 me-2">Cancel</a>
+                            <a href="{{url()->previous()}}" class="btn btn-color-11 text-white rounded-2 px-4 me-2">Close</a>
                             <button type="button" id="save-btn" class="btn btn-color-8 text-white rounded-2 px-4">Save Changes</button>
                         </div>
                         </form>
@@ -506,7 +506,7 @@
                if(status == 'unassignedUnit'){
                     // alert('You must expire the tenant from that unit');
                     //return false;
-                    if(confirm('Are you sure you want to remove unit permanently?')){
+                    if(confirm('Are you sure you want to permanently remove this unit?')){
                         $.ajax(
                             {
                                 url: "{{route('landlord.property.unit.delete')}}",
