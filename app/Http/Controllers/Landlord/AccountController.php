@@ -444,6 +444,13 @@ class AccountController extends Controller
     }
 
     public function BillingCycle($unit,$id){
+        $property_units = PropertyUnit::where(['added_by_id' => Auth::user()->id,'status'=>false])->get();
+        if(count($property_units) > 0){
+            foreach($property_units as $u){
+                $u->status = true;
+                $u->save();
+            }
+        }
         //$subscription = Subscription::where(['user_id' => Auth::user()->id])->first();
         $package = PackagePrice::where(['package_id' => $id])->first();
         $subscription= Subscription::where(['user_id' => Auth::user()->id, 'current_status' => 'active'])->first();
@@ -495,10 +502,10 @@ class AccountController extends Controller
         $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id, 'status' =>true])->get();
         if(count($propertyUnits) > $request->unit){
             $property = count($propertyUnits);
-            return redirect()->back()->with('message', 'In order to lower plan, your must deactivate '.(count($propertyUnits) - $request->unit).' out of your '.$property.' registered units. Please select the units you wish to deactivate.');
+            return redirect()->back()->with('message', 'In order to lower plan, you must deactivate '.(count($propertyUnits) - $request->unit).' of '.$property.' registered units. Please select the units you wish to deactivate.');
         }elseif(count($propertyUnits) <= $request->unit){
             $property = Property::where(['added_by_id' => Auth::user()->id])->get();
-            $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id,'status'=>true])->get();
+            $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id,'status'=>false])->get();
             $tenants = Tenant::where(['added_by_id' => Auth::user()->id])->get();
             $unit_number = $request->unit;
             $id = $request->id;

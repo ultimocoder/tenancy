@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Properties</title>
+    <title>Change Plan</title>
     @include('landlord_layouts.header')
 </head>
 
@@ -16,10 +16,18 @@
             @include('landlord_layouts.topbar')
                 <div class="page">
                     <div class="page-title">
-                        <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <span id="activepage"></span></div>
-                        <h1><span id="title"></span></h1>
+                    <div class="withButton">
+                            <div>
+                                <div class="admin-breadcrumb"><a href="#">Dashboard</a> / <span id="activepage"></span></div>
+                                <h1><span id="title"></span></h1>
+                            </div>
+                            <a href="{{route('billing.cycle', [$unit_number, $id])}}" class="btn btn-xs btn-7"><i class="fa-solid fa-arrow-left-long"></i> Back</a>
+                        </div>
                     </div>
                     <div class="container-fluid">
+                    <div class="mb-3">
+                            <b>You are about to deactivate selected units of your registered units. If you have an active tenant in the unit they will automatically be marked with an expired rental status and have limited functionality. Please select confirm if you wish to continue.</b>
+                        </div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page-card mb-4">

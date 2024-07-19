@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Change Plan</title>
     @include('landlord_layouts.header')
+
+    <style>
+        .alert-danger {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,12 +39,17 @@
                         </div>
                         @else
                         <div class="mb-3">
-                            <b>In order to lower your plan, you must deactivate {{(count($oldPropertyUnits) - $unit_number)}} out of your {{count($oldPropertyUnits)}} registered units. Please select the units you wish to deactivate.</b>
+                            <b>In order to lower your plan, you must deactivate {{(count($oldPropertyUnits) - $unit_number)}} of {{count($oldPropertyUnits)}} registered units. Please select the units you wish to deactivate.</b>
                         </div>
                         @endif
                         <form action="{{route('landlord.account.deactivate.property')}}" method="post">
                             @csrf
                         <div class="row">
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            You can only select up to {{(count($oldPropertyUnits) - $unit_number)}} units.
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <div class="error-message fw-semibold"></div>
                             <div class="col-sm-12">
                                 <div class="page-card mb-4">
                                     <table id="example" class="data-table" style="width:100%">
@@ -85,6 +96,10 @@
                                 </div>
                                 <input type="hidden" name="unit" value="{{ $unit_number }}">
                                 <input type="hidden" name="id" value="{{  $id }}">
+
+                                <!-- just for checkbox condtion only -->
+                                <input type="hidden" name="limit" id="limit" value="{{(count($oldPropertyUnits) - $unit_number)}}">
+
                                 <div class="text-center">
                                     <a href="{{route('landlord.account.subscription.change.plan')}}" class="btn btn-color-11 text-white rounded-2 mx-2">Cancel</a>
                                     <button class="btn btn-color-6 text-white rounded-2 mx-2">Next</button>
@@ -109,6 +124,28 @@
                 bottomStart: null,
                 bottomEnd: null
             }
+        });
+
+
+
+        $(document).ready(function() {
+           const limit = $('#limit').val();
+            //const limit = 3;
+            //alert(limit);
+            $('input[type="checkbox"]').on('change', function() {
+                const checkedCount = $('input[type="checkbox"]:checked').length;
+                if (checkedCount > limit) {
+                    $('.alert-danger').show();
+                    $(this).prop('checked', false);
+                } else {
+                    $('.alert-danger').hide();
+                    $('input[type="checkbox"]').prop('disabled', false);
+
+                    if (checkedCount === limit) {
+                        $('input[type="checkbox"]').not(':checked').prop('disabled', true);
+                    }
+                }
+            });
         });
     </script>
 </body>
