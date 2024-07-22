@@ -37,20 +37,23 @@
                         <div class="heading-2">Billing Cycle</div>
 
                         <div class="cus-radio-1">
+                            <?php  
+                                if($unit >2 ) 
+                                    $discount = ((25 * $unit) * 20)/100;
+                                else
+                                    $discount = 0;
+
+                            ?>
+                            <input type="hidden" name="unit" id="unit" value="{{$unit}}">
+                            <input type="hidden" name="pid" id="pid" value="{{$id}}">
+
+                            @if($schedule->schedule_type == 'yearly')
                             <input type="radio" name="cycle" id="annually" @if($schedule->schedule_type == 'yearly') checked @endif>
                             <label for="annually" class="cycle" data-card="yearly">
                                 <div>
                                     <div class="fs-16 fw-semibold">Pay annually @if($schedule->schedule_type == 'yearly') <span class="text-color-6">(current)</span>@endif </div>
-                                    <?php  
-                                    if($unit >2 ) 
-                                        $discount = ((25 * $unit) * 20)/100;
-                                    else
-                                        $discount = 0;
-
-                                ?>
-                                    <input type="hidden" name="unit" id="unit" value="{{$unit}}">
-                                    <input type="hidden" name="pid" id="pid" value="{{$id}}">
-
+                                   
+                                    
                                     <div class="text-black-50 fs-14 fw-semibold mb-2">billed ${{number_format(((25 * $unit) - $discount) * 12, 2)}} annually + applicable taxes</div>
                                     <div class="fs-16 fw-semibold">You save $20 by paying annually</div>
                                 </div>
@@ -58,7 +61,7 @@
                                     <i class="fa-solid fa-arrow-right-long"></i>
                                 </div>
                             </label>
-
+                        @else
                             <input type="radio" name="cycle" id="monthly" @if($schedule->schedule_type == 'monthly') checked @endif>
                             <label for="monthly" class="cycle" data-card="monthly">
                                 <div>
@@ -70,6 +73,7 @@
                                     <i class="fa-solid fa-arrow-right-long"></i>
                                 </div>
                             </label>
+                        @endif    
                         </div>
                         <input type="hidden" id="billing-cycle" name="billing-cycle" value="@if($schedule->schedule_type == 'monthly') monthly @else yearly @endif">
                         <div class="text-center">

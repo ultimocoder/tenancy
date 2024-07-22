@@ -25,17 +25,18 @@
                     <style>
                         body{font-size: 14px; background-color: #F6F7FB;}
                         .btn-xs{line-height: 28px;padding: 0 15px;display: inline-block;font-size: 13px;font-weight: 600;border-radius: 20px;}
+                        .error {color: #ff0000!important;font-weight: 500 !important;}
                     </style>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
                     
                         <div class='form-row row'>
-                            <div class='col-md-12 error form-group hide m-4' >
+                            <div class='col-md-12 error form-group hide m-4'>
                                 <div class='alert-danger alert'>Please correct the errors and try
                                     again.</div>
                             </div>
                         </div> 
                     <form role="form" action="{{route('tenant.tenant-add-payment')}}" method="post" class="require-validation page-card mx-auto"
-                    data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form" style="width: 600px;">
+                    data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form" name="addbank" style="width: 600px;">
                 
                     @csrf    
                     <div class="heading-underline">Account Information</div>
@@ -50,23 +51,23 @@
                         <input class='form-control address' name="address" size='4' type='hidden' value="{{$user->address}}">
                         <input class='form-control city' name="city"  size='4' type='hidden' value="{{$user->city}}">
                         <input class='form-control state' size='4' name="state" type='hidden' value="{{$user->state}}">
-                        <input class='form-control country' size='4' name="country"  type='hidden' value="{{$user->country}}">
+                   
 
                         <input class='form-control postal_code' size='4' name="postal_code" type='hidden' value="{{$user->zipcode}}">
 
                         <div class="row">
-                            <div class="col-sm-8">
+                            <div class="col-sm-8 required">
                                 <div class="form-group">
                                     <label for="">Card number</label>
                                     <input autocomplete='off' class='form-control card-number' minlength="16" maxlength="16" size='20' name="card_number" type='text' placeholder="Confirm the card number">
                                    
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 required">
                                 <div class="form-group">
                                     <label for="">Expiration</label>
                                     <div class="d-flex column-gap-2">
-                                        <input type="number" class="form-control card-expiry-month"  placeholder='MM' size='2'  minlength="2" maxlength="2" name="card_expiry_month">
+                                        <input type="text" class="form-control card-expiry-month"  placeholder='MM' size='2'  minlength="2" maxlength="2" name="card_expiry_month">
 
 
                                         <input class='form-control card-expiry-year' placeholder='YYYY' size='4' type='text' minlength="4" maxlength="4"  name="card_expiry_year">                                       
@@ -76,27 +77,40 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 required">
                                 <div class="form-group fs-16">
-                                    <label for="">CVV <i class="fa-solid fa-circle-info ms-2 text-black-50 "></i></label>
+                                    <label for="">Security code <i class="fa-solid fa-circle-info ms-2 text-black-50 "></i></label>
                                     <input autocomplete='off'
                                         class='form-control card-cvc' placeholder='ex. 311' size='4'
                                         type='text' placeholder="" minlength="3" maxlength="3" name="card_cvc">                             
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 required">
                                 <div class="form-group fs-16">
                                     <label for="">Billing zip code</label>
-                                    <input type="number" class="form-control" name="zip_code" required>
+                                    <input type="number" class="form-control form-control-sm" name="zip_code" id="zip_code">
                                 </div>
                             </div>
+                            <div class="col-sm-4">
+                                <div class="form-group fs-16">
+                                    <label for="">Country</label>
+                                    <select name="country" class="form-control country" id="country">
+                                        <!-- <option value="">Select Country Name</option> -->
+                                            @foreach($countries as $c)
+                                            <option value="{{$c->nicename}}" @if($c->nicename == 'United States') selected @endif>{{$c->nicename}}</option>
+                                            @endforeach
+                                 </select>
+                                </div>
+                            </div>
+
+                       
                         </div>
 
                         <hr>
 
                         <div class="row align-items-center">
                             <div class="col-sm-6"><b>Nickname</b></div>
-                            <div class="col-sm-6"><input type="text"  name="nick_name"class="form-control form-control-sm" placeholder="Account Nickname" required></div>
+                            <div class="col-sm-6"><input type="text"  name="nick_name"class="form-control form-control-sm" placeholder="Account Nickname" id="nick_name"></div>
                         </div>
 
                         <div class="d-flex">
@@ -135,7 +149,7 @@
         $('form.require-validation').bind('submit', function(e) {
             var $form = $(".require-validation"),
             inputSelector = ['input[type=email]', 'input[type=password]',
-                             'input[type=text]', 'input[type=file]',
+                             'input[type=text]', 'input[type=number]','input[type=file]',
                              'textarea'].join(', '),
             $inputs = $form.find('.required').find(inputSelector),
             $errorMessage = $form.find('div.error'),
@@ -191,3 +205,28 @@
          
     });
 </script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+
+<!--<script>-->
+<!--$(function() {-->
+    
+<!--  $("form[name='addbank']").validate({ -->
+<!--    rules: {-->
+<!--      nick_name: "required",-->
+<!--      zip_code: "required",-->
+<!--      country: "required"-->
+<!--    },   -->
+<!--    messages: {-->
+<!--      nick_name: "Please enter your Nick name",-->
+<!--      zip_code: "Please enter your Billing zip code",-->
+<!--      country: "Please select your Country name",-->
+     
+<!--    },-->
+<!--    submitHandler: function(form) {-->
+
+<!--      form.submit();-->
+<!--    }-->
+<!--  });-->
+<!--});-->
+<!--</script>-->
+    
