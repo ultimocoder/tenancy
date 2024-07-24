@@ -16,6 +16,7 @@ use App\Models\PackagePrice;
 use App\Models\Package;
 use App\Models\Country;
 use App\Models\AddPayment;
+use App\Models\PaymentHistory;
 use auth;
 use Session;
 use stripe;
@@ -35,8 +36,11 @@ class TenantPaymentController extends Controller
         return view('tenant.payments.payment-review', compact('tenant_info'));
     }
     public function tenantPaymentHistory()
-    {
-        return view('tenant.payments.payment-history');
+    {   
+        $tenant = Tenant::where(['user_id' => Auth::user()->id])->first();
+        $payment_histories = PaymentHistory::where(['tenant_id' => $tenant->id])->get();
+        //dd($payment_histories->toArray());
+        return view('tenant.payments.payment-history',compact('payment_histories'));
     }
     public function tenantPaymentMethod()
     {

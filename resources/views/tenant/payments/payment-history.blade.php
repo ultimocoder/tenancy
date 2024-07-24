@@ -20,7 +20,7 @@
                         <h1><span id="title"></span></h1>
                     </div>
 
-                    <div class="heading-3 mb-4">Account number: <span class="text-color-6 ms-1">SC417956</span></div>
+                    <div class="heading-3 mb-4">Account number: <span class="text-color-6 ms-1">{{AUth::user()->unique_id}}</span></div>
 
                     <div class="container-fluid">
                         <div class="row"> 
@@ -36,26 +36,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>November 05, 2023</td>
-                                                <td class="text-uppercase"><i class="fa-solid fa-circle-minus text-color-11 me-2"></i>Pending</td>
-                                                <td>$2,100.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>October 09, 2023</td>
-                                                <td class="text-uppercase"><i class="fa-solid fa-circle-check text-color-9 me-2"></i>processed</td>
-                                                <td>$1,900.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>September 01, 2023</td>
-                                                <td class="text-uppercase"><i class="fa-solid fa-circle-check text-color-9 me-2"></i>processed</td>
-                                                <td>$1,650.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>August 08, 2023</td>
-                                                <td class="text-uppercase"><i class="fa-solid fa-circle-check text-color-9 me-2"></i>processed</td>
-                                                <td>$1,650.00</td>
-                                            </tr>
+                                            <!--<tr>-->
+                                            <!--    <td>November 05, 2023</td>-->
+                                            <!--    <td class="text-uppercase"><i class="fa-solid fa-circle-minus text-color-11 me-2"></i>Pending</td>-->
+                                            <!--    <td>$2,100.00</td>-->
+                                            <!--</tr>-->
+                                            @if(count($payment_histories) > 0)
+                                                @foreach($payment_histories as $pay)
+                                                    <tr>
+                                                        <td>{{date('F d, Y',strtotime($pay->transaction_date))}}</td>
+                                                        <td class="text-uppercase"><i class="fa-solid fa-circle-check text-color-9 me-2"></i>processed</td>
+                                                        <td>${{$pay->rental_amount}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                            <!--<tr>-->
+                                            <!--    <td>August 08, 2023</td>-->
+                                            <!--    <td class="text-uppercase"><i class="fa-solid fa-circle-check text-color-9 me-2"></i>processed</td>-->
+                                            <!--    <td>$1,650.00</td>-->
+                                            <!--</tr>-->
                                         </tbody>
                                     </table>
 
