@@ -33,6 +33,7 @@
                                                 <th>Payment date</th>
                                                 <th>Status</th>
                                                 <th>Rent Amount</th>
+                                                <th>Paid Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -45,8 +46,14 @@
                                                 @foreach($payment_histories as $pay)
                                                     <tr>
                                                         <td>{{date('F d, Y',strtotime($pay->transaction_date))}}</td>
-                                                        <td class="text-uppercase"><i class="fa-solid fa-circle-check text-color-9 me-2"></i>processed</td>
+                                                        @if($pay->payment_status == 'completed')
+                                                        <td class="text-uppercase"><i class="fa-solid fa-circle-check text-color-9 me-2"></i>{{$pay->payment_status}}</td>
+                                                        @else
+                                                        <td class="text-uppercase"><i class="fa-solid fa-circle-minus text-color-11 me-2"></i>{{$pay->payment_status}}</td>
+                                                        @endif
+                                                        
                                                         <td>${{$pay->rental_amount}}</td>
+                                                        <td>${{ number_format($pay->paid_amount, 2) }}</td>
                                                     </tr>
                                                 @endforeach
                                             @endif
@@ -72,9 +79,8 @@
     <script>
         Object.assign(DataTable.defaults, {
             searching: false,
-            ordering: false,
+            order: [[0, 'desc']],
             info: false,
-            ordering: false,
             paging: true
             
         });

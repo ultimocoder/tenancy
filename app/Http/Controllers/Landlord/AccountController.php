@@ -502,7 +502,7 @@ class AccountController extends Controller
         $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id, 'status' =>true])->get();
         if(count($propertyUnits) > $request->unit){
             $property = count($propertyUnits);
-            return redirect()->back()->with('message', 'In order to lower plan, you must deactivate '.(count($propertyUnits) - $request->unit).' of '.$property.' registered units. Please select the units you wish to deactivate.');
+            return redirect()->back()->with('message', 'In order to lower your plan, you must deactivate '.(count($propertyUnits) - $request->unit).' of '.$property.' registered units. Please select the units you wish to deactivate.');
         }elseif(count($propertyUnits) <= $request->unit){
             $property = Property::where(['added_by_id' => Auth::user()->id])->get();
             $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id,'status'=>false])->get();

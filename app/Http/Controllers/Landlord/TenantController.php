@@ -148,9 +148,13 @@ class TenantController extends Controller
         }
         if($request->first_payment_due_date){
             $tenant->first_payment_due_date = $due_date;
+            $tenant->next_payment_due_date = $due_date;
+
         }
         
         $tenant->rental_amount = str_replace(array('$', ','), '', $request->rental_amount);
+        $tenant->balance = str_replace(array('$', ','), '', $request->rental_amount);
+
         $tenant->first_name = $request->first_name;
         $tenant->last_name = $request->last_name;
         $tenant->secondary_first_name = $request->secondary_first_name;
@@ -162,6 +166,8 @@ class TenantController extends Controller
         $tenant->rental_status = 'Active';
         $tenant->account_status = 'Current'; 
         $tenant->status = true;
+        $tenant->late_fee = 0.00;
+
         $tenant->save();
 
         $unit->booked = true;

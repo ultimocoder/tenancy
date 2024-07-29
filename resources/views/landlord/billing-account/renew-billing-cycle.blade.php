@@ -29,7 +29,7 @@
                     
                         <div>
                             <div class="fs-16 fw-semibold">Select a billing cycle</div>
-                            <div class="text-black-50 fs-14 fw-semibold">Select a new billing cycle or keep your current one.</div>
+                            <div class="text-black-50 fs-14 fw-semibold">Confirm billing cycle</div>
                         </div>
 
                         <hr class="my-0 opacity-10">

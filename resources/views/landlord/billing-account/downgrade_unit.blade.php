@@ -135,7 +135,7 @@
             $('input[type="checkbox"]').on('change', function() {
                 const checkedCount = $('input[type="checkbox"]:checked').length;
                 if (checkedCount > limit) {
-                    $('.alert-danger').show();
+                    //$('.alert-danger').show();
                     $(this).prop('checked', false);
                 } else {
                     $('.alert-danger').hide();

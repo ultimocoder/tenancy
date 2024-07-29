@@ -24,9 +24,10 @@
                             <a href="{{route('billing.cycle', [$unit_number, $id])}}" class="btn btn-xs btn-7"><i class="fa-solid fa-arrow-left-long"></i> Back</a>
                         </div>
                     </div>
+                    <hr>
                     <div class="container-fluid">
                     <div class="mb-3">
-                            <b>You are about to deactivate selected units of your registered units. If you have an active tenant in the unit they will automatically be marked with an expired rental status and have limited functionality. Please select confirm if you wish to continue.</b>
+                            <b>You are about to deactivate the units below. If you have an active tenant in the unit they will automatically be marked with an expired rental status and have limited functionality.<br/> Please select confirm if you wish to continue.</b>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
@@ -66,7 +67,7 @@
                                                     <td>Vacant</td>
                                                 @endif
                                                 
-                                                <td><span class="h-line-1">{{$prop->property_name}}</span></td>
+                                                <td><span class="">{{$prop->property_name}}</span></td>
                                                 <!-- <td class="text-end"></td> -->
                                             </tr>
                                                 @endif
