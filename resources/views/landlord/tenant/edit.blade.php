@@ -100,7 +100,7 @@
                                                 <div class="data-row"><label for="">Lease End Date</label>
                                                     <input type="text" name="lease_end_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly  class="form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->lease_end_date){{date('m/d/Y', strtotime($tenant->lease_end_date))}}@endif">
                                                 </div>
-                                                <div class="data-row"><label for="">First Payment Due Date</label>
+                                                <div class="data-row"><label for="">Next Payment Due Date</label>
                                                     <input type="text" name="first_payment_due_date" autocomplete="off" @if($tenant->rental_status == 'Expired') readonly  class="form-control form-control-sm" @else class="date form-control form-control-sm" @endif  value="@if($tenant->first_payment_due_date){{date('m/d/Y', strtotime($tenant->first_payment_due_date))}}@endif">
                                                 </div>
                                                 <div class="data-row"><label for="">Rent Amount</label>
@@ -157,7 +157,7 @@
                                                 @if($tenant->image)
                                                     <img src="{{ asset('landlord/tenants/'.$tenant->image) }}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
                                                 @else
-                                                    <img src="{{ asset('landlord/images/img-1.jpg') }}" id="last_fetch_image" class="" alt="">
+                                                    <img src="{{ asset('images.jpg') }}" id="last_fetch_image" class="" alt="">
                                                 @endif
                                                 <img src="" id="profile-img-tag" class="" alt="" height="200px" width="200px" style="display:none;">
                                                 <div id="image-cropper-container" style="display:none;">

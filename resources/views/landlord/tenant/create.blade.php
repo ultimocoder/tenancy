@@ -223,19 +223,7 @@
                                 </div>
                             </div>
                             </div>
-                            <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="">When will the first months payment be due?</label>
-                                    <input type="text" name="first_payment_due_date" value="{{old('first_payment_due_date')}}" autocomplete="off" class="form-control form-control-sm date @error('first_payment_due_date') is-invalid @enderror" placeholder="Enter first months payment be due">
-                                    @error('first_payment_due_date')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            </div>
+                            
                             <div class="row">
 
                             <div class="col-sm-6">
@@ -251,6 +239,20 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="">First payment due date</label> <i class="fa fa-info-circle" aria-hidden="true" title="First payment due date – is the date that your tenant will be required to make their next month payment. This payment does not include deposit fees, security fees, application fees, etc"></i>
+                                    <input type="text" name="first_payment_due_date" value="{{old('first_payment_due_date')}}" autocomplete="off" class="form-control form-control-sm date @error('first_payment_due_date') is-invalid @enderror" placeholder="Enter the due date for the first month payment">
+                                    @error('first_payment_due_date')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Lease Type</label>
                                     <select name="lease_type" id="lease_type" class="form-select form-select-sm @error('lease_type') is-invalid @enderror">

@@ -23,7 +23,7 @@
                             <ul class="dropdown-menu">
                             
                                 {{--<li><a class="dropdown-item" href="{{route('landlord.tenants')}}">Edit User</a></li>--}}
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a href="{{route('tenant.tenant-information')}}" class="dropdown-item" href="#">Profile</a></li>
                             </ul>
                         </li>
                     </ul>
