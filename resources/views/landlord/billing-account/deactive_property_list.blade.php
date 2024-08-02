@@ -64,7 +64,7 @@
 
                                                     @endif
                                                 @else
-                                                    <td>Vacant</td>
+                                                    <td class="text-danger">Vacant</td>
                                                 @endif
                                                 
                                                 <td><span class="">{{$prop->property_name}}</span></td>

@@ -464,7 +464,7 @@ class AccountController extends Controller
         elseif($unit < $subscription->quantity){
 
             $property = Property::where(['added_by_id' => Auth::user()->id])->get();
-            $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id,'status'=>true])->get();
+            $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id,'status'=>true])->orderBy('unit_name')->get();
             $propertyTypes = PropertyType::where('property_type_status',true)->get();
             $tenants = Tenant::where(['added_by_id' => Auth::user()->id])->get();
             //dd($property->toArray());
@@ -491,7 +491,13 @@ class AccountController extends Controller
     }
 
     public function deactivatePropertyUnit(request $request){
-        //dd($request->toARray());
+        
+        if($request->delete){
+            if(count($request->delete) < $request->limit){
+                return redirect()->back();
+            }
+        }
+        
 
         if($request->delete){
             $recordIds = $request->get('delete');
@@ -500,12 +506,13 @@ class AccountController extends Controller
         }
 
         $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id, 'status' =>true])->get();
+        // dd(count($propertyUnits));
         if(count($propertyUnits) > $request->unit){
             $property = count($propertyUnits);
             return redirect()->back()->with('message', 'In order to lower your plan, you must deactivate '.(count($propertyUnits) - $request->unit).' of '.$property.' registered units. Please select the units you wish to deactivate.');
         }elseif(count($propertyUnits) <= $request->unit){
             $property = Property::where(['added_by_id' => Auth::user()->id])->get();
-            $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id,'status'=>false])->get();
+            $propertyUnits = PropertyUnit::where(['added_by_id' => Auth::user()->id,'status'=>false])->orderBy('unit_name')->get();
             $tenants = Tenant::where(['added_by_id' => Auth::user()->id])->get();
             $unit_number = $request->unit;
             $id = $request->id;

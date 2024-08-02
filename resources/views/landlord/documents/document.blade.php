@@ -85,7 +85,12 @@
                                     </table>
                                 </div>
                                 <div class="text-end">
+                                    @if($tenant_info->rental_status == 'Expired')
+                                    <button class="btn btn-lg btn-2 rounded-2" disabled>Upload</button>
+                                    @else
                                     <button class="btn btn-lg btn-2 rounded-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Upload</button>
+                                    @endif
+                                    
                                 </div>
                             </div>
                         </div>

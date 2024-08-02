@@ -84,7 +84,7 @@
 
                                                     @endif
                                                 @else
-                                                    <td>Vacant</td>
+                                                    <td class="text-danger">Vacant</td>
                                                 @endif
                                                 <td class="text-center"><input type="checkbox" name="delete[]" value="{{$unit->id}}"></td>
                                             </tr>

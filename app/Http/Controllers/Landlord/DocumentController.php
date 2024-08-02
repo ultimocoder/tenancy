@@ -32,7 +32,7 @@ class DocumentController extends Controller
                 $user = User::where('id',$tenant_info->user_id)->first();
                 $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
                 $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $tenant])->get()->sortByDesc('id');
-                return view('landlord.documents.document',compact('docs','popups'));
+                return view('landlord.documents.document',compact('docs','popups','tenant_info'));
             }
             else
             {
@@ -51,7 +51,7 @@ class DocumentController extends Controller
              $popups  = PopupTenant::where(['added_by_id' => Auth::user()->id])->get();
              //return view('landlord.tenant.tenant-additional-information', compact('tenant_info','user','popups'));
              $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $id])->get()->sortByDesc('id');
-            return view('landlord.documents.document',compact('docs','popups'));
+            return view('landlord.documents.document',compact('docs','popups','tenant_info'));
         } 
 
         // $docs = Document::where(['added_by_id' => Auth::user()->id, 'tenant_id' => $tenant])->get()->sortByDesc('id');
