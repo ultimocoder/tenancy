@@ -57,7 +57,12 @@
                                     </div>
                                     <div class="text-center">
                                     <!-- <a class="btn btn-2 rounded-2" href="{{route('tenant.tenant-payment-review')}}">Review Payment</a> -->
-                                       <button class="btn btn-2 rounded-2">Review Payment</button>
+                                    @if($tenant_info->rental_status == 'Expired')
+                                        <button class="btn btn-2 rounded-2" disabled>Review Payment</button>
+                                    @else
+                                        <button class="btn btn-2 rounded-2">Review Payment</button>
+                                    @endif
+                                    
                                     </div>
                                 </form>
                             </div>

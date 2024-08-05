@@ -67,7 +67,7 @@
                         <div class="data-row"><label for="">Account number</label>
                           <div class="value">{{$tenant_info->unique_id}}</div>
                         </div>
-                        <div class="data-row"><label for="">late Fee Amount</label>
+                        <div class="data-row"><label for="">Late Fee Amount</label>
                           <div class="value">${{$tenant_info->late_fee}}</div>
                         </div>
                         <div class="data-row"><label for="">Grace Period Days</label>
@@ -96,7 +96,9 @@
                           <div class="value">{{$tenant_info->parking}}</div>
                         </div>
                         <div class="data-row">
-                          <b class="pe-1">Notes: </b> {{$tenant_info->notes}}
+                          <div class="data-row"><label for="">Notes </label>
+                            <div class="value">{{$tenant_info->notes}}</div>
+                          </div>
                         </div>
                       </div>
                     </div>

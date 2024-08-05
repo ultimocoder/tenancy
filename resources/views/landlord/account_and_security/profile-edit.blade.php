@@ -30,7 +30,7 @@
                                     @if(Auth::user()->image)
                                     <img src="{{ asset('landlord/profile/'.Auth::user()->image)}}" id="previewImage" alt="Preview Image">
                                     @else
-                                    <img src="{{ asset('landlord/images/user-profile-pic.png')}}" id="previewImage" alt="Preview Image">
+                                    <img src="{{ asset('user.png')}}" id="previewImage" alt="Preview Image">
                                     @endif
                                         
                                         <input type="file" name="file" id="file">

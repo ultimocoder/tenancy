@@ -214,7 +214,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">Lease end date</label>
-                                    <input type="text" name="lease_end_date" value="{{old('lease_end_date')}}" autocomplete="off" class="form-control form-control-sm date @error('lease_end_date') is-invalid @enderror" placeholder="Enter end date">
+                                    <input type="text" name="lease_end_date" id="lease_end_date" value="{{old('lease_end_date')}}" autocomplete="off" class="form-control form-control-sm date @error('lease_end_date') is-invalid @enderror" placeholder="Enter end date">
                                     @error('lease_end_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -241,7 +241,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="">First payment due date</label> <i class="fa fa-info-circle" aria-hidden="true" title="First payment due date – is the date that your tenant will be required to make their next month payment. This payment does not include deposit fees, security fees, application fees, etc"></i>
-                                    <input type="text" name="first_payment_due_date" value="{{old('first_payment_due_date')}}" autocomplete="off" class="form-control form-control-sm date @error('first_payment_due_date') is-invalid @enderror" placeholder="Enter the due date for the first month payment">
+                                    <input type="text" name="first_payment_due_date" value="{{old('first_payment_due_date')}}" autocomplete="off" class="form-control form-control-sm date @error('first_payment_due_date') is-invalid @enderror" placeholder="Enter first payment due date">
                                     @error('first_payment_due_date')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -286,8 +286,24 @@
     <script>
        
     $(function(){
+        $("#lease_start_date").datepicker({
+                onSelect: function(selectedDate) {
+                    var minDate = $(this).datepicker('getDate'); // Get the selected date
+                    minDate.setDate(minDate.getDate() + 1);
+                    $("#lease_end_date").datepicker("option", "minDate", minDate); // Set the minDate for the second datepicker
+                }
+            });
+
+            $("#lease_end_date").datepicker();
+
+        // $("#lease_start_date").on('change', function(){
+        //     var minDate = $(this).datepicker('getDate');
+        //     alert(minDate);
+        // })
+
         $( ".date" ).datepicker(
-            {
+            {   
+
                 dateFormat: "mm/dd/yy",
             }
         );

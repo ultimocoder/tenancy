@@ -475,15 +475,18 @@ class TenantController extends Controller
     }
 
     public function tenantUpdateAdditional(request $request){
-        
+        //dd($request->toARray());
         $tenant = Tenant::where(['unique_id'=> $request->unique_id])->first();
-
+        //dd($tenant->toArray());
         $date3 = new \DateTime($request->rent_due_date);
         $due_date = $date3->format('Y-m-d');
         
         $tenant->number_of_security_deposit = $request->number_of_security_deposit;
         //$tenant->late_fee = $request->late_fee_amount;
-        $tenant->late_fee = str_replace(array('$', ','), '', $request->late_fee_amount);
+        if($request->late_fee_amount){
+            $tenant->late_fee = str_replace(array('$', ','), '', $request->late_fee_amount);
+        }
+        
         $tenant->grace_period_days = $request->grace_period_days;
         $tenant->total_security_deposit = $request->total_security_deposit;
         if($request->rent_due_date){

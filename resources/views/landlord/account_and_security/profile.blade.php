@@ -35,7 +35,7 @@
                                     </div>
                                     @else
                                     <div class="profile-pic">
-                                        <img src="{{ asset('landlord/images/user-profile-pic.png')}}" alt="">
+                                        <img src="{{ asset('user.png')}}" alt="">
                                     </div>
                                     @endif
 

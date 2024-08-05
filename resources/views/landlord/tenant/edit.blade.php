@@ -49,7 +49,7 @@
                                                 <div class="data-row"><label for="">Account number</label>
                                                     <span class="fw-bold">{{$tenant->unique_id}}</span>
                                                 </div>
-                                                <div class="data-row"><label for="">Username</label>
+                                                <div class="data-row"><label for="">User Name</label>
                                                     <input type="text" name="first_name" class="form-control form-control-sm" readonly value="{{$tenant->username}}">
                                                 </div>
                                                 <div class="data-row"><label for="">First name</label>
@@ -157,7 +157,7 @@
                                                 @if($tenant->image)
                                                     <img src="{{ asset('landlord/tenants/'.$tenant->image) }}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
                                                 @else
-                                                    <img src="{{ asset('images.jpg') }}" id="last_fetch_image" class="" alt="">
+                                                    <img src="{{ asset('user.png') }}" id="last_fetch_image" class="" alt="" height="150px" width="150px">
                                                 @endif
                                                 <img src="" id="profile-img-tag" class="" alt="" height="200px" width="200px" style="display:none;">
                                                 <div id="image-cropper-container" style="display:none;">

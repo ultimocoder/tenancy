@@ -20,7 +20,7 @@
                         <h1><span id="title"></span></h1>
                     </div>
 
-                    <div class="heading-3 mb-4">Account number: <span class="text-color-6 ms-1">{{AUth::user()->unique_id}}</span></div>
+                    <div class="fs-18 mb-4 text-color fw-semibold mb-4">Account number: <span class="text-color-6 ms-1">{{AUth::user()->unique_id}}</span></div>
 
                     <div class="container-fluid">
                         <div class="row"> 
@@ -77,15 +77,25 @@
     @include('tenant_layouts.script')
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
     <script>
-        Object.assign(DataTable.defaults, {
-            searching: false,
-            order: [[0, 'desc']],
-            info: false,
-            paging: true
-            
-        });
+        // Object.assign(DataTable.defaults, {
+        //     searching: false,
+        //     ordering: false,
+        //     info: false,
+        //     ordering: false,
+        //     paging: true
+        // });
 
-        new DataTable('#example');
+        // new DataTable('#example');
+        new DataTable('#example', {
+            layout: {
+                topStart: null,
+                topEnd:null,
+                bottom: null,
+                bottomStart: 'paging',
+                bottomEnd: 'pageLength'
+            },
+            order: [['desc']]
+        });
     </script>
     <script>
         $("#example_wrapper").addClass("reset");

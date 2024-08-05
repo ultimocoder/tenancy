@@ -93,7 +93,7 @@
                         <div class="data-row"><label for="">Account number</label>
                           <div class="value fw-bold">{{$user->unique_id}}</div>
                         </div>
-                        <div class="data-row"><label for="">Username</label>
+                        <div class="data-row"><label for="">User Name</label>
                           <div class="value">{{$user->username}}</div>
                         </div>
                         <div class="data-row"><label for="">First name</label>
@@ -164,7 +164,7 @@
                     </div>
                     @else
                     <div class="col-sm-2 text-center">
-                      <img src="{{asset('images.jpg')}}" class="img-fluid" alt="">
+                      <img src="{{asset('user.png')}}" class="img-fluid" alt="">
                       <!-- <a href="javascript:void(0);" data-id="{{$tenant_info->user_id}}" onclick="return confirm('Are you sure you want to permanently delete tenants profile?')" class="text-center d-block mt-5 text-danger fs-6 fw-bold tenant-delete">Delete Tenant Profile</a> -->
                     </div>
                     @endif

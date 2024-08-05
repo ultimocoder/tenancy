@@ -55,7 +55,7 @@
         <div class="profile-menu">
             <div class="dropdown">
                 <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('landlord/images/user-profile-pic.png')}}" alt="">
+                    <img src="{{ asset('user.png')}}" alt="">
                     Welcome <b class="ms-1 uc">{{ucfirst(auth::user()->first_name)." ".ucfirst(auth::user()->last_name)}}</b>
                 </button>
                 

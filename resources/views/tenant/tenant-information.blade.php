@@ -86,7 +86,7 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                       <div class="data-box">
                         <div class="data-row"><label for="">Account number</label>
                           <div class="value fw-bold">{{$user->unique_id}}</div>
@@ -117,7 +117,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                       <div class="data-box">
                         <div class="data-row"><label for="">Email</label>
                           <div mailto:class="value">{{$tenant_info->email}}</div>
@@ -128,8 +128,11 @@
                          <div class="data-row"><label for="">Lease Start Date</label>
                           <div class="value">@if($tenant_info->lease_start_date){{ date('m/d/Y', strtotime($tenant_info->lease_start_date))}} @endif</div>
                         </div>
-                        <div class="data-row"><label for="">Lease End</label>
+                        <div class="data-row"><label for="">Lease End Date</label>
                           <div class="value">@if($tenant_info->lease_end_date){{date('m/d/Y', strtotime($tenant_info->lease_end_date))}} @endif</div>
+                        </div>
+                        <div class="data-row"><label for="">Next Payment Due Date</label>
+                          <div class="value">@if($tenant_info->first_payment_due_date){{date('m/d/Y', strtotime($tenant_info->first_payment_due_date))}} @endif</div>
                         </div>
                         <div class="data-row"><label for="">Rent Amount</label>
                         <div class="value">${{number_format($tenant_info->rental_amount, 2)}}</div>
@@ -149,11 +152,11 @@
                       </div>
                     </div>
                     @if($tenant_info->image)
-                    <div class="col-sm-4 text-end">
+                    <div class="col-sm-2 text-center">
                       <img src="{{asset('landlord/tenants/'.$tenant_info->image)}}" class="" alt="" height="200px" width="200px">
                     </div>
                     @else
-                    <div class="col-sm-4 text-end">
+                    <div class="col-sm-2 text-center">
                       <img src="{{asset('landlord/images/img-1.jpg')}}" class="img-fluid" alt="">
                     </div>
                     @endif

@@ -34,9 +34,9 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="data-box">
-                                                <div class="data-row"><label for="">Account number</label><input type="text" name="unique_id" readonly class="form-control form-control-sm" value="{{$tenant->unique_id}}"></div>
+                                                <div class="data-row"><label for="">Account number</label>{{$tenant->unique_id}}<input type="hidden" name="unique_id" readonly class="form-control form-control-sm" value="{{$tenant->unique_id}}"></div>
                                                 
-                                                <div class="data-row"><label for="">late Fee Amount</label><input type="text" name="late_fee_amount" id="late_fee_amount" value="${{$tenant->late_fee}}" class="form-control form-control-sm" placeholder="$25.00"></div>
+                                                <div class="data-row"><label for="">late Fee Amount</label><input type="text" name="late_fee_amount" id="late_fee_amount" value="{{$tenant->late_fee}}" class="form-control form-control-sm" placeholder="$25.00"></div>
                                                 
                                                 <div class="data-row"><label for="">Grace Period Days</label><input type="text" name="grace_period_days" value="{{$tenant->grace_period_days}}" class="form-control form-control-sm" placeholder="10"></div>
                                                 
