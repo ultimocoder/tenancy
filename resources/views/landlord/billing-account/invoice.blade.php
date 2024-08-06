@@ -48,7 +48,8 @@
 
                         <div>
                             <div class="fw-semibold">#{{$invoice->number}}</div>
-                            <div class="fw-semibold text-black-50">Charged on {{$nextDueDate}}</div>
+                            <div class="fw-semibold text-black-50">Charged on {{ date('l, F d, Y',$invoice->created)}}</div>
+                            <!-- {{$nextDueDate}} -->
                         </div>
 
                         <div class="box-style-2 mb-2">

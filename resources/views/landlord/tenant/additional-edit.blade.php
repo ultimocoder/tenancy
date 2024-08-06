@@ -34,7 +34,7 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="data-box">
-                                                <div class="data-row"><label for="">Account number</label>{{$tenant->unique_id}}<input type="hidden" name="unique_id" readonly class="form-control form-control-sm" value="{{$tenant->unique_id}}"></div>
+                                                <div class="data-row"><label for="">Account number</label><span class="fw-bold">{{$tenant->unique_id}}</span><input type="hidden" name="unique_id" readonly class="form-control form-control-sm" value="{{$tenant->unique_id}}"></div>
                                                 
                                                 <div class="data-row"><label for="">late Fee Amount</label><input type="text" name="late_fee_amount" id="late_fee_amount" value="{{$tenant->late_fee}}" class="form-control form-control-sm" placeholder="$25.00"></div>
                                                 
@@ -42,10 +42,12 @@
                                                 
                                                 <div class="data-row"><label for="">Number of Security Deposit</label><input type="text" value="{{$tenant->number_of_security_deposit}}" name="number_of_security_deposit" class="form-control form-control-sm" placeholder="2"></div>
                                                 
-                                                <div class="data-row"><label for="">Total Security Deposit</label><input type="text" value="{{$tenant->total_security_deposit}}" name="total_security_deposit" class="form-control form-control-sm" placeholder="$3700.00"></div>
+                                                <div class="data-row"><label for="">Total Security Deposit</label><input type="text" id="security_deposit" value="{{$tenant->total_security_deposit}}" name="total_security_deposit" class="form-control form-control-sm" placeholder="$3700.00"></div>
                                                 
                                                 <div class="data-row"><label for="">Rent Due Date</label><input type="text" value="@if($tenant->rent_due_date){{date('m/d/Y',strtotime($tenant->rent_due_date))}}@endif" name="rent_due_date" autocomplete="off" class="form-control date form-control-sm" placeholder="1st"></div>
                                                 
+                                                <div class="data-row"><label for="">Secondary Tenant First Name</label><input type="text" name="secondary_first_name" value="{{$tenant->secondary_first_name}}" class="form-control form-control-sm" placeholder="Secondary Tenant First Name"></div>
+                                                <div class="data-row"><label for="">Secondary Tenant Last Name</label><input type="text" name="secondary_last_name" value="{{$tenant->secondary_last_name}}" class="form-control form-control-sm" placeholder="Secondary Tenant Last Name"></div>
                                                 <div class="data-row"><label for="">Pets</label><input type="text" name="pets" value="{{$tenant->pets}}" class="form-control form-control-sm" placeholder="No"></div>
                                                 
                                                 <div class="data-row"><label for="">Storage</label><input type="text" name="storage" value="{{$tenant->storage}}" class="form-control form-control-sm" placeholder="Yes"></div>
@@ -111,6 +113,25 @@
     // };
 
     $("#late_fee_amount").on("keyup", function() {
+        // Get the entered price
+        var price = $(this).val();
+        
+        // Remove non-numeric characters and allow only one dot
+        price = price.replace(/[^\d.]/g, '');
+        var dotCount = price.split('.').length - 1;
+        if(dotCount > 1) {
+            price = price.substr(0, price.lastIndexOf('.'));
+        }
+        
+        // Format the price
+        var formattedPrice = formatPrice(price);
+        
+        // Display the formatted price
+        $(this).val(formattedPrice);
+    });
+
+    
+    $("#security_deposit").on("keyup", function() {
         // Get the entered price
         var price = $(this).val();
         

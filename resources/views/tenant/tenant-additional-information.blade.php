@@ -37,25 +37,18 @@
                     </div> -->
                   </div>
                   <div class="row">
-                    <div class="col-sm-3" style="width: 33%;">
+                    <div class="col-sm-6" >
                       <div class="data-box">
                           <div class="data-row"><label for="">Account number</label>
-                            <div class="value">{{$tenant_info->unique_id}}</div>
+                            <div class="value fw-bold">{{$tenant_info->unique_id}}</div>
                           </div>
-                          <div class="data-row"><label for="">late Fee Amount</label>
+                          <div class="data-row"><label for="">Late Fee Amount</label>
                               <div class="value">${{$tenant_info->late_fee}}</div>
                           </div>
                           <div class="data-row"><label for="">Grace Period Days</label>
                               <div class="value">{{$tenant_info->grace_period_days}}</div>
-                          </div>  
-                          <div class="data-row"><label for="">Notes</label>
-                                <div class="value">{{$tenant_info->notes}}</div>
-                          </div>  
-                      </div>
-                  </div>   
-                 <div class="col-sm-3" style="width: 33%;">
-                    <div class="data-box">
-                        <div class="data-row"><label for="">Number of Security Deposit</label>
+                          </div>
+                          <div class="data-row"><label for="">Number of Security Deposit</label>
                            <div class="value">{{$tenant_info->number_of_security_deposit}}</div>
                         </div>
                         <div class="data-row"><label for="">Total Security Deposit</label>
@@ -63,22 +56,35 @@
                         </div>
                         <div class="data-row"><label for="">Rent Due Date</label>
                             <div class="value">{{$tenant_info->rent_due_date}}</div>
+                        </div> 
+                        <div class="data-row"><label for="">Secondary Tenant First Name</label>
+                          <div class="value">{{$tenant_info->secondary_first_name}}</div>
                         </div>
-                     </div>
-                   </div>    
-                     <div class="col-sm-3">
-                     <div class="data-box"> 
+                         <div class="data-row"><label for="">Secondary Tenant Last Name</label>
+                          <div class="value">{{$tenant_info->secondary_last_name}}</div>
+                        </div>
                         <div class="data-row"><label for="">Pets</label>
-                            <div class="value">{{$tenant_info->pets}}</div>
+                          <div class="value">{{$tenant_info->pets}}</div>
                         </div>
                         <div class="data-row"><label for="">Storage</label>
-                            <div class="value">{{$tenant_info->storage}}</div>
+                          <div class="value">{{$tenant_info->storage}}</div>
                         </div>
+                      </div>
+                  </div>   
+                  <div class="col-sm-6">
+                      <div class="data-box">
                         <div class="data-row"><label for="">Parking</label>
-                            <div class="value">{{$tenant_info->parking}}</div>
+                          <div class="value">{{$tenant_info->parking}}</div>
+                        </div>
+                        <div class="data-row">
+                          <div class="data-row"><label for="">Notes </label>
+                            <div class="value">{{$tenant_info->notes}}</div>
+                          </div>
                         </div>
                       </div>
                     </div>
+                    
+                     
                   
                        
                         <div class="data-row">

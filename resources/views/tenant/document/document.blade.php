@@ -60,17 +60,16 @@
     <script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
   
     <script>
-        Object.assign(DataTable.defaults, {
-            searching: false,
-            ordering: false,
-            info: false,
-            ordering: false,
-            paging: true
-            
+        new DataTable('#example', {
+            layout: {
+                topStart: null,
+                topEnd:null,
+                bottom: null,
+                bottomStart: 'paging',
+                bottomEnd: 'pageLength'
+            },
+            order: [['desc']]
         });
-
-
-        new DataTable('#example');
     </script>
     <script>
 

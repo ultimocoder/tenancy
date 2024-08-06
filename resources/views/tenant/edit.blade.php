@@ -153,7 +153,7 @@
                                                 @if($tenant->image)
                                                 <img src="{{ asset('landlord/tenants/'.$tenant->image)}}" id="last_fetch_image" class="" alt="" height="200px" width="200px">
                                                 @else
-                                                <img src="{{ asset('landlord/images/img-1.jpg')}}" id="last_fetch_image" class="" alt="" >
+                                                <img src="{{ asset('user.png')}}" id="last_fetch_image" class="" alt="" width="150px" height="150px">
                                                 @endif
                                                 <img src="" id="profile-img-tag" class="" alt="" height="200px" width="200px">
                                                 <!-- <div style="margin-left: 3px;">

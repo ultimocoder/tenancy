@@ -65,7 +65,7 @@
                     <div class="col-sm-6">
                       <div class="data-box">
                         <div class="data-row"><label for="">Account number</label>
-                          <div class="value">{{$tenant_info->unique_id}}</div>
+                          <div class="value fw-bold">{{$tenant_info->unique_id}}</div>
                         </div>
                         <div class="data-row"><label for="">Late Fee Amount</label>
                           <div class="value">${{$tenant_info->late_fee}}</div>
@@ -81,6 +81,12 @@
                         </div>
                         <div class="data-row"><label for="">Rent Due Date</label>
                           <div class="value">@if($tenant_info->rent_due_date){{date('m/d/Y',strtotime($tenant_info->rent_due_date))}} @endif</div>
+                        </div>
+                        <div class="data-row"><label for="">Secondary Tenant First Name</label>
+                          <div class="value">{{$tenant_info->secondary_first_name}}</div>
+                        </div>
+                         <div class="data-row"><label for="">Secondary Tenant Last Name</label>
+                          <div class="value">{{$tenant_info->secondary_last_name}}</div>
                         </div>
                         <div class="data-row"><label for="">Pets</label>
                           <div class="value">{{$tenant_info->pets}}</div>

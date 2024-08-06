@@ -157,7 +157,7 @@
                     </div>
                     @else
                     <div class="col-sm-2 text-center">
-                      <img src="{{asset('landlord/images/img-1.jpg')}}" class="img-fluid" alt="">
+                      <img src="{{asset('user.png')}}" class="img-fluid" alt="">
                     </div>
                     @endif
                   </div>
