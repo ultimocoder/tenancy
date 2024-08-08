@@ -332,7 +332,7 @@ class TenantController extends Controller
     public function tenantEdit($id){
         $tenant = User::where('users.id', $id)
             ->join('tenants as t', 't.user_id', '=', 'users.id')
-                ->select('t.id','user_id','t.first_name','t.last_name','t.email','t.phone','t.address','t.first_payment_due_date','users.unique_id','users.username','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image')->first();
+                ->select('t.id','user_id','t.first_name','t.last_name','t.late_fee_owed','t.email','t.phone','t.address','t.first_payment_due_date','users.unique_id','users.username','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image')->first();
         // dd($tenant->toArray());
         return view('landlord.tenant.edit',compact('tenant'));
     }
@@ -340,7 +340,7 @@ class TenantController extends Controller
     public function tenantEditAdditional($id){
         $tenant = User::where('users.id', $id)
             ->join('tenants as t', 't.user_id', '=', 'users.id')
-                ->select('t.id','t.first_name','t.last_name','t.email','t.phone','t.address','t.secondary_first_name','t.secondary_last_name','users.unique_id','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image','t.notes','t.storage','t.parking','t.pets','t.rent_due_date','t.total_security_deposit','t.number_of_security_deposit','t.late_fee','t.grace_period_days')->first();
+                ->select('t.id','t.first_name','t.last_name','t.email','t.phone','t.address','t.secondary_first_name','t.secondary_last_name','users.unique_id','users.zipcode','users.city','users.state','users.country','t.created_at','t.lease_start_date','t.lease_end_date','t.rental_amount','t.status','t.property_name','t.property_unit','t.account_status','t.late_fee','t.rental_status','t.lease_type','t.image','t.notes','t.storage','t.parking','t.pets','t.rent_due_date','t.first_payment_due_date','t.total_security_deposit','t.number_of_security_deposit','t.late_fee','t.grace_period_days')->first();
         //dd($tenant->toArray());
         return view('landlord.tenant.additional-edit',compact('tenant'));
     }
@@ -398,7 +398,7 @@ class TenantController extends Controller
         }
         $tenant->rental_amount = str_replace(array('$', ','), '', $request->rental_amount);
         $tenant->account_status = $request->acc_status;
-        $tenant->late_fee = $request->late_fee;
+        $tenant->late_fee_owed = $request->late_fee_owed;
         $tenant->rental_status = $request->rental_status;
         $tenant->lease_type = $request->lease_type;
         if($request->rental_status == 'Active'){
@@ -475,11 +475,24 @@ class TenantController extends Controller
     }
 
     public function tenantUpdateAdditional(request $request){
+        if($request->secondary_name){
+            $nameParts = explode(' ', $request->secondary_name);
+            
+            if(count($nameParts) >= 2){
+                $firstName = $nameParts[0];
+                $lastName = $nameParts[1];
+            }else{
+                $firstName = $nameParts[0];
+                $lastName = '';
+            }
+            
+        }
+        
         //dd($request->toARray());
         $tenant = Tenant::where(['unique_id'=> $request->unique_id])->first();
         //dd($tenant->toArray());
-        $date3 = new \DateTime($request->rent_due_date);
-        $due_date = $date3->format('Y-m-d');
+        // $date3 = new \DateTime($request->rent_due_date);
+        // $due_date = $date3->format('Y-m-d');
         
         $tenant->number_of_security_deposit = $request->number_of_security_deposit;
         //$tenant->late_fee = $request->late_fee_amount;
@@ -499,16 +512,22 @@ class TenantController extends Controller
             $tenant->total_security_deposit = 0.00;
         }
         
-        if($request->rent_due_date){
-            $tenant->rent_due_date = $due_date;
-        }
+        // if($request->rent_due_date){
+        //     $tenant->rent_due_date = $due_date;
+        // }
+        $tenant->rent_due_date = $request->rent_due_date;
         
         $tenant->pets = $request->pets;
         $tenant->storage = $request->storage;
         $tenant->parking = $request->parking;
         $tenant->notes = $request->notes;
-        $tenant->secondary_first_name = $request->secondary_first_name;
-        $tenant->secondary_last_name = $request->secondary_last_name;
+        if($request->secondary_name){
+            $tenant->secondary_first_name = $firstName;
+            $tenant->secondary_last_name = $lastName;
+        }else{
+            $tenant->secondary_first_name = null;
+            $tenant->secondary_last_name = null;
+        }
         $tenant->save(); 
         return redirect()->route('landlord.tenant-additional-information')->with('message', 'Tenant Additional Information updated successfully.');
     }

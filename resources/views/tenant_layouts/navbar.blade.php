@@ -44,7 +44,7 @@
                 <a href="{{route('tenant.tenant-payment-history')}}" class="{{ Request()->is('tenant/payment-history') ? 'active' : '' }}"><i class="fa-solid fa-clock-rotate-left"></i>Payment History</a>
                    
                     <a href="{{route('tenant.tenant-manage-payment-accounts')}}"><i class="fa-solid fa-list-check"></i>Manage payment account</a>
-                    <a href="#"><i class="fa-regular fa-receipt"></i>Receipt</a>
+                    <a href="{{route('tenant.tenant-payment-receipt-search')}}"><i class="fa-regular fa-receipt"></i>Receipt</a>
                 </div>
             </div>
         </div>

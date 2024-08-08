@@ -111,7 +111,7 @@
                                                     <span>Current</span>
                                                 </div>
                                                 <div class="data-row"><label for="">Late Fee Owed</label>
-                                                    <input type="text" name="late_fee" class="form-control form-control-sm" @if($tenant->rental_status == 'Expired') readonly @endif value="@if($tenant->late_fee){{$tenant->late_fee}}@else{{0.00}}@endif">
+                                                    <input type="text" name="late_fee_owed" class="form-control form-control-sm" @if($tenant->rental_status == 'Expired') readonly @endif value="@if($tenant->late_fee_owed){{$tenant->late_fee_owed}}@else{{0.00}}@endif">
                                                 </div>
                                                 <div class="data-row"><label for="">Rental Status</label>
                                                     <!-- <input type="text" name="rental_status" class="form-control form-control-sm" value="{{$tenant->rental_status}}"> -->

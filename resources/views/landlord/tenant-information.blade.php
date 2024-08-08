@@ -146,7 +146,7 @@
                           <div class="value">{{$tenant_info->account_status}}</div>
                         </div>
                         <div class="data-row"><label for="">Late Fee Owed</label>
-                          <div class="value">@if($tenant_info->late_fee) {{$tenant_info->late_fee}} @else 0.00 @endif</div>
+                          <div class="value">@if($tenant_info->late_fee_owed) {{$tenant_info->late_fee_owed}} @else 0.00 @endif</div>
                         </div>
                         <div class="data-row"><label for="">Rental Status</label>
                           <div class="value">{{$tenant_info->rental_status}}</div>
@@ -174,6 +174,20 @@
                 </div>
               </div>
             </div>
+          </div>
+          @else
+          <div class="page align-items-center d-flex justify-content-center w-100" style="height: 40vh;">
+            <form action="{{route('landlord.tenant.dashboard.search')}}" method="post">
+              @csrf
+            <div class="">
+              <div class="page-card mx-auto" style="width: 480px;">
+              <input type="hidden" name="click" value="1">
+                <div class="text-center mb-3 fs-18"><b class="fs-26"></b><br></div>
+                <button class="btn btn-2">Click here to search tenants</button>
+
+              </div>
+            </div>
+            </form>
           </div>
           @endif
         </div>

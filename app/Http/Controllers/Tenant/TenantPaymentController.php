@@ -221,6 +221,11 @@ class TenantPaymentController extends Controller
         return redirect()->route('tenant.tenant-manage-payment-accounts')->with('message', 'Account Information updated successfully.');      
 
     }
+
+    public function receiptSearch(){
+        $tenant_info = Tenant::where(['user_id'=> Auth::user()->id])->first();
+        return view('tenant.payments.receipt-search', compact('tenant_info'));
+    }
     
      
      

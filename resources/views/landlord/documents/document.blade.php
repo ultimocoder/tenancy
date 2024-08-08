@@ -94,6 +94,20 @@
                                 </div>
                             </div>
                         </div>
+                    @else
+                    <div class="page align-items-center d-flex justify-content-center w-100" style="height: 40vh;">
+                        <form action="{{route('landlord.tenant.dashboard.search')}}" method="post">
+                        @csrf
+                        <div class="">
+                        <div class="page-card mx-auto" style="width: 480px;">
+                        <input type="hidden" name="click" value="1">
+                            <div class="text-center mb-3 fs-18"><b class="fs-26"></b><br></div>
+                            <button class="btn btn-2">Click here to search tenants</button>
+
+                        </div>
+                        </div>
+                        </form>
+                    </div>
                     @endif    
                     </div>
                 </div>

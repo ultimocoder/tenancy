@@ -119,7 +119,7 @@
                                                    
                                                 </div>
                                                 <div class="data-row"><label for="">Late Fee Owed</label>
-                                                <span class="fw-bold">{{$tenant->late_fee}}</span>
+                                                <span class="fw-bold">@if($tenant->late_fee_owed) {{$tenant->late_fee_owed}} @else 0.00 @endif</span>
                                                     <!-- <input type="text" name="late_fee" class="form-control form-control-sm" value="@if($tenant->late_fee){{$tenant->late_fee}}@else{{0.00}}@endif"> -->
                                                 </div>
                                                 <div class="data-row"><label for="">Rental Status</label>

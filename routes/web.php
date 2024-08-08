@@ -206,6 +206,11 @@ Route::post('/tenant/update-bank-account', [App\Http\Controllers\Tenant\TenantPa
 //tenant documents
 
 Route::get('/tenant/documents', [App\Http\Controllers\Tenant\TenantDocumentController::class, 'documents'])->name('tenant.documents');
+
+//receipt by @k
+Route::get('/tenant/payment-receipt-search', [App\Http\Controllers\Tenant\TenantPaymentController::class, 'receiptSearch'])->name('tenant.tenant-payment-receipt-search');
+
+
 });
 
 

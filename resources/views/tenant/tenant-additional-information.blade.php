@@ -57,12 +57,10 @@
                         <div class="data-row"><label for="">Rent Due Date</label>
                             <div class="value">{{$tenant_info->rent_due_date}}</div>
                         </div> 
-                        <div class="data-row"><label for="">Secondary Tenant First Name</label>
-                          <div class="value">{{$tenant_info->secondary_first_name}}</div>
+                        <div class="data-row"><label for="">Secondary Tenant Name</label>
+                          <div class="value">{{$tenant_info->secondary_first_name.' '.$tenant_info->secondary_last_name}}</div>
                         </div>
-                         <div class="data-row"><label for="">Secondary Tenant Last Name</label>
-                          <div class="value">{{$tenant_info->secondary_last_name}}</div>
-                        </div>
+                         
                         <div class="data-row"><label for="">Pets</label>
                           <div class="value">{{$tenant_info->pets}}</div>
                         </div>

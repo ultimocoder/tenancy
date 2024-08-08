@@ -79,15 +79,16 @@
                         <div class="data-row"><label for="">Total Security Deposit</label>
                           <div class="value">${{$tenant_info->total_security_deposit}}</div>
                         </div>
+                        <!-- <div class="data-row"><label for="">Rent Due Date</label>
+                          <div class="value">@if($tenant_info->rent_due_date){{date('m/d/Y',strtotime($tenant_info->rent_due_date))}} @endif</div>
+                        </div> -->
                         <div class="data-row"><label for="">Rent Due Date</label>
                           <div class="value">@if($tenant_info->rent_due_date){{date('m/d/Y',strtotime($tenant_info->rent_due_date))}} @endif</div>
                         </div>
-                        <div class="data-row"><label for="">Secondary Tenant First Name</label>
-                          <div class="value">{{$tenant_info->secondary_first_name}}</div>
+                        <div class="data-row"><label for="">Secondary Tenant Name</label>
+                          <div class="value">{{$tenant_info->secondary_first_name." ".$tenant_info->secondary_last_name}}</div>
                         </div>
-                         <div class="data-row"><label for="">Secondary Tenant Last Name</label>
-                          <div class="value">{{$tenant_info->secondary_last_name}}</div>
-                        </div>
+                         
                         <div class="data-row"><label for="">Pets</label>
                           <div class="value">{{$tenant_info->pets}}</div>
                         </div>
@@ -115,6 +116,20 @@
                 </div>
               </div>
             </div>
+          </div>
+          @else
+          <div class="page align-items-center d-flex justify-content-center w-100" style="height: 40vh;">
+            <form action="{{route('landlord.tenant.dashboard.search')}}" method="post">
+              @csrf
+            <div class="">
+              <div class="page-card mx-auto" style="width: 480px;">
+              <input type="hidden" name="click" value="1">
+                <div class="text-center mb-3 fs-18"><b class="fs-26"></b><br></div>
+                <button class="btn btn-2">Click here to search tenants</button>
+
+              </div>
+            </div>
+            </form>
           </div>
           @endif
         </div>

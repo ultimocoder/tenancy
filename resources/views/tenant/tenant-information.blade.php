@@ -141,7 +141,7 @@
                           <div class="value">{{$tenant_info->account_status}}</div>
                         </div>
                         <div class="data-row"><label for="">Late Fee Owed</label>
-                          <div class="value">@if($tenant_info->late_fee) {{$tenant_info->late_fee}} @else 0.00 @endif</div>
+                          <div class="value">@if($tenant_info->late_fee_owed) {{$tenant_info->late_fee_owed}} @else 0.00 @endif</div>
                         </div>
                         <div class="data-row"><label for="">Rental Status</label>
                           <div class="value">{{$tenant_info->rental_status}}</div>
